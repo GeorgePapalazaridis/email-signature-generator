@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="el">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Prognosis Signature Generator</title>
+
+    <link rel="stylesheet" href="css/index.css" />
+
+    <script type="module" src="./js/index.js"></script>
+  </head>
+
+  <body>
+    <!-- ====== LANGUAGE SELECTOR ====== -->
+    <div class="header-bar">
+      <label for="lang">🌐 Language:</label>
+      <select id="lang" onchange="setLanguage(this.value)">
+        <option value="gr" selected>🇬🇷 Ελληνικά</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
+    </div>
+
+    <!-- ====== LOGO ====== -->
+    <div class="logo">
+      <a href="https://www.prognosis-biotech.com" target="_blank">
+        <img
+          src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
+          alt="Prognosis Biotech Logo"
+        />
+      </a>
+    </div>
+
+    <hr />
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <h2 id="titleHeading">Prognosis Email Signature Generator</h2>
+    <p id="subtitleText">
+      Συμπλήρωσε τα στοιχεία σου και πάτα “Generate Bookmarklet”.
+    </p>
+
+    <label for="name" id="labelName">
+      Ονοματεπώνυμο <span style="color: red">*</span>
+    </label>
+    <input id="name" placeholder="π.χ. George Papalazaridis" required />
+
+    <label for="title" id="labelTitle">
+      Θέση / Τίτλος <span style="color: red">*</span>
+    </label>
+    <input id="title" placeholder="π.χ. Front End Angular Developer" required />
+
+    <label for="mobile" id="labelMobile"> Κινητό </label>
+    <input
+      id="mobile"
+      placeholder="π.χ. +30 6987 331 449"
+      oninput="allowOnlyPhoneChars(this)"
+    />
+
+    <label for="phone" id="labelPhone"> Σταθερό τηλέφωνο </label>
+    <input
+      id="phone"
+      placeholder="+30 2410 623 922"
+      value="+30 2410 623 922"
+      oninput="allowOnlyPhoneChars(this)"
+    />
+
+    <button id="generateBtn" onclick="generate()">Generate Bookmarklet</button>
+
+    <div id="bookmarklet-container">
+      <p id="dragText">Σύρε αυτό το κουμπί στη μπάρα των bookmarks σου:</p>
+      <a id="bookmarklet" class="bookmarklet" href="#">Prognosis Signature</a>
+      <div class="info" id="instructionText">
+        ➡️ Άνοιξε Outlook Web (Settings → Signatures) και πάτησε το bookmark για
+        να μπει η υπογραφή.
+      </div>
+    </div>
+
+    <footer
+      style="
+        text-align: center;
+        font-size: 12.5px;
+        color: #888;
+        margin-top: 32px;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+      "
+    >
+      © 2025 Prognosis Biotech — All rights reserved.
+    </footer>
+  </body>
+</html>

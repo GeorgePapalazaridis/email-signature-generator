@@ -1,0 +1,149 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 24px 30px;
+  line-height: 1.6;
+  background-color: #f9fafc;
+  color: #222;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  color: #0a3d62;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #444;
+}
+
+/* ====== FORM ====== */
+label {
+  display: block;
+  margin-top: 14px;
+  font-weight: 600;
+  color: #004a8f;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  transition: border 0.2s ease;
+}
+
+input:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0, 120, 212, 0.3);
+}
+
+/* ====== BUTTONS ====== */
+button {
+  margin-top: 24px;
+  width: 100%;
+  background-color: #0078d4;
+  color: #fff;
+  padding: 12px 18px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* ====== BOOKMARKLET ====== */
+#bookmarklet-container {
+  margin-top: 24px;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#bookmarklet-container.show {
+  display: block;
+  opacity: 1;
+}
+
+a.bookmarklet {
+  display: inline-block;
+  background: #0078d4;
+  color: #fff;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+a.bookmarklet:hover {
+  background-color: #005fa3;
+}
+
+.info {
+  font-size: 13px;
+  color: #555;
+  margin-top: 12px;
+  text-align: center;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  width: 80%;
+  margin: 0 auto 30px auto;
+}
+
+/* ====== HEADER ====== */
+.header-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.header-bar label {
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-bar select {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 1.4;
+  height: 30px; /* κρατά σταθερό ύψος */
+  cursor: pointer;
+}
+
+/* ====== LOGO ====== */
+.logo {
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.logo img {
+  max-width: 280px;
+  height: auto;
+}

@@ -1,19 +1,22 @@
 import { allowOnlyPhoneChars } from "../js/utils.js";
 
 export function bindDom({ onGenerate, onLanguageChange }) {
-  // inputs
+  // Inputs
   const mobileInput = document.getElementById("mobile");
-  const phoneInput = document.getElemendById("phone");
+  const phoneInput = document.getElementById("phone");
   const langSelect = document.getElementById("lang");
   const generateBtn = document.getElementById("generateBtn");
 
-  // sanitize για τηλέφωνα
-  mobileInput.addEventListener("input", () => allowOnlyPhoneChars(mobileInput));
-  phoneInput.addEventListener("input", () => allowOnlyPhoneChars(phoneInput));
+  // Sanitize phone fields
+  [mobileInput, phoneInput].forEach((input) =>
+    input.addEventListener("input", (e) => allowOnlyPhoneChars(e.target))
+  );
 
-  // αλλαγή γλώσσας
-  langSelect.addEventListener("inout", () => onLanguageChange(e.target.value));
+  // Language change
+  langSelect.addEventListener("change", (e) =>
+    onLanguageChange(e.target.value)
+  );
 
-  // generate
+  // Generate button
   generateBtn.addEventListener("click", onGenerate);
 }

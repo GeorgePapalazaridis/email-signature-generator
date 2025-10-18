@@ -1,4 +1,4 @@
-// Μεταφράσεις
+// Translations
 export const translations = {
   gr: {
     name: "Ονοματεπώνυμο",
@@ -6,6 +6,7 @@ export const translations = {
     title: "Θέση / Τίτλος",
     titlePlaceholder: "π.χ. Front End Angular Developer",
     phone: "Σταθερό τηλέφωνο",
+    address: "Διεύθυνση",
     mobile: "Κινητό",
     mobilePlaceholder: "π.χ. +30 6987 331 449",
     button: "Δημιουργία Bookmarklet",
@@ -25,6 +26,7 @@ export const translations = {
     title: "Job Title",
     titlePlaceholder: "e.g. Front End Angular Developer",
     phone: "Office Phone",
+    address: "Address",
     mobile: "Mobile",
     mobilePlaceholder: "e.g. +30 6987 331 449",
     button: "Generate Bookmarklet",
@@ -41,22 +43,30 @@ export const translations = {
 };
 
 export function setLanguage(lang) {
-  const t = translations[lang];
+  const t = translations[lang] || translations["en"]; // fallback safety
+  if (!t) return;
+
   document.getElementById("titleHeading").textContent = t.heading;
   document.getElementById("subtitleText").textContent = t.subtitle;
   document.getElementById("dragText").textContent = t.dragText;
   document.getElementById("instructionText").textContent = t.instruction;
+
   document.getElementById(
     "labelName"
   ).innerHTML = `${t.name} <span style="color:red;">*</span>`;
   document.getElementById("name").placeholder = t.namePlaceholder;
+
   document.getElementById(
     "labelTitle"
   ).innerHTML = `${t.title} <span style="color:red;">*</span>`;
   document.getElementById("title").placeholder = t.titlePlaceholder;
+
+  document.getElementById("labelAddress").textContent = t.address;
   document.getElementById("labelPhone").textContent = t.phone;
   document.getElementById("labelMobile").textContent = t.mobile;
   document.getElementById("mobile").placeholder = t.mobilePlaceholder;
+
   document.getElementById("generateBtn").textContent = t.button;
-  window.currentLang = lang;
+
+  window.currentLang = translations[lang] ? lang : "en";
 }

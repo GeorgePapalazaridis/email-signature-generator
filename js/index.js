@@ -33,6 +33,9 @@ export function generate() {
   const t = translations[window.currentLang || "gr"];
   const name = document.getElementById("name").value || "";
   const title = document.getElementById("title").value || "";
+  const address =
+    document.getElementById("address").value ||
+    "Farsalon 153, Larissa, 41335 - Greece";
   const mobile = document.getElementById("mobile").value.trim();
   const phone =
     document.getElementById("phone").value.trim() || "+30 2410 623 922";
@@ -42,7 +45,14 @@ export function generate() {
     return;
   }
 
-  const signature = buildSignature({ name, title, phone, mobile, logoBase64 });
+  const signature = buildSignature({
+    name,
+    title,
+    address,
+    phone,
+    mobile,
+    logoBase64,
+  });
 
   const js = makeBookmarklet(signature, t);
   const link = document.getElementById("bookmarklet");
@@ -60,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // δέσιμο DOM handlers
   bindDom({
-    onGenerate: geberate,
+    onGenerate: generate,
     onLanguageChange: (lang) => setLanguage(lang),
   });
   console.log("App initialized ✅");

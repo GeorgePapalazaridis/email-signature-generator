@@ -15,7 +15,7 @@
     <!-- ====== LANGUAGE SELECTOR ====== -->
     <div class="header-bar">
       <label for="lang">🌐 Language:</label>
-      <select id="lang" onchange="setLanguage(this.value)">
+      <select id="lang">
         <option value="gr" selected>🇬🇷 Ελληνικά</option>
         <option value="en">🇬🇧 English</option>
       </select>
@@ -49,22 +49,17 @@
     </label>
     <input id="title" placeholder="π.χ. Front End Angular Developer" required />
 
+    <label for="address" id="labelAddress"> Διευθυνση </label>
+    <input id="address" value="Farsalon 153, Larissa, 41335 - Greece" />
+
     <label for="mobile" id="labelMobile"> Κινητό </label>
-    <input
-      id="mobile"
-      placeholder="π.χ. +30 6987 331 449"
-      oninput="allowOnlyPhoneChars(this)"
-    />
+    <input id="mobile" placeholder="π.χ. +30 6987 331 449" />
 
     <label for="phone" id="labelPhone"> Σταθερό τηλέφωνο </label>
-    <input
-      id="phone"
-      placeholder="+30 2410 623 922"
-      value="+30 2410 623 922"
-      oninput="allowOnlyPhoneChars(this)"
-    />
+    <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
-    <button id="generateBtn" onclick="generate()">Generate Bookmarklet</button>
+    <!-- ====== GENERATE BUTTON ====== -->
+    <button id="generateBtn">Generate Bookmarklet</button>
 
     <div id="bookmarklet-container">
       <p id="dragText">Σύρε αυτό το κουμπί στη μπάρα των bookmarks σου:</p>

@@ -3,25 +3,25 @@
    =============================== */
 label {
   display: block;
-  margin-top: 16px;
+  margin-top: var(--space-md);
   font-weight: 600;
-  color: #004a8f;
-  font-size: 15px;
+  color: var(--color-accent);
+  font-size: var(--font-size-md);
 }
 
 input {
   width: 100%;
-  padding: 10px 12px;
-  font-size: 15px;
-  margin-top: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.625rem 0.75rem; /* 10px 12px */
+  font-size: var(--font-size-md);
+  margin-top: var(--space-xs);
+  border: var(--border-width) solid #ccc;
+  border-radius: var(--border-radius-sm);
+  background: var(--color-white);
+  transition: border var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 input:focus {
-  border-color: #0078d4;
+  border-color: var(--color-primary);
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
 }
@@ -35,20 +35,21 @@ input::placeholder {
      🔘 BUTTON
    =============================== */
 button {
-  margin-top: 28px;
+  margin-top: var(--space-lg);
   width: 100%;
-  background-color: #0078d4;
-  color: #fff;
-  padding: 13px 20px;
-  font-size: 15.5px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.8125rem 1.25rem; /* 13px 20px */
+  font-size: var(--font-size-md);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
   cursor: pointer;
-  transition: background 0.25s ease, transform 0.15s ease;
+  transition: background var(--transition-normal),
+    transform var(--transition-fast);
 }
 
 button:hover {
-  background-color: #005fa3;
+  background-color: var(--color-primary-hover);
   transform: translateY(-1px);
 }
 
@@ -59,7 +60,7 @@ button:active {
 button.loading {
   opacity: 0.7;
   cursor: wait;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-slow);
 }
 
 button:disabled {

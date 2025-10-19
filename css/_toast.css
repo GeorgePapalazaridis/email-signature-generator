@@ -3,45 +3,45 @@
    =============================== */
 .toast {
   position: fixed;
-  top: 20px;
-  right: 24px;
-  background-color: #28a745;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 14.5px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  top: var(--space-md);
+  right: var(--space-lg);
+  background-color: var(--color-success);
+  color: var(--color-white);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
   opacity: 0;
-  transform: translateY(-10px);
-  animation: toastIn 0.35s ease both;
+  transform: translateY(-0.9375rem); /* 15px */
+  animation: toastIn var(--transition-normal) both;
   z-index: 9999;
 }
 
 /* ===============================
-       🔹 Toast Variants
+   🔹 Toast Variants
    =============================== */
 .toast-success {
-  background-color: #28a745;
+  background-color: var(--color-success);
 }
 
 .toast-error {
-  background-color: #dc3545;
+  background-color: var(--color-error);
 }
 
 /* ===============================
-       🔄 Fade Out State
+   🔄 Fade Out State
    =============================== */
 .toast.fade-out {
-  animation: toastOut 0.35s ease both;
+  animation: toastOut var(--transition-normal) both;
 }
 
 /* ===============================
-       🎬 Keyframes
+   🎬 Keyframes
    =============================== */
 @keyframes toastIn {
   from {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(-1rem);
   }
   to {
     opacity: 1;
@@ -56,6 +56,6 @@
   }
   to {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(-1rem);
   }
 }

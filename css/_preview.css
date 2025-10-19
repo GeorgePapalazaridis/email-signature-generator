@@ -2,26 +2,26 @@
      🪄 PREVIEW BOX
    =============================== */
 #preview-box {
-  max-width: 520px;
-  margin: 20px auto 0 auto;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 22px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-  animation: fadeIn 0.4s ease both;
+  max-width: var(--max-width-preview);
+  margin: var(--space-md) auto 0 auto;
+  background-color: var(--color-white);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-md) calc(var(--space-md) + 0.375rem); /* ~22px */
+  box-shadow: var(--shadow-md);
+  animation: fadeIn var(--transition-slow) both;
 }
 
 /* ===============================
-       🔖 BOOKMARKLET SECTION
+     🔖 BOOKMARKLET SECTION
    =============================== */
 #bookmarklet-container {
-  margin-top: 32px;
+  margin-top: var(--space-xl);
   text-align: center;
   display: none;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(0.625rem); /* 10px */
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
 
 #bookmarklet-container.show {
@@ -32,26 +32,27 @@
 
 a.bookmarklet {
   display: inline-block;
-  background: #0078d4;
-  color: #fff;
-  padding: 10px 20px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-sm) var(--space-md);
   text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
   font-weight: 500;
-  transition: background-color 0.25s ease, transform 0.15s ease;
+  transition: background-color var(--transition-normal),
+    transform var(--transition-fast);
   position: relative;
 }
 
 a.bookmarklet:hover {
-  background-color: #005fa3;
+  background-color: var(--color-primary-hover);
   transform: translateY(-1px);
 }
 
 .info {
-  font-size: 13.5px;
-  color: #555;
-  margin-top: 14px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
   text-align: center;
   line-height: 1.5;
   max-width: 90%;
@@ -60,7 +61,7 @@ a.bookmarklet:hover {
 }
 
 /* ===============================
-       💬 BOOKMARKLET TOOLTIP
+     💬 BOOKMARKLET TOOLTIP
    =============================== */
 a.bookmarklet::after {
   content: attr(data-tooltip);
@@ -69,14 +70,15 @@ a.bookmarklet::after {
   left: 50%;
   transform: translate(-50%, 6px);
   background-color: rgba(40, 40, 40, 0.9);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
+  color: var(--color-white);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity var(--transition-normal),
+    transform var(--transition-normal);
 }
 
 a.bookmarklet:hover::after {
@@ -89,9 +91,9 @@ a.bookmarklet:hover::after {
    =============================== */
 #resultSection {
   display: none;
-  margin-top: 36px;
+  margin-top: var(--space-xl);
   text-align: center;
-  animation: fadeIn 0.4s ease both;
+  animation: fadeIn var(--transition-slow) both;
 }
 
 #resultSection.show {
@@ -99,17 +101,17 @@ a.bookmarklet:hover::after {
 }
 
 .preview-title {
-  margin-top: 28px;
-  margin-bottom: 16px;
-  color: #0a3d62;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+  color: var(--color-accent);
   text-align: center;
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   font-weight: 600;
 }
 
 .drag-text {
-  margin-top: 28px;
-  color: #333;
-  font-size: 15px;
+  margin-top: var(--space-lg);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
   line-height: 1.5;
 }

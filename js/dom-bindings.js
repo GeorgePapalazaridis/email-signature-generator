@@ -31,7 +31,10 @@ export function bindDom({ onGenerate, onLanguageChange }) {
     );
 
   // ====== GENERATE BUTTON ======
-  generateBtn.addEventListener("click", onGenerate);
+  generateBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    onGenerate();
+  });
 
   console.log("✅ DOM bindings initialized");
 }

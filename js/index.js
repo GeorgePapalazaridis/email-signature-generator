@@ -32,13 +32,14 @@ function makeBookmarklet(signature, t) {
 export function generate() {
   const t = translations[window.currentLang || "gr"];
 
-  // === Όλα τα DOM elements πρώτα ===
+  // === DOM refs ===
+  const resultSection = document.getElementById("resultSection");
   const previewSection = document.getElementById("preview-section");
   const previewBox = document.getElementById("preview-box");
   const bookmarkletContainer = document.getElementById("bookmarklet-container");
   const link = document.getElementById("bookmarklet");
 
-  // === Παίρουμε τις τιμές από πεδία ===
+  // === Field values ===
   const name = document.getElementById("name").value.trim();
   const title = document.getElementById("title").value.trim();
   const address =
@@ -48,11 +49,17 @@ export function generate() {
   const phone =
     document.getElementById("phone").value.trim() || "+30 2410 623 922";
 
-  // === Reset preview & bookmarklet ===
-  previewBox.innerHTML = "";
-  previewSection.style.display = "none";
-  bookmarkletContainer.classList.remove("show");
-  bookmarkletContainer.style.display = "none";
+  // === Reset view ===
+  if (previewBox) previewBox.innerHTML = "";
+  if (previewSection) previewSection.style.display = "none";
+  if (bookmarkletContainer) {
+    bookmarkletContainer.classList.remove("show");
+    bookmarkletContainer.style.display = "none";
+  }
+  if (resultSection) {
+    resultSection.classList.remove("show");
+    resultSection.style.display = "none";
+  }
 
   // === Validation ===
   if (!name || !title) {
@@ -60,7 +67,7 @@ export function generate() {
     return;
   }
 
-  // === Δημιουργία υπογραφής ===
+  // === Build signature ===
   const signature = buildSignature({
     name,
     title,
@@ -70,19 +77,26 @@ export function generate() {
     logoBase64,
   });
 
-  // === Δημιουργία Bookmarklet ===
+  // === Make bookmarklet ===
   const js = makeBookmarklet(signature, t);
-  link.href = js;
+  if (link) link.href = js;
 
-  // === Εμφάνιση αποτελεσμάτων ===
-  previewBox.innerHTML = signature;
-  previewSection.style.display = "block";
+  // === Show results ===
+  if (previewBox) previewBox.innerHTML = signature;
+  if (previewSection) previewSection.style.display = "block";
 
-  // ⚡ Force reflow & εμφάνιση bookmarklet
-  bookmarkletContainer.style.display = "block"; // inline force (safe)
-  requestAnimationFrame(() => {
-    bookmarkletContainer.classList.add("show"); // fade-in από CSS
-  });
+  // First show the parent section
+  if (resultSection) {
+    resultSection.style.display = "block"; // inline show
+    // optional: αν χρησιμοποιειθεί το .show στο CSS
+    requestAnimationFrame(() => resultSection.classList.add("show"));
+  }
+
+  // Then show the bookmarklet container (with fade)
+  if (bookmarkletContainer) {
+    bookmarkletContainer.style.display = "block"; // inline force
+    requestAnimationFrame(() => bookmarkletContainer.classList.add("show"));
+  }
 }
 
 // === Αρχικοποίηση εφαρμογής ===

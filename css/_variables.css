@@ -1,0 +1,61 @@
+/* ===============================
+   🎨 DESIGN TOKENS (Variables)
+   =============================== */
+:root {
+  /* ===== FONT FAMILY ===== */
+  --font-family-base: "Segoe UI", Arial, sans-serif;
+
+  /* ===== FONT SIZES ===== */
+  --font-size-xs: 0.75rem; /* ~12px */
+  --font-size-sm: 0.875rem; /* ~14px */
+  --font-size-md: 0.9375rem; /* ~15px */
+  --font-size-lg: 1.125rem; /* ~18px */
+  --font-size-xl: 1.25rem; /* ~20px */
+
+  /* ===== LINE HEIGHT ===== */
+  --line-height-base: 1.6;
+
+  /* ===== SPACING (Margins / Padding) ===== */
+  --space-xxs: 0.25rem; /* 4px */
+  --space-xs: 0.5rem; /* 8px */
+  --space-sm: 0.75rem; /* 12px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-xxl: 3rem; /* 48px */
+
+  /* ===== BORDERS ===== */
+  --border-radius-sm: 0.25rem; /* 4px */
+  --border-radius-md: 0.5rem; /* 8px */
+  --border-radius-lg: 0.75rem; /* 12px */
+  --border-width: 1px;
+  --border-color: #ddd;
+
+  /* ===== COLORS ===== */
+  --color-text: #1e1e1e;
+  --color-text-muted: #444;
+  --color-primary: #0078d4;
+  --color-primary-hover: #005fa3;
+  --color-accent: #0a3d62;
+  --color-border: #e2e4e8;
+  --color-bg: #f9fafc;
+  --color-white: #fff;
+
+  /* ===== STATUS COLORS ===== */
+  --color-success: #28a745;
+  --color-error: #dc3545;
+
+  /* ===== SHADOWS ===== */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 3px 10px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 6px 18px rgba(0, 0, 0, 0.07);
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+
+  /* ===== CONTAINER WIDTHS ===== */
+  --max-width-body: 40rem; /* ~640px */
+  --max-width-preview: 32.5rem; /* ~520px */
+}

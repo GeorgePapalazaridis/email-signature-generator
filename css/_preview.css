@@ -1,0 +1,115 @@
+/* ===============================
+     🪄 PREVIEW BOX
+   =============================== */
+#preview-box {
+  max-width: 520px;
+  margin: 20px auto 0 auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.4s ease both;
+}
+
+/* ===============================
+       🔖 BOOKMARKLET SECTION
+   =============================== */
+#bookmarklet-container {
+  margin-top: 32px;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#bookmarklet-container.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+a.bookmarklet {
+  display: inline-block;
+  background: #0078d4;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  position: relative;
+}
+
+a.bookmarklet:hover {
+  background-color: #005fa3;
+  transform: translateY(-1px);
+}
+
+.info {
+  font-size: 13.5px;
+  color: #555;
+  margin-top: 14px;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===============================
+       💬 BOOKMARKLET TOOLTIP
+   =============================== */
+a.bookmarklet::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+  background-color: rgba(40, 40, 40, 0.9);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+a.bookmarklet:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ===============================
+     🧭 RESULT SECTION LAYOUT
+   =============================== */
+#resultSection {
+  display: none;
+  margin-top: 36px;
+  text-align: center;
+  animation: fadeIn 0.4s ease both;
+}
+
+#resultSection.show {
+  display: block;
+}
+
+.preview-title {
+  margin-top: 28px;
+  margin-bottom: 16px;
+  color: #0a3d62;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.drag-text {
+  margin-top: 28px;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.5;
+}

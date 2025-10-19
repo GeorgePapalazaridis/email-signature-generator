@@ -1,7 +1,7 @@
-# ✉️ Email Signature Generator
+# ✉️ Corporate Email Signature Generator
 
-A lightweight browser-based tool that creates personalized **Outlook Web** email signatures and injects them automatically using a **bookmarklet**.  
-Designed to eliminate the copy-paste formatting issues of Outlook’s signature editor and restore full HTML control.
+A lightweight **browser-based tool** that creates personalized **Outlook Web** email signatures and injects them automatically using a **bookmarklet**.  
+Originally developed for Prognosis Biotech, this project is evolving into a **generic, multi-template signature generator** suitable for any corporate environment.
 
 ---
 
@@ -20,123 +20,197 @@ Companies lost brand consistency and were forced to rebuild signatures manually 
 
 ## 💡 The Solution
 
-This project provides a **stand-alone, fully local HTML generator** that:
+This tool provides a **stand-alone, browser-based HTML generator** that:
 
-- Opens directly in any browser (no install, no server).
-- Lets users fill in their personal info (name, title, phone, etc.).
-- Generates a **bookmarklet** that injects the HTML signature directly into Outlook Web’s editor.
-- Uses **fully inline-styled HTML** for compatibility with Outlook and all major email clients.
+- Runs directly online from any web server (e.g., GitHub Pages, Vercel, Netlify).
+- Lets users fill in personal details (name, title, phone, etc.).
+- Generates a **bookmarklet** that injects a full HTML signature directly into Outlook Web’s editor.
+- Uses **fully inline-styled HTML** for 100 % Outlook compatibility.
 - Supports **multiple languages** (currently English & Greek).
-- Includes a **step-by-step PDF installation guide** for non-technical staff.
+- Includes a **PDF installation guide** for company-wide rollout.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **HTML5 / CSS3 / Vanilla JavaScript (ES Modules)**
-- Inline CSS for 100 % Outlook-safe rendering
-- No external dependencies — works completely offline
-- Modularized for maintainability (imports per module)
+- Inline CSS for Outlook-safe rendering
+- No dependencies — 100 % offline
+- Modular architecture for easy maintenance
 
 ---
 
 ## ✨ Features
 
-- Dynamic input fields (name, title, phone, optional mobile)
-- Auto-hide logic for unused fields (e.g., mobile)
-- Modern, branded layout with social links and icons
-- Clean, table-based HTML structure for Outlook compatibility
-- Auto-generated **bookmarklet** for one-click insertion
-- Built-in **EN / GR translations**
-- **PDF guide** for company rollout
+✅ Dynamic form fields (Name, Title, Phone, optional Mobile)  
+✅ Auto-hide logic for empty fields (e.g., hides “Mobile” row)  
+✅ Modern, branded HTML layout with icons & contact links  
+✅ Auto-generated **bookmarklet** for one-click insertion  
+✅ Built-in **EN / GR translations**  
+✅ Animated **toast notifications** for UX feedback  
+✅ Complete **PDF guide** for onboarding non-technical users
 
 ---
 
 ## 🚀 Usage
 
-1. **Clone or download** the full project folder.
-2. Open `index.html` in your browser (Chrome or Edge).
-3. Fill in your personal details:
+1. Visit the hosted version of the generator:  
+   👉 [**Open Corporate Signature Generator**](https://your-domain-or-github-pages-link)
+
+2. Fill in your personal details:
+
    - Full Name
    - Job Title
    - Phone / Mobile (optional)
-4. Click **“Generate Bookmarklet.”**
-5. Drag the blue **“Signature”** button to your bookmarks bar.
-6. Open **Outlook Web → Settings → Signatures.**
-7. Inside the signature editor, **click the bookmarklet.**  
-   Your branded HTML signature is inserted automatically ✅
 
-📄 Full illustrated instructions are available in  
+3. Click **“Generate Bookmarklet.”**
+
+4. Drag the blue **“Signature”** button to your browser’s bookmarks bar.
+
+5. Open **Outlook Web → Settings → Signatures.**
+
+6. Inside the signature editor, **click the bookmarklet** —  
+   your branded HTML signature will be automatically inserted ✅
+
+📄 A full illustrated installation guide is available here:  
 [`docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf`](docs/Οδηγίες%20Εγκατάστασης%20Υπογραφής%20Email.pdf)
 
 ---
 
 ## 📁 Project Structure
 
-```md
+```text
 email-signature-generator/
 │
 ├── assets/
-│ ├── base64/
-│ │ └── logo-base64.js # Encoded logo (Base64 string)
-│ └── icons/ # Contact / social icons
-│ ├── call.png
-│ ├── factory.png
-│ ├── facebook.png
-│ ├── instagram.png
-│ ├── language.png
-│ ├── linkedIn.png
-│ ├── M.png
-│ └── youtube.png
+│   ├── base64/
+│   │   └── logo-base64.js           # Encoded logo (Base64 string)
+│   └── icons/                       # Contact & social icons
+│       ├── call.png
+│       ├── factory.png
+│       ├── facebook.png
+│       ├── instagram.png
+│       ├── language.png
+│       ├── linkedin.png
+│       ├── M.png
+│       └── youtube.png
 │
 ├── css/
-│ └── index.css # Styling (form + layout)
+│   ├── _variables.css               # Design tokens (spacing, colors, typography)
+│   ├── _layout.css                  # Layout & global structure
+│   ├── _form.css                    # Form elements & buttons
+│   ├── _preview.css                 # Preview & bookmarklet section
+│   ├── _toast.css                   # Toast notification styles
+│   ├── _animations.css              # Keyframes & transitions
+│   └── index.css                    # Entry point importing all partials
 │
 ├── docs/
-│ ├── Οδηγίες Εγκατάστασης Υπογραφής Email.pdf
-│ └── Οδηγίες Εγκατάστασης Υπογραφής Email.txt
+│   ├── Οδηγίες Εγκατάστασης Υπογραφής Email.pdf
+│   └── Οδηγίες Εγκατάστασης Υπογραφής Email.txt
 │
 ├── js/
-│ ├── index.js # App entry point (main logic)
-│ ├── dom-bindings.js # Event bindings for UI
-│ ├── utils.js # Input sanitization helpers
-│ ├── translations.js # EN/GR translations & setter
-│ ├── signature-template.js # Dynamic HTML builder
-│ └── assets/base64/logo-base64.js # Logo asset (Base64)
+│   ├── index.js                     # Main app entry point
+│   ├── dom-bindings.js              # Event handlers & bindings
+│   ├── utils.js                     # Input sanitization helpers
+│   ├── translations.js              # EN/GR translations
+│   ├── signature-template.js        # Dynamic HTML builder
+│   └── assets/base64/logo-base64.js # Base64 logo
 │
-├── dist/ # (optional) minified build output
+├── dist/                            # (Optional) minified build
 │
-├── index.html # Main UI
-├── LICENSE # MIT License
-├── README.md # This documentation
-└── .gitignore
+├── index.html                       # Main UI
+├── LICENSE                          # MIT License
+└── README.md                        # This documentation
 ```
 
 ---
 
-## 🧭 Design Decisions
+## 🧭 Design Principles
 
-- **Offline-first approach:** works without a network connection.
-- **Base64-encoded logo:** prevents broken image links in Outlook.
-- **Dynamic mobile block:** hidden automatically when empty.
-- **Clean modular structure:** easier future scaling (multi-org).
-- **Step-by-step PDF guide:** simplifies company-wide rollout.
+- **Offline-first:** Works without internet access.
+- **Base64-encoded logo:** Prevents image breaks in Outlook.
+- **Dynamic visibility:** Hides unused contact rows.
+- **Design token system:** Centralized control of colors, spacing, typography.
+- **Scalable structure:** Modular, ready for multi-template expansion.
+- **User-friendly:** PDF walkthrough included for deployment.
 
 ---
 
-## 🔮 Next Steps
+## 🧱 Future Implementations
+
+### 1️⃣ Multi-Template Architecture
+
+Evolve the project into a **generic “Corporate Signature Generator.”**
+Each user or organization will be able to:
+
+- Choose from **5–6 pre-designed templates** (Minimal, Modern, Classic, Compact, Creative, etc.)
+- See a **live preview** before generating.
+- Switch templates dynamically without losing form data.
+
+### 2️⃣ Company Branding Support
+
+Allow organizations to define their own:
+
+- **Logo** (upload or Base64)
+- **Brand colors** (primary, accent, link color)
+- **Default contact info** (address, email, support line)
+
+This will turn the app into a **white-label tool** for any business.
+
+### 3️⃣ Template Configuration System
+
+Add a `/templates` directory with modular HTML & CSS:
+
+```
+templates/
+ ├── classic.html
+ ├── modern.html
+ ├── minimalist.html
+ ├── compact.html
+ └── creative.html
+```
+
+Each template will include dynamic placeholders:
+
+```
+{{name}}  {{title}}  {{phone}}  {{email}}  {{logo}}
+```
+
+allowing automatic HTML rendering from JSON-based user data.
+
+### 4️⃣ Template Preview Gallery
+
+A gallery component displaying all templates with thumbnails & style tags,
+plus real-time switching via a **TemplateSelectorComponent**.
+
+### 5️⃣ Export & Integration Options
+
+- Export to `.html`, `.zip`, or `.json config`
+- Add “Copy to Clipboard” for legacy clients
+- (Future) REST API endpoint for integration with company portals
+
+---
+
+## 💎 Long-Term Vision
+
+> To provide a **universal, self-hosted, offline email signature builder**
+> that any organization can rebrand and deploy internally —
+> empowering employees to create consistent, compliant HTML signatures without IT involvement.
+
+---
+
+## 🔮 Roadmap
 
 - [ ] Add **dark-mode logo variant**
 - [ ] Add **multi-organization template support**
-- [ ] Add **visual preview before generation**
-- [ ] Add **export-to-HTML** option for manual insertion
+- [ ] Add **visual HTML preview before generation**
 
 ---
 
 ## 🧾 License
 
-MIT License © 2025
+**MIT License © 2025 George Papalazaridis**
 
 ---
 
-💬 _Developed to simplify branded email signature deployment in modern Outlook environments._
+💬 _Built to simplify branded email signature deployment in modern Outlook environments._

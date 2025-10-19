@@ -24,6 +24,8 @@ export const translations = {
     // === HEADINGS ===
     heading: "Prognosis Email Signature Generator",
     subtitle: "Συμπλήρωσε τα στοιχεία σου και πάτα «Δημιουργία Bookmarklet».",
+    helpLinkText: "📄 Χρειάζεσαι βοήθεια; Δες τις οδηγίες βήμα-βήμα",
+    helpLinkHref: "docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf",
     previewTitle: "Προεπισκόπηση Υπογραφής",
 
     // === BOOKMARKLET SECTION ===
@@ -56,6 +58,8 @@ export const translations = {
     // === HEADINGS ===
     heading: "Prognosis Email Signature Generator",
     subtitle: "Fill in your details and click “Generate Bookmarklet”.",
+    helpLinkText: "📄 Need help? Open the step-by-step installation guide",
+    helpLinkHref: "docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf",
     previewTitle: "Signature Preview",
 
     // === BOOKMARKLET SECTION ===
@@ -79,6 +83,19 @@ export function setLanguage(lang) {
   document.getElementById("titleHeading").textContent = t.heading;
   document.getElementById("subtitleText").textContent = t.subtitle;
   document.getElementById("previewTitle").textContent = t.previewTitle;
+
+  // Help link
+  const helpLink = document.getElementById("helpLink");
+  if (helpLink) {
+    helpLink.textContent = t.helpLinkText;
+    helpLink.href = t.helpLinkHref;
+    helpLink.setAttribute(
+      "aria-label",
+      lang === "gr"
+        ? "Άνοιγμα αρχείου PDF με οδηγίες εγκατάστασης σε νέο παράθυρο"
+        : "Open PDF installation guide in a new tab"
+    );
+  }
 
   // === FORM LABELS ===
   document.getElementById(

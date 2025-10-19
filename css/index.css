@@ -72,9 +72,10 @@ button:hover {
   text-align: center;
   display: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
+/* ✅ εμφανίζεται με fade-in όταν έχει .show */
 #bookmarklet-container.show {
   display: block;
   opacity: 1;
@@ -88,7 +89,7 @@ a.bookmarklet {
   text-decoration: none;
   border-radius: 6px;
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: background-color 0.25s ease;
 }
 
 a.bookmarklet:hover {
@@ -102,6 +103,7 @@ a.bookmarklet:hover {
   text-align: center;
 }
 
+/* ====== DIVIDERS ====== */
 hr {
   border: none;
   border-top: 1px solid #ddd;
@@ -115,7 +117,7 @@ hr {
   justify-content: flex-end;
   align-items: center;
   gap: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 2.5rem;
 }
 
 .header-bar label {
@@ -133,7 +135,7 @@ hr {
   border: 1px solid #ccc;
   font-size: 14px;
   line-height: 1.4;
-  height: 30px; /* κρατά σταθερό ύψος */
+  height: 30px;
   cursor: pointer;
 }
 
@@ -146,4 +148,15 @@ hr {
 .logo img {
   max-width: 280px;
   height: auto;
+}
+
+/* ====== PREVIEW BOX ====== */
+#preview-box {
+  max-width: 520px;
+  margin: 16px auto 0 auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }

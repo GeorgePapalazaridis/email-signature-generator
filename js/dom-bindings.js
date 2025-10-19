@@ -1,22 +1,37 @@
 import { allowOnlyPhoneChars } from "../js/utils.js";
 
 export function bindDom({ onGenerate, onLanguageChange }) {
-  // Inputs
+  // ====== DOM ELEMENTS ======
   const mobileInput = document.getElementById("mobile");
   const phoneInput = document.getElementById("phone");
   const langSelect = document.getElementById("lang");
   const generateBtn = document.getElementById("generateBtn");
 
-  // Sanitize phone fields
-  [mobileInput, phoneInput].forEach((input) =>
-    input.addEventListener("input", (e) => allowOnlyPhoneChars(e.target))
-  );
+  // ====== SAFE CHECKS ======
+  if (!generateBtn) {
+    console.error(
+      "❌ Missing #generateBtn in DOM. Cannot bind generate event."
+    );
+    return;
+  }
+  if (!langSelect) {
+    console.error("❌ Missing #lang selector. Cannot bind language change.");
+  }
 
-  // Language change
-  langSelect.addEventListener("change", (e) =>
-    onLanguageChange(e.target.value)
-  );
+  // ====== SANITIZE PHONE FIELDS ======
+  [mobileInput, phoneInput].forEach((input) => {
+    if (input)
+      input.addEventListener("input", (e) => allowOnlyPhoneChars(e.target));
+  });
 
-  // Generate button
+  // ====== LANGUAGE CHANGE ======
+  if (langSelect)
+    langSelect.addEventListener("change", (e) =>
+      onLanguageChange(e.target.value)
+    );
+
+  // ====== GENERATE BUTTON ======
   generateBtn.addEventListener("click", onGenerate);
+
+  console.log("✅ DOM bindings initialized");
 }

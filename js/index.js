@@ -28,11 +28,19 @@ function makeBookmarklet(signature, t) {
   })();`;
 }
 
-// Κύρια λειτουργία
+// === Κύρια λειτουργία ===
 export function generate() {
   const t = translations[window.currentLang || "gr"];
-  const name = document.getElementById("name").value || "";
-  const title = document.getElementById("title").value || "";
+
+  // === Πιάσε όλα τα DOM elements πρώτα ===
+  const previewSection = document.getElementById("preview-section");
+  const previewBox = document.getElementById("preview-box");
+  const bookmarkletContainer = document.getElementById("bookmarklet-container");
+  const link = document.getElementById("bookmarklet");
+
+  // === Πάρε τιμές από πεδία ===
+  const name = document.getElementById("name").value.trim();
+  const title = document.getElementById("title").value.trim();
   const address =
     document.getElementById("address").value ||
     "Farsalon 153, Larissa, 41335 - Greece";
@@ -40,11 +48,19 @@ export function generate() {
   const phone =
     document.getElementById("phone").value.trim() || "+30 2410 623 922";
 
+  // === Reset preview & bookmarklet ===
+  previewBox.innerHTML = "";
+  previewSection.style.display = "none";
+  bookmarkletContainer.classList.remove("show");
+  bookmarkletContainer.style.display = "none";
+
+  // === Validation ===
   if (!name || !title) {
     alert(t.alertMissing);
     return;
   }
 
+  // === Δημιουργία υπογραφής ===
   const signature = buildSignature({
     name,
     title,
@@ -54,25 +70,33 @@ export function generate() {
     logoBase64,
   });
 
+  // === Δημιουργία Bookmarklet ===
   const js = makeBookmarklet(signature, t);
-  const link = document.getElementById("bookmarklet");
   link.href = js;
 
-  const container = document.getElementById("bookmarklet-container");
-  container.classList.add("show");
+  // === Εμφάνιση αποτελεσμάτων ===
+  previewBox.innerHTML = signature;
+  previewSection.style.display = "block";
+
+  // ⚡ Force reflow & εμφάνιση bookmarklet
+  bookmarkletContainer.style.display = "block"; // inline force (safe)
+  requestAnimationFrame(() => {
+    bookmarkletContainer.classList.add("show"); // fade-in από CSS
+  });
 }
 
-// αρχικοποίηση εφαρμογής
+// === Αρχικοποίηση εφαρμογής ===
 document.addEventListener("DOMContentLoaded", () => {
-  // default language
+  // Default language
   window.currentLang = "gr";
   setLanguage("gr");
 
-  // δέσιμο DOM handlers
+  // Δέσιμο DOM handlers
   bindDom({
     onGenerate: generate,
     onLanguageChange: (lang) => setLanguage(lang),
   });
+
   console.log("App initialized ✅");
   console.log("Logo base64 preview:", logoBase64.slice(0, 50) + "...");
 });

@@ -3,11 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Prognosis Signature Generator</title>
 
     <link rel="stylesheet" href="css/index.css" />
-
     <script type="module" src="./js/index.js"></script>
   </head>
 
@@ -34,40 +32,59 @@
     <hr />
 
     <!-- ====== MAIN CONTENT ====== -->
-    <h2 id="titleHeading">Prognosis Email Signature Generator</h2>
-    <p id="subtitleText">
-      Συμπλήρωσε τα στοιχεία σου και πάτα “Generate Bookmarklet”.
-    </p>
+    <h2 id="titleHeading"></h2>
+    <p id="subtitleText"></p>
 
+    <!-- ====== FORM FIELDS ====== -->
     <label for="name" id="labelName">
-      Ονοματεπώνυμο <span style="color: red">*</span>
+      <span style="color: red">*</span>
     </label>
     <input id="name" placeholder="π.χ. George Papalazaridis" required />
 
     <label for="title" id="labelTitle">
-      Θέση / Τίτλος <span style="color: red">*</span>
+      <span style="color: red">*</span>
     </label>
     <input id="title" placeholder="π.χ. Front End Angular Developer" required />
 
-    <label for="address" id="labelAddress"> Διευθυνση </label>
+    <label for="address" id="labelAddress"></label>
     <input id="address" value="Farsalon 153, Larissa, 41335 - Greece" />
 
-    <label for="mobile" id="labelMobile"> Κινητό </label>
+    <label for="mobile" id="labelMobile"></label>
     <input id="mobile" placeholder="π.χ. +30 6987 331 449" />
 
-    <label for="phone" id="labelPhone"> Σταθερό τηλέφωνο </label>
+    <label for="phone" id="labelPhone"></label>
     <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
     <!-- ====== GENERATE BUTTON ====== -->
-    <button id="generateBtn">Generate Bookmarklet</button>
+    <button id="generateBtn"></button>
 
+    <!-- ====== PREVIEW BOX ====== -->
+    <div id="preview-section" style="display: none">
+      <h3
+        id="previewTitle"
+        style="margin-top: 28px; text-align: center; color: #0a3d62"
+      ></h3>
+
+      <div
+        id="preview-box"
+        style="
+          margin-top: 12px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 16px;
+          background: #fff;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        "
+      ></div>
+    </div>
+
+    <!-- ====== BOOKMARKLET (moved below preview) ====== -->
     <div id="bookmarklet-container">
-      <p id="dragText">Σύρε αυτό το κουμπί στη μπάρα των bookmarks σου:</p>
-      <a id="bookmarklet" class="bookmarklet" href="#">Prognosis Signature</a>
-      <div class="info" id="instructionText">
-        ➡️ Άνοιξε Outlook Web (Settings → Signatures) και πάτησε το bookmark για
-        να μπει η υπογραφή.
-      </div>
+      <p id="dragText" style="margin-top: 24px"></p>
+
+      <a id="bookmarklet" class="bookmarklet" href="#"></a>
+
+      <div class="info" id="instructionText"></div>
     </div>
 
     <footer

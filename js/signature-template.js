@@ -103,65 +103,42 @@ export function buildSignature({
       </table>
 
       <!-- Logo + Tagline -->
-      <table
-        role="presentation"
-        cellpadding="0"
-        cellspacing="0"
-        width="100%"
-        style="border-collapse: collapse; table-layout: fixed"
-      >
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse; table-layout:fixed;">
         <tr>
-          <td
-            valign="middle"
-            style="padding: 4px 0; width: 50%; height: 64px; text-align: center"
-          >
-            <a
-              href="https://www.prognosis-biotech.com"
-              target="_blank"
-              style="text-decoration: none"
-            >
-              <img
-                alt="ProGnosis Biotech"
-                src="${logoBase64}"
-                style="
-                  display: inline-block;
-                  vertical-align: middle;
-                  border: 0;
-                  max-width: 200px;
-                  height: auto;
-                  margin: 0 auto;
-                "
-              />
-            </a>
+          <!-- LOGO -->
+          <td width="50%" valign="middle" align="center" style="padding:4px 0; height:64px; text-align:center;">
+            <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+              <tr>
+                <td align="center" valign="middle">
+                  <a href="https://www.prognosis-biotech.com" target="_blank" style="text-decoration:none;">
+                    <img
+                      alt="ProGnosis Biotech"
+                      src="${logoBase64}"
+                      style="display:block; border:0; max-width:200px; height:auto; margin:0 auto;"
+                    />
+                  </a>
+                </td>
+              </tr>
+            </table>
           </td>
-          <td
-            valign="middle"
-            align="center"
-            style="
-              padding: 4px 0;
-              width: 50%;
-              height: 64px;
-              text-align: center;
-              word-break: break-word;
-              white-space: normal;
-            "
-          >
-            <span
-              style="
-                display: inline-block;
-                vertical-align: middle;
-                font-family: Montserrat, Arial, Helvetica, sans-serif;
-                font-size: 16px;
-                font-weight: 400;
-                color: #000;
-                line-height: 1.35;
-              "
-            >
-              Food Safety &amp; Clinical Diagnostics
-            </span>
+      
+          <!-- TAGLINE -->
+          <td width="50%" valign="middle" align="center" style="padding:4px 0; height:64px; text-align:center; word-break:break-word; white-space:normal;">
+            <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+              <tr>
+                <td align="center" valign="middle">
+                  <span
+                    style="display:inline-block; vertical-align:middle; font-family: Montserrat, Arial, Helvetica, sans-serif; font-size:16px; font-weight:400; color:#000; line-height:1.35;"
+                  >
+                    Food Safety &amp; Clinical Diagnostics
+                  </span>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
+      
 
       <!-- Divider (top of contact section) -->
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0">

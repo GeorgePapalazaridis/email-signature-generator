@@ -32,13 +32,13 @@ function makeBookmarklet(signature, t) {
 export function generate() {
   const t = translations[window.currentLang || "gr"];
 
-  // === Πιάσε όλα τα DOM elements πρώτα ===
+  // === Όλα τα DOM elements πρώτα ===
   const previewSection = document.getElementById("preview-section");
   const previewBox = document.getElementById("preview-box");
   const bookmarkletContainer = document.getElementById("bookmarklet-container");
   const link = document.getElementById("bookmarklet");
 
-  // === Πάρε τιμές από πεδία ===
+  // === Παίρουμε τις τιμές από πεδία ===
   const name = document.getElementById("name").value.trim();
   const title = document.getElementById("title").value.trim();
   const address =

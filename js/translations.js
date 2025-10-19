@@ -32,6 +32,7 @@ export const translations = {
     instruction:
       "➡️ Στη συνέχεια, άνοιξε το <strong>Outlook Web</strong> (Ρυθμίσεις → Υπογραφές) και πάτησε το bookmark για να προστεθεί αυτόματα η υπογραφή σου.",
     bookmarkletLabel: "Prognosis Υπογραφή",
+    bookmarkletTooltip: "Σύρε αυτό το κουμπί στη μπάρα των σελιδοδεικτών σου",
   },
 
   en: {
@@ -63,6 +64,7 @@ export const translations = {
     instruction:
       "➡️ Then open <strong>Outlook Web</strong> (Settings → Signatures) and click the bookmark to insert your signature automatically.",
     bookmarkletLabel: "Prognosis Signature",
+    bookmarkletTooltip: "Drag this button to your bookmarks bar",
   },
 };
 
@@ -101,6 +103,10 @@ export function setLanguage(lang) {
   const dragTextEl = document.getElementById("dragText");
   const instructionEl = document.getElementById("instructionText");
   const bookmarkletLink = document.getElementById("bookmarklet");
+  if (bookmarkletLink) {
+    bookmarkletLink.textContent = t.bookmarkletLabel;
+    bookmarkletLink.setAttribute("data-tooltip", t.bookmarkletTooltip);
+  }
 
   // 🩵 Πλήρης ενημέρωση και σε αρχικό load
   if (dragTextEl) dragTextEl.innerHTML = t.dragText;

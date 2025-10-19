@@ -3,10 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Prognosis Signature Generator — create and inject branded Outlook Web signatures automatically"
+    />
+    <meta property="og:title" content="Prognosis Signature Generator" />
+    <meta
+      property="og:description"
+      content="A lightweight in-browser generator for Outlook Web email signatures"
+    />
+    <meta property="og:type" content="website" />
+
     <title>Prognosis Signature Generator</title>
 
+    <!-- Base path handling for GitHub Pages -->
+    <script type="module">
+      const isProduction =
+        window.location.hostname === "georgepapalazaridis.github.io";
+      const baseUrl = isProduction ? "/prognosis-signature-generator/" : "/";
+      document.write(`<base href="${baseUrl}">`);
+    </script>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/index.css" />
+
+    <!-- Favicon suppression -->
+    <link rel="icon" href="data:," />
+
+    <!-- JS entry point -->
     <script type="module" src="./js/index.js"></script>
+
+    <!-- Fallback for GitHub Pages (subpath-safe) -->
+    <script type="module">
+      if (window.location.hostname === "georgepapalazaridis.github.io") {
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "/prognosis-signature-generator/js/index.js";
+        document.body.appendChild(script);
+      }
+    </script>
   </head>
 
   <body>
@@ -21,7 +56,11 @@
 
     <!-- ====== LOGO ====== -->
     <div class="logo">
-      <a href="https://www.prognosis-biotech.com" target="_blank">
+      <a
+        href="https://www.prognosis-biotech.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
           alt="Prognosis Biotech Logo"
@@ -42,9 +81,7 @@
         href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf"
         target="_blank"
         rel="noopener noreferrer"
-      >
-        <!-- text comes from translations -->
-      </a>
+      ></a>
     </p>
 
     <!-- ====== FORM FIELDS ====== -->
@@ -82,15 +119,14 @@
       <div id="preview-section">
         <h3 id="previewTitle" class="preview-title"></h3>
         <div id="preview-box"></div>
-        <!-- 🆕 Help CTA under preview -->
+        <!-- Help CTA under preview -->
         <p class="help-cta help-cta--after">
           <a
             id="helpLinkAfter"
             href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf"
             target="_blank"
             rel="noopener noreferrer"
-          >
-          </a>
+          ></a>
         </p>
       </div>
 

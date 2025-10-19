@@ -97,6 +97,19 @@ export function setLanguage(lang) {
     );
   }
 
+  // Second help link (below preview)
+  const helpLinkAfter = document.getElementById("helpLinkAfter");
+  if (helpLinkAfter) {
+    helpLinkAfter.textContent = t.helpLinkText;
+    helpLinkAfter.href = t.helpLinkHref;
+    helpLinkAfter.setAttribute(
+      "aria-label",
+      lang === "gr"
+        ? "Άνοιγμα αρχείου PDF με οδηγίες εγκατάστασης σε νέο παράθυρο"
+        : "Open PDF installation guide in a new tab"
+    );
+  }
+
   // === FORM LABELS ===
   document.getElementById(
     "labelName"

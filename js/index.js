@@ -28,6 +28,19 @@ function makeBookmarklet(signature, t) {
   })();`;
 }
 
+// === Helper: Toast notifications ===
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.animation = "toastOut 0.4s ease forwards";
+    setTimeout(() => toast.remove(), 400);
+  }, 2200);
+}
+
 // === Κύρια λειτουργία ===
 export function generate() {
   const t = translations[window.currentLang || "gr"];
@@ -38,6 +51,7 @@ export function generate() {
   const previewBox = document.getElementById("preview-box");
   const bookmarkletContainer = document.getElementById("bookmarklet-container");
   const link = document.getElementById("bookmarklet");
+  const btn = document.getElementById("generateBtn");
 
   // === Field values ===
   const name = document.getElementById("name").value.trim();
@@ -63,40 +77,74 @@ export function generate() {
 
   // === Validation ===
   if (!name || !title) {
-    alert(t.alertMissing);
+    const msg =
+      window.currentLang === "gr"
+        ? "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο"
+        : "⚠️ Please fill in at least Name and Title";
+    showToast(msg, "error");
     return;
   }
 
-  // === Build signature ===
-  const signature = buildSignature({
-    name,
-    title,
-    address,
-    phone,
-    mobile,
-    logoBase64,
-  });
+  // === Loader state στο κουμπί ===
+  const oldText = btn.textContent;
+  btn.disabled = true;
+  btn.classList.add("loading");
+  btn.textContent =
+    window.currentLang === "gr" ? "Δημιουργία..." : "Generating...";
 
-  // === Make bookmarklet ===
-  const js = makeBookmarklet(signature, t);
-  if (link) link.href = js;
+  // === Ελαφρύ delay για UX feedback ===
+  setTimeout(() => {
+    // === Build signature ===
+    const signature = buildSignature({
+      name,
+      title,
+      address,
+      phone,
+      mobile,
+      logoBase64,
+    });
 
-  // === Show results ===
-  if (previewBox) previewBox.innerHTML = signature;
-  if (previewSection) previewSection.style.display = "block";
+    // === Make bookmarklet ===
+    const js = makeBookmarklet(signature, t);
+    if (link) link.href = js;
 
-  // First show the parent section
-  if (resultSection) {
-    resultSection.style.display = "block"; // inline show
-    // optional: αν χρησιμοποιειθεί το .show στο CSS
-    requestAnimationFrame(() => resultSection.classList.add("show"));
-  }
+    // === Show results ===
+    if (previewBox) previewBox.innerHTML = signature;
+    if (previewSection) previewSection.style.display = "block";
 
-  // Then show the bookmarklet container (with fade)
-  if (bookmarkletContainer) {
-    bookmarkletContainer.style.display = "block"; // inline force
-    requestAnimationFrame(() => bookmarkletContainer.classList.add("show"));
-  }
+    // === Show parent section ===
+    if (resultSection) {
+      resultSection.style.display = "block";
+      requestAnimationFrame(() => resultSection.classList.add("show"));
+    }
+
+    // === Fade-in bookmarklet ===
+    if (bookmarkletContainer) {
+      bookmarkletContainer.style.display = "block";
+      requestAnimationFrame(() => bookmarkletContainer.classList.add("show"));
+    }
+
+    // === Smooth scroll στο αποτέλεσμα ===
+    setTimeout(() => {
+      if (resultSection) {
+        resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 200);
+
+    // === Restore κουμπί ===
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.classList.remove("loading");
+      // === Toast message ===
+      const msg =
+        window.currentLang === "gr"
+          ? "✅ Η υπογραφή δημιουργήθηκε επιτυχώς!"
+          : "✅ Signature generated successfully!";
+      showToast(msg);
+
+      btn.textContent = oldText;
+    }, 800);
+  }, 200);
 }
 
 // === Αρχικοποίηση εφαρμογής ===

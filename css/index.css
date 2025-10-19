@@ -1,9 +1,0 @@
-/* ===============================
-   🌐 INDEX (entry point)
-   =============================== */
-@import "./_variables.css";
-@import "./_layout.css";
-@import "./_form.css";
-@import "./_preview.css";
-@import "./_toast.css";
-@import "./_animations.css";

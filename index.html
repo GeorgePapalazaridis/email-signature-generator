@@ -29,19 +29,6 @@
 
     <!-- Favicon suppression -->
     <link rel="icon" href="data:," />
-
-    <!-- JS entry point -->
-    <script type="module" src="./js/index.js"></script>
-
-    <!-- Fallback for GitHub Pages (subpath-safe) -->
-    <!-- <script type="module">
-      if (window.location.hostname === "georgepapalazaridis.github.io") {
-        const script = document.createElement("script");
-        script.type = "module";
-        script.src = "/prognosis-signature-generator/js/index.js";
-        document.body.appendChild(script);
-      }
-    </script> -->
   </head>
 
   <body>
@@ -151,5 +138,18 @@
         </a>
       </p>
     </footer>
+
+    <!-- JS entry point -->
+    <script type="module" src="./js/index.js"></script>
+
+    <!-- Fallback for GitHub Pages (subpath-safe) -->
+    <script type="module">
+      if (window.location.hostname === "georgepapalazaridis.github.io") {
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "/prognosis-signature-generator/js/index.js";
+        document.body.appendChild(script);
+      }
+    </script>
   </body>
 </html>

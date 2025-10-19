@@ -1,104 +1,142 @@
 # ✉️ Email Signature Generator
 
-A lightweight HTML tool that creates personalized **Outlook Web** email signatures and injects them automatically using a bookmarklet.  
-Designed to eliminate the copy-paste formatting issues of Outlook’s signature editor.
+A lightweight browser-based tool that creates personalized **Outlook Web** email signatures and injects them automatically using a **bookmarklet**.  
+Designed to eliminate the copy-paste formatting issues of Outlook’s signature editor and restore full HTML control.
 
 ---
 
-## 🧩 Problem
+## 🧩 The Problem
 
-Creating branded HTML signatures in **Outlook Web** is frustrating:
+When Microsoft introduced the **new Outlook for Web (2024+)**, it disrupted traditional HTML signature workflows:
 
 - Outlook strips rich HTML formatting when you paste.
+- Inline styles and `<table>` layouts get removed or broken.
 - There’s no direct way to inject clean HTML into the editor.
-- Most employees or partners need a simple, foolproof process.
+- Most employees or partners need a simple, foolproof setup.
+
+Companies lost brand consistency and were forced to rebuild signatures manually — often with broken icons, fonts, and spacing.
 
 ---
 
-## 💡 Solution
+## 💡 The Solution
 
-This project provides a **stand-alone HTML tool** that:
+This project provides a **stand-alone, fully local HTML generator** that:
 
-- Opens locally in any browser (no installation needed)
-- Lets the user fill in personal details (name, title, phone, etc.)
-- Generates a **bookmarklet** that automatically inserts the pre-built signature HTML into the Outlook Web editor
-- Supports multiple languages (currently English & Greek)
-- Includes a responsive, inline-styled email signature compatible with Outlook Web
+- Opens directly in any browser (no install, no server).
+- Lets users fill in their personal info (name, title, phone, etc.).
+- Generates a **bookmarklet** that injects the HTML signature directly into Outlook Web’s editor.
+- Uses **fully inline-styled HTML** for compatibility with Outlook and all major email clients.
+- Supports **multiple languages** (currently English & Greek).
+- Includes a **step-by-step PDF installation guide** for non-technical staff.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML / CSS / Vanilla JS** – no external dependencies
-- Inline CSS for maximum email-client compatibility
-- Embedded translations for multilingual support
-- Works fully offline — download → open → run
+- **HTML5 / CSS3 / Vanilla JavaScript (ES Modules)**
+- Inline CSS for 100 % Outlook-safe rendering
+- No external dependencies — works completely offline
+- Modularized for maintainability (imports per module)
 
 ---
 
 ## ✨ Features
 
 - Dynamic input fields (name, title, phone, optional mobile)
-- Smart logic — hides the mobile field if left empty
-- Clean Outlook-safe table structure with inline icons
-- Brand-consistent, modern layout with social links
-- Auto-generated bookmarklet for instant insertion
-- Step-by-step installation guide (PDF included)
+- Auto-hide logic for unused fields (e.g., mobile)
+- Modern, branded layout with social links and icons
+- Clean, table-based HTML structure for Outlook compatibility
+- Auto-generated **bookmarklet** for one-click insertion
+- Built-in **EN / GR translations**
+- **PDF guide** for company rollout
 
 ---
 
 ## 🚀 Usage
 
-1. **Download** the file `Prognosis_Signature_Generator.html` (or the latest `index.html` build).
-2. **Open it locally** in your browser (Chrome / Edge).
-3. **Fill in** your details (name, title, phone, etc.).
-4. Click **“Generate Bookmarklet”** — a button named “Prognosis Signature” will appear.
-5. **Drag it** to your browser’s bookmarks bar.
-6. Open **Outlook Web → Settings → Signatures**.
-7. In the signature editor, **click the bookmarklet** — your signature will be inserted automatically.
+1. **Clone or download** the full project folder.
+2. Open `index.html` in your browser (Chrome or Edge).
+3. Fill in your personal details:
+   - Full Name
+   - Job Title
+   - Phone / Mobile (optional)
+4. Click **“Generate Bookmarklet.”**
+5. Drag the blue **“Signature”** button to your bookmarks bar.
+6. Open **Outlook Web → Settings → Signatures.**
+7. Inside the signature editor, **click the bookmarklet.**  
+   Your branded HTML signature is inserted automatically ✅
 
-Full illustrated instructions are available in  
-📄 [`docs/Email_Signature_Instructions.pdf`](docs/Email_Signature_Instructions.pdf)
+📄 Full illustrated instructions are available in  
+[`docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf`](docs/Οδηγίες%20Εγκατάστασης%20Υπογραφής%20Email.pdf)
 
 ---
 
 ## 📁 Project Structure
 
-```
+```md
 email-signature-generator/
 │
-├── src/
-│   ├── index.html                   # Main entry (UI + script imports)
-│   ├── js/
-│   │   ├── translations.js          # EN/GR translations
-│   │   ├── generator.js             # Main logic & bookmarklet creation
-│   │   └── signature-template.js    # HTML structure of the signature
-│   ├── css/
-│   │   └── main.css                 # Styling (form + layout)
-│   └── assets/
-│       └── icons/                   # Social/contact icons
+├── assets/
+│ ├── base64/
+│ │ └── logo-base64.js # Encoded logo (Base64 string)
+│ └── icons/ # Contact / social icons
+│ ├── call.png
+│ ├── factory.png
+│ ├── facebook.png
+│ ├── instagram.png
+│ ├── language.png
+│ ├── linkedIn.png
+│ ├── M.png
+│ └── youtube.png
 │
-├── dist/                            # (optional) minified / production build
+├── css/
+│ └── index.css # Styling (form + layout)
+│
 ├── docs/
-│   └── Email_Signature_Instructions.pdf
-├── README.md
+│ ├── Οδηγίες Εγκατάστασης Υπογραφής Email.pdf
+│ └── Οδηγίες Εγκατάστασης Υπογραφής Email.txt
+│
+├── js/
+│ ├── index.js # App entry point (main logic)
+│ ├── dom-bindings.js # Event bindings for UI
+│ ├── utils.js # Input sanitization helpers
+│ ├── translations.js # EN/GR translations & setter
+│ ├── signature-template.js # Dynamic HTML builder
+│ └── assets/base64/logo-base64.js # Logo asset (Base64)
+│
+├── dist/ # (optional) minified build output
+│
+├── index.html # Main UI
+├── LICENSE # MIT License
+├── README.md # This documentation
 └── .gitignore
-
 ```
 
 ---
 
-## 🧭 Next Steps
+## 🧭 Design Decisions
 
-- [ ] Add **dark-mode** friendly variant
-- [ ] Implement **preview before injection**
-- [ ] Allow **export / copy as raw HTML** for manual paste
-- [ ] Extend **translation support** (e.g. FR, PT, DE)
+- **Offline-first approach:** works without a network connection.
+- **Base64-encoded logo:** prevents broken image links in Outlook.
+- **Dynamic mobile block:** hidden automatically when empty.
+- **Clean modular structure:** easier future scaling (multi-org).
+- **Step-by-step PDF guide:** simplifies company-wide rollout.
+
+---
+
+## 🔮 Next Steps
+
+- [ ] Add **dark-mode logo variant**
+- [ ] Add **multi-organization template support**
+- [ ] Add **visual preview before generation**
+- [ ] Add **export-to-HTML** option for manual insertion
 
 ---
 
 ## 🧾 License
 
-This project is released under the **MIT License** — free to use, modify, and distribute with attribution.
+MIT License © 2025
 
 ---
+
+💬 _Developed to simplify branded email signature deployment in modern Outlook environments._

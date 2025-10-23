@@ -3,17 +3,19 @@
    =============================== */
 label {
   display: block;
-  margin-top: var(--space-md);
+  // margin-top: var(--space-md);
   font-weight: 600;
   color: var(--color-accent);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
+  margin-bottom: 0.35rem;
 }
 
 input {
   width: 100%;
-  padding: 0.625rem 0.75rem; /* 10px 12px */
+  padding: 0.75rem 0.9rem;
   font-size: var(--font-size-md);
-  margin-top: var(--space-xs);
+  height: 2.75rem;
+  margin-bottom: 0.85rem;
   border: var(--border-width) solid #ccc;
   border-radius: var(--border-radius-sm);
   background: var(--color-white);
@@ -32,14 +34,15 @@ input::placeholder {
 }
 
 /* ===============================
-     🔘 BUTTON
+       🔘 BUTTON
    =============================== */
 button {
-  margin-top: var(--space-lg);
-  width: 100%;
+  margin-top: var(--space-md);
+  width: 80%;
+  align-self: center;
   background-color: var(--color-primary);
   color: var(--color-white);
-  padding: 0.8125rem 1.25rem; /* 13px 20px */
+  padding: 0.7rem 1rem;
   font-size: var(--font-size-md);
   border: none;
   border-radius: var(--border-radius-md);
@@ -67,4 +70,29 @@ button:disabled {
   background-color: #a0c8e8;
   cursor: not-allowed;
   transform: none;
+}
+
+/* ===============================
+       ⚙️ RESPONSIVE & ZOOM STABILITY FIX
+   =============================== */
+form {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+h2#titleHeading,
+p#subtitleText {
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.35;
+}
+
+@media (max-width: 480px) {
+  button {
+    width: 90%;
+  }
 }

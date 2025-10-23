@@ -114,7 +114,7 @@ export function buildSignature({
                     <img
                       alt="ProGnosis Biotech"
                       src="${logoBase64}"
-                      style="display:block; border:0; max-width:200px; height:auto; margin:0 auto;"
+                      style="display:block; border:0; max-width:200px; height:auto; border-radius:12px; margin:0 auto;"
                     />
                   </a>
                 </td>

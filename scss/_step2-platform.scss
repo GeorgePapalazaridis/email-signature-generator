@@ -1,0 +1,44 @@
+// ===========================
+// STEP 2 — Platform selection
+// ===========================
+.platform-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.platform-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #eaeaea;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.platform-card:hover {
+  border-color: #4092ff;
+  background: #f8fdff;
+}
+
+.platform-card.selected {
+  border-color: #0066ff;
+  background: #eaf3ff;
+}
+
+.platform-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.platform-desc {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.platform-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}

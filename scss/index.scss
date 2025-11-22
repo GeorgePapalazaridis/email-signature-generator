@@ -4,6 +4,19 @@
 @use "./_variables";
 @use "./_layout";
 @use "./_form";
+@use "./_step2-platform";
 @use "./_preview";
 @use "./_toast";
 @use "./_animations";
+
+.step-section {
+  width: 100%;
+}
+.step-section.active {
+  display: block;
+}
+
+#nextBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

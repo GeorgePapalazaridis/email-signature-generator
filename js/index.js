@@ -3,6 +3,71 @@ import { translations, setLanguage } from "./translations.js";
 import { buildSignature } from "./signature-template.js";
 import { bindDom } from "./dom-bindings.js";
 
+// ===========================
+// STEP NAV + VALIDATION (Step 1)
+// ===========================
+const step1Section = document.getElementById("step1Section");
+const step2Section = document.getElementById("step2Section");
+
+const nextBtn = document.getElementById("nextBtn");
+const backToStep1Btn = document.getElementById("backToStep1Btn");
+
+const nameInput = document.getElementById("name");
+const titleInput = document.getElementById("title");
+
+// required τώρα = name + title (όπως ήδη είχες validation)
+function step1IsValid() {
+  return (
+    nameInput.value.trim().length > 0 && titleInput.value.trim().length > 0
+  );
+}
+
+function updateNextButtonState() {
+  nextBtn.disabled = !step1IsValid();
+}
+
+// listeners για live enable/disable)
+[nameInput, titleInput].forEach((el) => {
+  el.addEventListener("input", updateNextButtonState);
+});
+
+updateNextButtonState(); // αρχική κατάσταση
+
+nextBtn.addEventListener("click", () => {
+  if (!step1IsValid()) return;
+
+  step1Section.style.display = "none";
+  step2Section.style.display = "block";
+  step2Section.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+backToStep1Btn.addEventListener("click", () => {
+  step2Section.style.display = "none";
+  step1Section.style.display = "block";
+  step1Section.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// ===========================
+// STEP 2 — Platform selection
+// ===========================
+let selectedPlatform = null;
+const platformCards = document.querySelectorAll(".platform-card");
+const step2ContinueBtn = document.getElementById("step2ContinueBtn"); // FIXED
+
+platformCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    // Clear previous selection
+    platformCards.forEach((c) => c.classList.remove("selected"));
+
+    // Set new selection
+    card.classList.add("selected");
+    selectedPlatform = card.dataset.platform;
+
+    // Enable continue
+    step2ContinueBtn.disabled = false;
+  });
+});
+
 function makeBookmarklet(signature, t) {
   // Προσοχή: JSON.stringify για ασφαλή embed
   return `javascript:(function(){

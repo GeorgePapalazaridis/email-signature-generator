@@ -36,8 +36,7 @@ body:hover {
 }
 
 main,
-.logo,
-form {
+.logo {
   transform: translateY(-0.5rem);
 }
 
@@ -175,89 +174,6 @@ hr {
 }
 
 /* ===============================
-       🧱 FORM ELEMENTS
-   =============================== */
-form {
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  display: block;
-  margin-top: var(--space-md);
-  font-weight: 600;
-  color: var(--color-accent);
-  font-size: var(--font-size-sm);
-  margin-bottom: 0.35rem;
-}
-
-input {
-  width: 100%;
-  padding: 0.75rem 0.9rem;
-  font-size: var(--font-size-md);
-  height: 2.75rem;
-  margin-bottom: 0.85rem;
-  border: var(--border-width) solid #ccc;
-  border-radius: var(--border-radius-sm);
-  background: var(--color-white);
-  transition: border var(--transition-fast), box-shadow var(--transition-fast);
-  box-sizing: border-box;
-}
-
-input:focus {
-  border-color: var(--color-primary);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
-}
-
-input::placeholder {
-  color: #999;
-  font-style: italic;
-}
-
-/* ===============================
-       🔘 BUTTON
-   =============================== */
-button {
-  margin-top: var(--space-md);
-  width: 80%;
-  align-self: center;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  padding: 0.7rem 1rem;
-  font-size: var(--font-size-md);
-  border: none;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  transition: background var(--transition-normal),
-    transform var(--transition-fast);
-}
-
-button:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-button.loading {
-  opacity: 0.7;
-  cursor: wait;
-  transition: opacity var(--transition-slow);
-}
-
-button:disabled {
-  background-color: #a0c8e8;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ===============================
        🧑‍💻 DEVELOPER FOOTER
    =============================== */
 .footer {
@@ -338,10 +254,6 @@ button:disabled {
   body {
     padding: 1rem;
     margin: 1rem auto;
-  }
-
-  button {
-    width: 90%;
   }
 
   hr {

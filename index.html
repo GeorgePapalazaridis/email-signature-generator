@@ -1,87 +1,76 @@
 <!DOCTYPE html>
 <html lang="el">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Prognosis Signature Generator — create and inject branded Outlook Web signatures automatically"
-    />
-    <meta property="og:title" content="Prognosis Signature Generator" />
-    <meta
-      property="og:description"
-      content="A lightweight in-browser generator for Outlook Web email signatures"
-    />
-    <meta property="og:type" content="website" />
 
-    <title>Prognosis Signature Generator</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Prognosis Signature Generator — create and inject branded Outlook Web signatures automatically" />
+  <meta property="og:title" content="Prognosis Signature Generator" />
+  <meta property="og:description" content="A lightweight in-browser generator for Outlook Web email signatures" />
+  <meta property="og:type" content="website" />
 
-    <!-- Base path handling for GitHub Pages -->
-    <script type="module">
-      const isProduction =
-        window.location.hostname === "georgepapalazaridis.github.io";
-      const baseUrl = isProduction ? "/email-signature-generator/" : "/";
-      document.write(`<base href="${baseUrl}">`);
-    </script>
+  <title>Prognosis Signature Generator</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/index.css" />
+  <!-- Base path handling for GitHub Pages -->
+  <script type="module">
+    const isProduction =
+      window.location.hostname === "georgepapalazaridis.github.io";
+    const baseUrl = isProduction ? "/email-signature-generator/" : "/";
+    document.write(`<base href="${baseUrl}">`);
+  </script>
 
-    <!-- Favicon suppression -->
-    <link rel="icon" href="data:," />
-  </head>
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/index.css" />
 
-  <body>
-    <!-- ====== LANGUAGE SELECTOR ====== -->
-    <div class="header-bar">
-      <label for="lang">🌐 Language:</label>
-      <select id="lang">
-        <option value="gr" selected>🇬🇷 Ελληνικά</option>
-        <option value="en">🇬🇧 English</option>
-      </select>
-    </div>
+  <!-- Favicon suppression -->
+  <link rel="icon" href="data:," />
+</head>
 
-    <!-- ====== LOGO ====== -->
-    <div class="logo">
-      <a
-        href="https://www.prognosis-biotech.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
-          alt="Prognosis Biotech Logo"
-        />
-      </a>
-    </div>
+<body>
+  <!-- ====== LANGUAGE SELECTOR ====== -->
+  <div class="header-bar">
+    <label for="lang">🌐 Language:</label>
+    <select id="lang">
+      <option value="gr" selected>🇬🇷 Ελληνικά</option>
+      <option value="en">🇬🇧 English</option>
+    </select>
+  </div>
 
-    <hr />
+  <!-- ====== LOGO ====== -->
+  <div class="logo">
+    <a href="https://www.prognosis-biotech.com" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
+        alt="Prognosis Biotech Logo" />
+    </a>
+  </div>
 
-    <!-- ====== MAIN CONTENT ====== -->
-    <h2 id="titleHeading"></h2>
-    <p id="subtitleText"></p>
+  <hr />
 
-    <!-- Help CTA (opens PDF in new tab) -->
-    <p class="help-cta">
-      <a
-        id="helpLink"
-        href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      ></a>
-    </p>
+  <!-- ====== MAIN CONTENT ====== -->
+  <h2 id="titleHeading"></h2>
+  <p id="subtitleText"></p>
 
-    <!-- ====== FORM FIELDS ====== -->
+  <!-- Help CTA (opens PDF in new tab) -->
+  <p class="help-cta">
+    <a id="helpLink" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank" rel="noopener noreferrer"></a>
+  </p>
+
+  <h3 id="step1Title" class="step-title"></h3>
+  <p id="step1Subtitle" class="step-subtitle"></p>
+
+  <!-- ====== FORM FIELDS ====== -->
+  <section id="step1Section" class="step-section active">
+
+    <h3 class="step-header">Βήμα 1: Συμπλήρωση στοιχείων</h3>
+
+
     <form id="signatureForm">
       <label for="name" id="labelName"></label>
       <input id="name" placeholder="π.χ. George Papalazaridis" required />
 
       <label for="title" id="labelTitle"></label>
-      <input
-        id="title"
-        placeholder="π.χ. Front End Angular Developer"
-        required
-      />
+      <input id="title" placeholder="π.χ. Front End Angular Developer" required />
 
       <label for="address" id="labelAddress"></label>
       <input id="address" value="Farsalon 153, Larissa, 41335 - Greece" />
@@ -90,66 +79,100 @@
       <input id="mobile" placeholder="π.χ. +30 6987 331 449" />
 
       <label for="phone" id="labelPhone"></label>
-      <input
-        id="phone"
-        placeholder="+30 2410 623 922"
-        value="+30 2410 623 922"
-      />
+      <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
       <!-- ====== GENERATE BUTTON ====== -->
-      <button id="generateBtn" type="button"></button>
+      <!-- <button id="generateBtn" type="button"></button> -->
+
+      <button id="nextBtn" type="button" disabled>Επόμενο</button>
     </form>
+  </section>
 
-    <!-- ====== PREVIEW + BOOKMARKLET SECTION ====== -->
-    <section id="resultSection">
-      <!-- Preview -->
-      <div id="preview-section">
-        <h3 id="previewTitle" class="preview-title"></h3>
-        <div id="preview-box"></div>
-        <!-- Help CTA under preview -->
-        <p class="help-cta help-cta--after">
-          <a
-            id="helpLinkAfter"
-            href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          ></a>
-        </p>
+
+  <section id="step2Section" class="step-section" style="display: none;">
+    <h3 style="text-align: center; margin-top: 24px;">
+      Βήμα 2: Επιλογή πλατφόρμας
+    </h3>
+
+    <div id="platformCards" class="platform-cards">
+      <!-- Outlook -->
+      <div class="platform-card" data-platform="outlook">
+        <div class="platform-icon">📧</div>
+        <div class="platform-title">Microsoft Outlook</div>
+        <div class="platform-desc">
+          Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet.
+        </div>
       </div>
 
-      <!-- Bookmarklet -->
-      <div id="bookmarklet-container">
-        <p id="dragText" class="drag-text"></p>
-        <a id="bookmarklet" class="bookmarklet" href="#"></a>
-        <div class="info" id="instructionText"></div>
+      <!-- Thunderbird -->
+      <div class="platform-card" data-platform="thunderbird">
+        <div class="platform-icon">🐦</div>
+        <div class="platform-title">Thunderbird</div>
+        <div class="platform-desc">
+          Λήψη αρχείου .html για import.
+        </div>
       </div>
-    </section>
 
-    <!-- ====== FOOTER ====== -->
-    <footer class="footer" role="contentinfo">
-      <p>
-        © 2025 <strong>Prognosis Signature Generator</strong> — Developed by
-        <a
-          href="https://www.linkedin.com/in/george-papalazaridis-865689120/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="footer-icon">💻</span> George Papalazaridis
-        </a>
+      <!-- Monday -->
+      <div class="platform-card" data-platform="monday">
+        <div class="platform-icon">🔵</div>
+        <div class="platform-title">Monday.com</div>
+        <div class="platform-desc">
+          Copy–Paste HTML υπογραφής.
+        </div>
+      </div>
+    </div>
+
+    <!-- Continue + Back buttons -->
+    <div style="text-align:center; margin-top:32px;">
+      <button id="backToStep1Btn" type="button">Πίσω</button>
+      <button id="step2ContinueBtn" type="button" disabled>Συνέχεια</button>
+    </div>
+  </section>
+
+  <!-- ====== PREVIEW + BOOKMARKLET SECTION ====== -->
+  <section id="resultSection">
+    <!-- Preview -->
+    <div id="preview-section">
+      <h3 id="previewTitle" class="preview-title"></h3>
+      <div id="preview-box"></div>
+      <!-- Help CTA under preview -->
+      <p class="help-cta help-cta--after">
+        <a id="helpLinkAfter" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank"
+          rel="noopener noreferrer"></a>
       </p>
-    </footer>
+    </div>
 
-    <!-- JS entry point -->
-    <script type="module" src="./js/index.js"></script>
+    <!-- Bookmarklet -->
+    <div id="bookmarklet-container">
+      <p id="dragText" class="drag-text"></p>
+      <a id="bookmarklet" class="bookmarklet" href="#"></a>
+      <div class="info" id="instructionText"></div>
+    </div>
+  </section>
 
-    <!-- Fallback for GitHub Pages (subpath-safe) -->
-    <script type="module">
-      if (window.location.hostname === "georgepapalazaridis.github.io") {
-        const script = document.createElement("script");
-        script.type = "module";
-        script.src = "/email-signature-generator/js/index.js";
-        document.body.appendChild(script);
-      }
-    </script>
-  </body>
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer" role="contentinfo">
+    <p>
+      © 2025 <strong>Prognosis Signature Generator</strong> — Developed by
+      <a href="https://www.linkedin.com/in/george-papalazaridis-865689120/" target="_blank" rel="noopener noreferrer">
+        <span class="footer-icon">💻</span> George Papalazaridis
+      </a>
+    </p>
+  </footer>
+
+  <!-- JS entry point -->
+  <script type="module" src="./js/index.js"></script>
+
+  <!-- Fallback for GitHub Pages (subpath-safe) -->
+  <script type="module">
+    if (window.location.hostname === "georgepapalazaridis.github.io") {
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "/email-signature-generator/js/index.js";
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+
 </html>

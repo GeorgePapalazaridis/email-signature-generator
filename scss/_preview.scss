@@ -2,6 +2,8 @@
      🪄 PREVIEW BOX
    =============================== */
 #preview-box {
+  height: auto;
+  overflow: visible;
   max-width: var(--max-width-preview);
   margin: var(--space-md) auto 0 auto;
   background-color: var(--color-white);

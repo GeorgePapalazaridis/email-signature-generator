@@ -65,8 +65,8 @@
 body {
   font-family: var(--font-family-base);
   max-width: var(--max-width-body);
-  margin: 2rem auto;
-  padding: 1.5rem 2rem;
+  margin: 4rem auto;
+  padding: 0.75rem 1.25rem;
   line-height: var(--line-height-base);
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -74,16 +74,10 @@ body {
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--transition-slow);
-  /* ✅ keeps footer at bottom */
-  min-height: 100vh;
+  /* Layout */
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-bottom: 2rem;
 }
 
 body:hover {
@@ -175,18 +169,18 @@ hr {
   border: none;
   border-top: 1px solid var(--color-border);
   width: 80%;
-  margin: 0.75rem auto 1.25rem auto;
+  margin: 0.5rem auto 0.75rem auto;
 }
 
 /* ===============================
        💬 HELP CTA
    =============================== */
 .help-cta {
-  background: #f5f7fa;
-  border: 1px solid #d8e2ec;
+  background: #f8fafc;
+  border: 1px solid #e5e9ef;
   border-radius: 10px;
   padding: 0.6rem 0.9rem;
-  margin: 1rem auto 1.5rem;
+  margin: 0.5rem auto 1rem;
   max-width: 420px;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
@@ -238,9 +232,9 @@ hr {
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: var(--space-md) 0 var(--space-sm);
-  margin-top: var(--space-xl);
+  margin-top: auto;
   border-top: 1px solid #e2e2e2;
-  background: linear-gradient(to bottom right, #f9fafc, #ffffff);
+  background: #f9fafc;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   color: #555;
@@ -281,23 +275,26 @@ hr {
 }
 
 /* 🌙 Dark Mode */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .footer {
     background: linear-gradient(to bottom right, #111, #1b1b1b);
     border-top-color: #2b2b2b;
     color: #aaa;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
+
   .footer strong {
     color: #ddd;
   }
+
   .footer a {
     color: #6cb8ff;
   }
+
   .footer a:hover {
     color: #9fd0ff;
   }
-}
+} */
 /* ===============================
        📱 RESPONSIVE FIXES
    =============================== */
@@ -324,11 +321,17 @@ label {
   margin-bottom: 0.35rem;
 }
 
+label.required::after {
+  content: " *";
+  color: var(--color-error);
+  font-weight: 700;
+}
+
 input {
   width: 100%;
-  padding: 0.75rem 0.9rem;
+  padding: 0.6rem 0.75rem;
+  height: auto;
   font-size: var(--font-size-md);
-  height: 2.75rem;
   margin-bottom: 0.85rem;
   border: var(--border-width) solid #ccc;
   border-radius: var(--border-radius-sm);
@@ -352,7 +355,6 @@ input::placeholder {
    =============================== */
 button {
   margin-top: var(--space-md);
-  width: 80%;
   align-self: center;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -380,9 +382,36 @@ button.loading {
 }
 
 button:disabled {
-  background-color: #a0c8e8;
+  background-color: #bcd8f4;
   cursor: not-allowed;
   transform: none;
+}
+
+/* κοινός κανόνας για όλα τα primary "επόμενο/συνέχεια" κουμπιά */
+.next-button {
+  width: auto;
+  padding: 0.6rem 1.25rem;
+  margin-left: auto;
+  margin-right: 0; /* right aligned */
+  border-radius: 6px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.back-button {
+  width: auto;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  min-width: 120px;
+  text-align: center;
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  margin-right: auto; /* left aligned */
+}
+
+.back-button:hover {
+  background: #eef6ff;
 }
 
 /* ===============================
@@ -394,7 +423,7 @@ form {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  transform: translateY(-0.5rem);
+  transform: none;
 }
 
 h2#titleHeading,
@@ -410,20 +439,81 @@ p#subtitleText {
     width: 90%;
   }
 }
+/* ===============================
+   STEP 2 — BUTTONS LAYOUT
+=============================== */
+.step2-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-lg);
+  gap: var(--space-md);
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Outline button (Πίσω) */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.55rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(0, 120, 212, 0.08);
+}
+
+/* Primary button (Συνέχεια) */
+.btn-primary {
+  background: var(--color-primary);
+  border: none;
+  color: var(--color-white);
+  padding: 0.55rem 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  transition: background var(--transition-normal), transform var(--transition-fast);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background: #a0c8e8;
+  cursor: not-allowed;
+}
+
+/* ===============================
+   STEP 2 — CARD FIXES
+=============================== */
 .platform-cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   margin-top: 24px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .platform-card {
-  padding: 20px;
+  padding: 16px 20px;
   border-radius: 12px;
   border: 2px solid #eaeaea;
   background: #fff;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
 }
 
 .platform-card:hover {
@@ -436,10 +526,14 @@ p#subtitleText {
   background: #eaf3ff;
 }
 
+.platform-icon {
+  font-size: 2rem;
+}
+
 .platform-title {
   font-weight: 600;
-  font-size: 1.2rem;
-  margin-bottom: 6px;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
 }
 
 .platform-desc {
@@ -447,15 +541,12 @@ p#subtitleText {
   color: #666;
 }
 
-.platform-icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
 /* ===============================
      🪄 PREVIEW BOX
    =============================== */
 #preview-box {
+  height: auto;
+  overflow: visible;
   max-width: var(--max-width-preview);
   margin: var(--space-md) auto 0 auto;
   background-color: var(--color-white);
@@ -654,15 +745,21 @@ a.bookmarklet:hover::after {
 }
 .step-section {
   width: 100%;
+  margin-top: var(--space-md);
+}
+
+.step-header {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  line-height: 1.3;
 }
 
 .step-section.active {
   display: block;
-}
-
-#nextBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 /*# sourceMappingURL=index.css.map */

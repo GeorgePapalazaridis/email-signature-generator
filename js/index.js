@@ -4,69 +4,95 @@ import { buildSignature } from "./signature-template.js";
 import { bindDom } from "./dom-bindings.js";
 
 // ===========================
-// STEP NAV + VALIDATION (Step 1)
+// DOM Refs (new 3-step wizard)
 // ===========================
-const step1Section = document.getElementById("step1Section");
-const step2Section = document.getElementById("step2Section");
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
 
-const nextBtn = document.getElementById("nextBtn");
-const backToStep1Btn = document.getElementById("backToStep1Btn");
+// Buttons
+const toStep2Btn = document.getElementById("toStep2Btn");
+const toStep3Btn = document.getElementById("toStep3Btn");
+const backToStep1Btn = document.getElementById("backToStep1");
+const backToStep2Btn = document.getElementById("backToStep2");
+const generateFinalBtn = document.getElementById("generateFinalBtn");
 
+// Inputs
 const nameInput = document.getElementById("name");
 const titleInput = document.getElementById("title");
+const addressInput = document.getElementById("address");
+const mobileInput = document.getElementById("mobile");
+const phoneInput = document.getElementById("phone");
 
-// required τώρα = name + title (όπως ήδη είχες validation)
+// Preview box (Step 2)
+const previewBox = document.getElementById("preview-box");
+
+// Platform cards (Step 3)
+const platformCards = document.querySelectorAll(".platform-card");
+
+// Optional old/final DOM (if you decide to keep them later)
+const bookmarkletContainer = document.getElementById("bookmarklet-container");
+const bookmarkletLink = document.getElementById("bookmarklet");
+const dragTextEl = document.getElementById("dragText");
+const instructionEl = document.getElementById("instructionText");
+
+// ===========================
+// State
+// ===========================
+let selectedPlatform = null;
+let signatureHtml = "";
+
+// ===========================
+// Helpers
+// ===========================
+function showStep(stepEl) {
+  [step1, step2, step3].forEach((s) => {
+    if (!s) return;
+    s.style.display = s === stepEl ? "block" : "none";
+  });
+
+  stepEl?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function step1IsValid() {
   return (
-    nameInput.value.trim().length > 0 && titleInput.value.trim().length > 0
+    nameInput?.value.trim().length > 0 && titleInput?.value.trim().length > 0
   );
 }
 
-function updateNextButtonState() {
-  nextBtn.disabled = !step1IsValid();
+function updateToStep2State() {
+  if (!toStep2Btn) return;
+  toStep2Btn.disabled = !step1IsValid();
 }
 
-// listeners για live enable/disable)
-[nameInput, titleInput].forEach((el) => {
-  el.addEventListener("input", updateNextButtonState);
-});
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
 
-updateNextButtonState(); // αρχική κατάσταση
+  setTimeout(() => {
+    toast.style.animation = "toastOut 0.4s ease forwards";
+    setTimeout(() => toast.remove(), 400);
+  }, 2200);
+}
 
-nextBtn.addEventListener("click", () => {
-  if (!step1IsValid()) return;
+function buildSignatureHtml() {
+  const name = nameInput.value.trim();
+  const title = titleInput.value.trim();
+  const address = addressInput.value || "Farsalon 153, Larissa, 41335 - Greece";
+  const mobile = mobileInput.value.trim();
+  const phone = phoneInput.value.trim() || "+30 2410 623 922";
 
-  step1Section.style.display = "none";
-  step2Section.style.display = "block";
-  step2Section.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-backToStep1Btn.addEventListener("click", () => {
-  step2Section.style.display = "none";
-  step1Section.style.display = "block";
-  step1Section.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-// ===========================
-// STEP 2 — Platform selection
-// ===========================
-let selectedPlatform = null;
-const platformCards = document.querySelectorAll(".platform-card");
-const step2ContinueBtn = document.getElementById("step2ContinueBtn"); // FIXED
-
-platformCards.forEach((card) => {
-  card.addEventListener("click", () => {
-    // Clear previous selection
-    platformCards.forEach((c) => c.classList.remove("selected"));
-
-    // Set new selection
-    card.classList.add("selected");
-    selectedPlatform = card.dataset.platform;
-
-    // Enable continue
-    step2ContinueBtn.disabled = false;
+  return buildSignature({
+    name,
+    title,
+    address,
+    phone,
+    mobile,
+    logoBase64,
   });
-});
+}
 
 function makeBookmarklet(signature, t) {
   // Προσοχή: JSON.stringify για ασφαλή embed
@@ -93,55 +119,37 @@ function makeBookmarklet(signature, t) {
   })();`;
 }
 
-// === Helper: Toast notifications ===
-function showToast(message, type = "success") {
-  const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
-  toast.textContent = message;
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.style.animation = "toastOut 0.4s ease forwards";
-    setTimeout(() => toast.remove(), 400);
-  }, 2200);
+function downloadHtmlFile(html, filename = "prognosis-signature.html") {
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
 }
 
-// === Κύρια λειτουργία ===
-export function generate() {
-  const t = translations[window.currentLang || "gr"];
-
-  // === DOM refs ===
-  const resultSection = document.getElementById("resultSection");
-  const previewSection = document.getElementById("preview-section");
-  const previewBox = document.getElementById("preview-box");
-  const bookmarkletContainer = document.getElementById("bookmarklet-container");
-  const link = document.getElementById("bookmarklet");
-  const btn = document.getElementById("generateBtn");
-
-  // === Field values ===
-  const name = document.getElementById("name").value.trim();
-  const title = document.getElementById("title").value.trim();
-  const address =
-    document.getElementById("address").value ||
-    "Farsalon 153, Larissa, 41335 - Greece";
-  const mobile = document.getElementById("mobile").value.trim();
-  const phone =
-    document.getElementById("phone").value.trim() || "+30 2410 623 922";
-
-  // === Reset view ===
-  if (previewBox) previewBox.innerHTML = "";
-  if (previewSection) previewSection.style.display = "none";
-  if (bookmarkletContainer) {
-    bookmarkletContainer.classList.remove("show");
-    bookmarkletContainer.style.display = "none";
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
   }
-  if (resultSection) {
-    resultSection.classList.remove("show");
-    resultSection.style.display = "none";
-  }
+}
 
-  // === Validation ===
-  if (!name || !title) {
+// ===========================
+// Step 1 -> Step 2 (Preview)
+// ===========================
+[nameInput, titleInput].forEach((el) => {
+  el?.addEventListener("input", updateToStep2State);
+});
+updateToStep2State();
+
+toStep2Btn?.addEventListener("click", () => {
+  if (!step1IsValid()) {
     const msg =
       window.currentLang === "gr"
         ? "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο"
@@ -150,69 +158,119 @@ export function generate() {
     return;
   }
 
-  // === Loader state στο κουμπί ===
-  const oldText = btn.textContent;
-  btn.disabled = true;
-  btn.classList.add("loading");
-  btn.textContent =
-    window.currentLang === "gr" ? "Δημιουργία..." : "Generating...";
+  signatureHtml = buildSignatureHtml();
 
-  // === Ελαφρύ delay για UX feedback ===
-  setTimeout(() => {
-    // === Build signature ===
-    const signature = buildSignature({
-      name,
-      title,
-      address,
-      phone,
-      mobile,
-      logoBase64,
-    });
+  if (previewBox) previewBox.innerHTML = signatureHtml;
 
-    // === Make bookmarklet ===
-    const js = makeBookmarklet(signature, t);
-    if (link) link.href = js;
+  showStep(step2);
+});
 
-    // === Show results ===
-    if (previewBox) previewBox.innerHTML = signature;
-    if (previewSection) previewSection.style.display = "block";
+// Back Step 2 -> Step 1
+backToStep1Btn?.addEventListener("click", () => {
+  showStep(step1);
+});
 
-    // === Show parent section ===
-    if (resultSection) {
-      resultSection.style.display = "block";
-      requestAnimationFrame(() => resultSection.classList.add("show"));
-    }
+// ===========================
+// Step 2 -> Step 3 (Platform)
+// ===========================
+toStep3Btn?.addEventListener("click", () => {
+  // safety: if user somehow skipped build
+  if (!signatureHtml) signatureHtml = buildSignatureHtml();
+  showStep(step3);
+});
 
-    // === Fade-in bookmarklet ===
+// Back Step 3 -> Step 2
+backToStep2Btn?.addEventListener("click", () => {
+  showStep(step2);
+});
+
+// ===========================
+// Step 3 Platform selection
+// ===========================
+platformCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    platformCards.forEach((c) => c.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedPlatform = card.dataset.platform;
+
+    if (generateFinalBtn) generateFinalBtn.disabled = false;
+  });
+});
+
+// ===========================
+// Final action (depends on platform)
+// ===========================
+generateFinalBtn?.addEventListener("click", async () => {
+  if (!selectedPlatform) return;
+
+  const t = translations[window.currentLang || "gr"];
+  if (!signatureHtml) signatureHtml = buildSignatureHtml();
+
+  if (selectedPlatform === "outlook") {
+    // create bookmarklet
+    const js = makeBookmarklet(signatureHtml, t);
+
+    // If you kept old container, fill it
+    if (bookmarkletLink) bookmarkletLink.href = js;
+    if (dragTextEl) dragTextEl.innerHTML = t.dragText;
+    if (instructionEl) instructionEl.innerHTML = t.instruction;
+
     if (bookmarkletContainer) {
       bookmarkletContainer.style.display = "block";
       requestAnimationFrame(() => bookmarkletContainer.classList.add("show"));
+      showToast(
+        window.currentLang === "gr"
+          ? "✅ Bookmarklet έτοιμο — σύρε το κουμπί στα bookmarks."
+          : "✅ Bookmarklet ready — drag it to bookmarks."
+      );
+      bookmarkletContainer.scrollIntoView({ behavior: "smooth" });
+      return;
     }
 
-    // === Smooth scroll στο αποτέλεσμα ===
-    setTimeout(() => {
-      if (resultSection) {
-        resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 200);
+    // fallback: copy bookmarklet to clipboard
+    const ok = await copyToClipboard(js);
+    showToast(
+      ok
+        ? window.currentLang === "gr"
+          ? "✅ Bookmarklet αντιγράφηκε στο clipboard."
+          : "✅ Bookmarklet copied to clipboard."
+        : window.currentLang === "gr"
+        ? "⚠️ Δεν μπόρεσα να το αντιγράψω — κάνε copy χειροκίνητα."
+        : "⚠️ Could not copy — please copy manually.",
+      ok ? "success" : "error"
+    );
+    return;
+  }
 
-    // === Restore κουμπί ===
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.classList.remove("loading");
-      // === Toast message ===
-      const msg =
-        window.currentLang === "gr"
-          ? "✅ Η υπογραφή δημιουργήθηκε επιτυχώς!"
-          : "✅ Signature generated successfully!";
-      showToast(msg);
+  if (selectedPlatform === "thunderbird") {
+    downloadHtmlFile(signatureHtml);
+    showToast(
+      window.currentLang === "gr"
+        ? "✅ Κατέβηκε αρχείο HTML για import."
+        : "✅ HTML file downloaded for import."
+    );
+    return;
+  }
 
-      btn.textContent = oldText;
-    }, 800);
-  }, 200);
-}
+  if (selectedPlatform === "monday") {
+    const ok = await copyToClipboard(signatureHtml);
+    showToast(
+      ok
+        ? window.currentLang === "gr"
+          ? "✅ Η υπογραφή αντιγράφηκε — κάνε paste στο Monday."
+          : "✅ Signature copied — paste it into Monday."
+        : window.currentLang === "gr"
+        ? "⚠️ Δεν μπόρεσα να την αντιγράψω."
+        : "⚠️ Could not copy signature.",
+      ok ? "success" : "error"
+    );
+    return;
+  }
+});
 
-// === Αρχικοποίηση εφαρμογής ===
+// ===========================
+// Init
+// ===========================
 document.addEventListener("DOMContentLoaded", () => {
   // Default language
   window.currentLang = "gr";
@@ -220,7 +278,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Δέσιμο DOM handlers
   bindDom({
-    onGenerate: generate,
     onLanguageChange: (lang) => setLanguage(lang),
   });
 

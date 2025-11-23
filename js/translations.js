@@ -80,9 +80,14 @@ export function setLanguage(lang) {
   if (!t) return;
 
   // === HEADINGS ===
-  document.getElementById("titleHeading").textContent = t.heading;
-  document.getElementById("subtitleText").textContent = t.subtitle;
-  document.getElementById("previewTitle").textContent = t.previewTitle;
+  const titleHeading = document.getElementById("titleHeading");
+  if (titleHeading) titleHeading.textContent = t.heading;
+
+  const subtitleText = document.getElementById("subtitleText");
+  if (subtitleText) subtitleText.textContent = t.subtitle;
+
+  const previewTitle = document.getElementById("previewTitle");
+  if (previewTitle) previewTitle.textContent = t.previewTitle;
 
   // Help link
   const helpLink = document.getElementById("helpLink");
@@ -111,15 +116,8 @@ export function setLanguage(lang) {
   }
 
   // === FORM LABELS ===
-  document.getElementById(
-    "labelName"
-  ).innerHTML = `${t.name} <span style="color:red;">*</span>`;
-  document.getElementById("name").placeholder = t.namePlaceholder;
-
-  document.getElementById(
-    "labelTitle"
-  ).innerHTML = `${t.title} <span style="color:red;">*</span>`;
-  document.getElementById("title").placeholder = t.titlePlaceholder;
+  document.getElementById("labelName").textContent = t.name;
+  document.getElementById("labelTitle").textContent = t.title;
 
   document.getElementById("labelAddress").textContent = t.address;
   document.getElementById("labelPhone").textContent = t.phone;
@@ -127,7 +125,8 @@ export function setLanguage(lang) {
   document.getElementById("mobile").placeholder = t.mobilePlaceholder;
 
   // === BUTTON ===
-  document.getElementById("generateBtn").textContent = t.button;
+  const generateBtn = document.getElementById("generateBtn");
+  if (generateBtn) generateBtn.textContent = t.button;
 
   // === BOOKMARKLET SECTION ===
   const dragTextEl = document.getElementById("dragText");

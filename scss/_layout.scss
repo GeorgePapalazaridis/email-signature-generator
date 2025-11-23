@@ -8,8 +8,8 @@
 body {
   font-family: var(--font-family-base);
   max-width: var(--max-width-body);
-  margin: 2rem auto;
-  padding: 1.5rem 2rem;
+  margin: 4rem auto;
+  padding: 0.75rem 1.25rem;
   line-height: var(--line-height-base);
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -18,17 +18,10 @@ body {
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--transition-slow);
 
-  /* ✅ keeps footer at bottom */
-  min-height: 100vh;
+  /* Layout */
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-bottom: 2rem;
 }
 
 body:hover {
@@ -120,18 +113,18 @@ hr {
   border: none;
   border-top: 1px solid var(--color-border);
   width: 80%;
-  margin: 0.75rem auto 1.25rem auto;
+  margin: 0.5rem auto 0.75rem auto;
 }
 
 /* ===============================
        💬 HELP CTA
    =============================== */
 .help-cta {
-  background: #f5f7fa;
-  border: 1px solid #d8e2ec;
+  background: #f8fafc;
+  border: 1px solid #e5e9ef;
   border-radius: 10px;
   padding: 0.6rem 0.9rem;
-  margin: 1rem auto 1.5rem;
+  margin: 0.5rem auto 1rem;
   max-width: 420px;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
@@ -183,9 +176,12 @@ hr {
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: var(--space-md) 0 var(--space-sm);
-  margin-top: var(--space-xl);
+  // margin-top: var(--space-xl);
+  margin-top: auto;
   border-top: 1px solid #e2e2e2;
-  background: linear-gradient(to bottom right, #f9fafc, #ffffff);
+  // background: linear-gradient(to bottom right, #f9fafc, #ffffff);
+  background: #f9fafc;
+
   font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   color: #555;
@@ -226,7 +222,7 @@ hr {
 }
 
 /* 🌙 Dark Mode */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .footer {
     background: linear-gradient(to bottom right, #111, #1b1b1b);
     border-top-color: #2b2b2b;
@@ -245,7 +241,7 @@ hr {
   .footer a:hover {
     color: #9fd0ff;
   }
-}
+} */
 
 /* ===============================
        📱 RESPONSIVE FIXES

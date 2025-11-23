@@ -60,16 +60,14 @@
   <p id="step1Subtitle" class="step-subtitle"></p>
 
   <!-- ====== FORM FIELDS ====== -->
-  <section id="step1Section" class="step-section active">
-
+  <section id="step1" class="step-section active">
     <h3 class="step-header">Βήμα 1: Συμπλήρωση στοιχείων</h3>
 
-
     <form id="signatureForm">
-      <label for="name" id="labelName"></label>
+      <label for="name" id="labelName" class="required"></label>
       <input id="name" placeholder="π.χ. George Papalazaridis" required />
 
-      <label for="title" id="labelTitle"></label>
+      <label for="title" id="labelTitle" class="required"></label>
       <input id="title" placeholder="π.χ. Front End Angular Developer" required />
 
       <label for="address" id="labelAddress"></label>
@@ -81,17 +79,27 @@
       <label for="phone" id="labelPhone"></label>
       <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
-      <!-- ====== GENERATE BUTTON ====== -->
-      <!-- <button id="generateBtn" type="button"></button> -->
-
-      <button id="nextBtn" type="button" disabled>Επόμενο</button>
+      <button id="toStep2Btn" class="next-button" type="button" disabled>Επόμενο</button>
     </form>
   </section>
 
+  <section id="step2" class="step-section" style="display:none;">
+    <h3 class="step-header">Βήμα 2: Προεπισκόπηση Υπογραφής</h3>
 
-  <section id="step2Section" class="step-section" style="display: none;">
-    <h3 style="text-align: center; margin-top: 24px;">
-      Βήμα 2: Επιλογή πλατφόρμας
+    <div id="preview-section">
+      <div id="preview-box"></div>
+    </div>
+
+    <div class="step2-actions">
+      <button id="backToStep1" class="back-button" type="button">Πίσω</button>
+      <button id="toStep3Btn" class="next-button" type="button">Συνέχεια</button>
+    </div>
+  </section>
+
+
+  <section id="step3" class="step-section" style="display: none;">
+    <h3 class="step-header">
+      Βήμα 3: Επιλογή πλατφόρμας
     </h3>
 
     <div id="platformCards" class="platform-cards">
@@ -124,25 +132,14 @@
     </div>
 
     <!-- Continue + Back buttons -->
-    <div style="text-align:center; margin-top:32px;">
-      <button id="backToStep1Btn" type="button">Πίσω</button>
-      <button id="step2ContinueBtn" type="button" disabled>Συνέχεια</button>
+    <div class="step2-actions">
+      <button id="backToStep2" class="back-button" type="button">Πίσω</button>
+      <button id="generateFinalBtn" class="next-button" type="button" disabled>Τέλος</button>
     </div>
   </section>
 
-  <!-- ====== PREVIEW + BOOKMARKLET SECTION ====== -->
+  <!-- ====== BOOKMARKLET SECTION ====== -->
   <section id="resultSection">
-    <!-- Preview -->
-    <div id="preview-section">
-      <h3 id="previewTitle" class="preview-title"></h3>
-      <div id="preview-box"></div>
-      <!-- Help CTA under preview -->
-      <p class="help-cta help-cta--after">
-        <a id="helpLinkAfter" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank"
-          rel="noopener noreferrer"></a>
-      </p>
-    </div>
-
     <!-- Bookmarklet -->
     <div id="bookmarklet-container">
       <p id="dragText" class="drag-text"></p>

@@ -5,6 +5,7 @@
 @use "./_layout";
 @use "./_form";
 @use "./_step2-platform";
+@use "./step4-outlook";
 @use "./_preview";
 @use "./_toast";
 @use "./_animations";
@@ -12,12 +13,17 @@
 .step-section {
   width: 100%;
   margin-top: var(--space-md);
+  padding-bottom: var(--space-xxl);
+}
+
+.step-subtitle {
+  text-align: center;
 }
 
 .step-header {
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--color-accent);

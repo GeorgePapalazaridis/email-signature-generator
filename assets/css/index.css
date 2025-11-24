@@ -90,6 +90,14 @@ main,
 }
 
 /* Headings */
+h1#titleHeading {
+  color: var(--color-accent);
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 7rem;
+  font-size: clamp(1.2rem, 2vw + 0.7rem, 1.6rem);
+}
+
 h2#titleHeading {
   color: var(--color-accent);
   text-align: center;
@@ -108,39 +116,65 @@ p#subtitleText {
 }
 
 /* ===============================
-       🌐 HEADER BAR
+       🌐 HEADER BAR (New Layout)
    =============================== */
 .header-bar {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--space-xs);
-  margin-bottom: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start; /* σημαντικό – όχι center */
+  padding: 0.25rem 0.15rem;
+  margin-bottom: 3.5rem;
 }
 
-.header-bar label {
-  font-weight: 600;
-  color: var(--color-text);
-  margin: 0;
+/* Help link (left side) */
+.header-help a {
   display: flex;
   align-items: center;
-  gap: var(--space-xxs);
-  font-size: var(--font-size-sm);
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: #0366d6;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  opacity: 0.95;
 }
 
-.header-bar select {
+.header-help a:hover {
+  color: #005bb7;
+  text-decoration: underline;
+}
+
+/* Language block (right side) */
+.header-lang {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem; /* Λίγο φυσικός αέρας μεταξύ τίτλου & select */
+  padding-top: 0.1rem; /* Μικρή διόρθωση offset ώστε ο τίτλος να ευθυγραμμίζεται άψογα */
+}
+
+/* Label inside language selector */
+.header-lang label {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+  margin-bottom: 0.05rem; /* Μικρό φιλικό separation */
+}
+
+/* Select styling */
+.header-lang select {
   padding: var(--space-xxs) var(--space-sm);
   border-radius: var(--border-radius-sm);
-  border: var(--border-width) solid #ccc;
+  border: 1px solid #ccc;
   font-size: var(--font-size-sm);
-  line-height: 1.4;
-  height: 1.875rem; /* 30px */
+  height: 1.875rem;
   cursor: pointer;
   background: var(--color-white);
   transition: border var(--transition-fast);
 }
 
-.header-bar select:hover {
+.header-lang select:hover {
   border-color: var(--color-primary);
 }
 
@@ -231,8 +265,8 @@ hr {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: var(--space-md) 0 var(--space-sm);
   margin-top: auto;
+  padding: var(--space-lg) 0 var(--space-md);
   border-top: 1px solid #e2e2e2;
   background: #f9fafc;
   font-family: "JetBrains Mono", monospace;
@@ -541,6 +575,112 @@ p#subtitleText {
   color: #666;
 }
 
+/* ===== STEP 4 (Outlook) ===== */
+.step4-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e6e6e6;
+  padding: 30px;
+  max-width: 650px;
+  margin: 0 auto 32px auto;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.step4-section {
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.step4-subtitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.step4-text {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.step4-note {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* Bookmarklet button */
+.bookmarklet-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  margin-top: 6px;
+  font-size: 0.95rem;
+  background: #0078d4; /* Outlook Blue */
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.bookmarklet-btn:hover {
+  background: #006cbe;
+}
+
+/* Outlook open button */
+.outlook-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #2e7d32; /* Green for action */
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.outlook-btn:hover {
+  background: #256628;
+}
+
+/* Footer action buttons */
+.step4-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.back-button {
+  border: 1px solid #0366d6;
+  color: #0366d6;
+  padding: 10px 20px;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.back-button:hover {
+  background: rgba(3, 102, 214, 0.07);
+}
+
+.next-button {
+  background: #0366d6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.next-button:hover {
+  background: #005bb7;
+}
+
 /* ===============================
      🪄 PREVIEW BOX
    =============================== */
@@ -746,12 +886,17 @@ a.bookmarklet:hover::after {
 .step-section {
   width: 100%;
   margin-top: var(--space-md);
+  padding-bottom: var(--space-xxl);
+}
+
+.step-subtitle {
+  text-align: center;
 }
 
 .step-header {
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--color-accent);

@@ -30,12 +30,22 @@
 <body>
   <!-- ====== LANGUAGE SELECTOR ====== -->
   <div class="header-bar">
-    <label for="lang">🌐 Language:</label>
-    <select id="lang">
-      <option value="gr" selected>🇬🇷 Ελληνικά</option>
-      <option value="en">🇬🇧 English</option>
-    </select>
+
+    <div class="header-help">
+      <a id="helpLink" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank" rel="noopener noreferrer">
+      </a>
+    </div>
+
+    <div class="header-lang">
+      <label for="lang">🌐 Language:</label>
+      <select id="lang">
+        <option value="gr" selected>🇬🇷 Ελληνικά</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
+    </div>
+
   </div>
+
 
   <!-- ====== LOGO ====== -->
   <div class="logo">
@@ -48,20 +58,13 @@
   <hr />
 
   <!-- ====== MAIN CONTENT ====== -->
-  <h2 id="titleHeading"></h2>
-  <p id="subtitleText"></p>
-
-  <!-- Help CTA (opens PDF in new tab) -->
-  <p class="help-cta">
-    <a id="helpLink" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank" rel="noopener noreferrer"></a>
-  </p>
-
-  <h3 id="step1Title" class="step-title"></h3>
-  <p id="step1Subtitle" class="step-subtitle"></p>
+  <h1 id="titleHeading"></h1>
 
   <!-- ====== FORM FIELDS ====== -->
   <section id="step1" class="step-section active">
-    <h3 class="step-header">Βήμα 1: Συμπλήρωση στοιχείων</h3>
+    <h2 class="step-header" id="step1Header"></h2>
+
+    <p id="step1Subtitle" class="step-subtitle"></p>
 
     <form id="signatureForm">
       <label for="name" id="labelName" class="required"></label>
@@ -79,28 +82,30 @@
       <label for="phone" id="labelPhone"></label>
       <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
-      <button id="toStep2Btn" class="next-button" type="button" disabled>Επόμενο</button>
+      <button id="toStep2Btn" class="next-button" type="button" disabled></button>
     </form>
   </section>
 
   <section id="step2" class="step-section" style="display:none;">
-    <h3 class="step-header">Βήμα 2: Προεπισκόπηση Υπογραφής</h3>
+    <h2 id="step2Title" class="step-header"></h2>
+
+    <p id="step2Subtitle" class="step-subtitle"></p>
 
     <div id="preview-section">
       <div id="preview-box"></div>
     </div>
 
     <div class="step2-actions">
-      <button id="backToStep1" class="back-button" type="button">Πίσω</button>
-      <button id="toStep3Btn" class="next-button" type="button">Συνέχεια</button>
+      <button id="backToStep1" class="back-button" type="button"></button>
+      <button id="toStep3Btn" class="next-button" type="button"></button>
     </div>
   </section>
 
 
   <section id="step3" class="step-section" style="display: none;">
-    <h3 class="step-header">
+    <h2 class="step-header">
       Βήμα 3: Επιλογή πλατφόρμας
-    </h3>
+    </h2>
 
     <div id="platformCards" class="platform-cards">
       <!-- Outlook -->
@@ -133,20 +138,26 @@
 
     <!-- Continue + Back buttons -->
     <div class="step2-actions">
-      <button id="backToStep2" class="back-button" type="button">Πίσω</button>
-      <button id="generateFinalBtn" class="next-button" type="button" disabled>Τέλος</button>
+      <button id="backToStep2" class="back-button" type="button"></button>
+      <button id="toStep4Btn" class="next-button" type="button" disabled></button>
     </div>
   </section>
 
-  <!-- ====== BOOKMARKLET SECTION ====== -->
-  <section id="resultSection">
-    <!-- Bookmarklet -->
-    <div id="bookmarklet-container">
-      <p id="dragText" class="drag-text"></p>
-      <a id="bookmarklet" class="bookmarklet" href="#"></a>
-      <div class="info" id="instructionText"></div>
+  <!-- ====== STEP 4 — BOOKMARKLET (Outlook) ====== -->
+  <section id="step4" class="step-section" style="display:none;">
+    <h2 id="step4Title" class="step-header"></h2>
+
+    <!-- Dynamic container: Outlook / Thunderbird / Monday -->
+    <div id="step4Content"></div>
+
+    <div class="step4-actions">
+      <button id="backToStep3" class="back-button" type="button"></button>
+      <button id="finishBtn" class="next-button" type="button"></button>
     </div>
+
   </section>
+
+
 
   <!-- ====== FOOTER ====== -->
   <footer class="footer" role="contentinfo">

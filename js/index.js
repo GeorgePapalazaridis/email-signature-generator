@@ -9,13 +9,18 @@ import { bindDom } from "./dom-bindings.js";
 const step1 = document.getElementById("step1");
 const step2 = document.getElementById("step2");
 const step3 = document.getElementById("step3");
+const step4 = document.getElementById("step4");
 
 // Buttons
 const toStep2Btn = document.getElementById("toStep2Btn");
 const toStep3Btn = document.getElementById("toStep3Btn");
+const toStep4Btn = document.getElementById("toStep4Btn");
+
 const backToStep1Btn = document.getElementById("backToStep1");
 const backToStep2Btn = document.getElementById("backToStep2");
-const generateFinalBtn = document.getElementById("generateFinalBtn");
+const backToStep3Btn = document.getElementById("backToStep3");
+
+const finishBtn = document.getElementById("finishBtn");
 
 // Inputs
 const nameInput = document.getElementById("name");
@@ -39,14 +44,15 @@ const instructionEl = document.getElementById("instructionText");
 // ===========================
 // State
 // ===========================
-let selectedPlatform = null;
-let signatureHtml = "";
+window.selectedPlatform = null;
+
+window.signatureHtml = "";
 
 // ===========================
 // Helpers
 // ===========================
 function showStep(stepEl) {
-  [step1, step2, step3].forEach((s) => {
+  [step1, step2, step3, step4].forEach((s) => {
     if (!s) return;
     s.style.display = s === stepEl ? "block" : "none";
   });
@@ -119,6 +125,66 @@ function makeBookmarklet(signature, t) {
   })();`;
 }
 
+function renderOutlookStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
+
+  container.innerHTML = `
+<div class="step4-card">
+
+  <!-- 1) Step 1 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">1. ${t.outlook_step1_title}</h4>
+
+    <a id="bookmarkletButton"
+       href="#"
+       class="bookmarklet-btn">
+      ${t.bookmarkletLabel}
+    </a>
+
+    <p class="step4-note">
+      ${t.outlook_step1_note_intro}<br>
+      ${t.outlook_step1_note_mac}<br>
+      ${t.outlook_step1_note_win}
+    </p>
+
+  </div>
+
+  <!-- 2) Step 2 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">2. ${t.outlook_step2_title}</h4>
+
+    <a href="https://outlook.office.com/" target="_blank" class="outlook-btn">
+      ${t.outlook_open_button}
+    </a>
+  </div>
+
+  <!-- 3) Step 3 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">3. ${t.outlook_step3_title}</h4>
+    <p class="step4-text">
+      ${t.outlook_step3_text}
+    </p>
+  </div>
+
+  <!-- 4) Step 4 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">4. ${t.outlook_step4_title}</h4>
+    <p class="step4-text">
+      ${t.outlook_step4_text}
+    </p>
+  </div>
+
+</div>
+  `;
+
+  // Connect Bookmarklet
+  const btn = document.getElementById("bookmarkletButton");
+  if (btn) {
+    btn.href = makeBookmarklet(window.signatureHtml, t);
+  }
+}
+
 function downloadHtmlFile(html, filename = "prognosis-signature.html") {
   const blob = new Blob([html], { type: "text/html;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -158,9 +224,9 @@ toStep2Btn?.addEventListener("click", () => {
     return;
   }
 
-  signatureHtml = buildSignatureHtml();
+  window.signatureHtml = buildSignatureHtml();
 
-  if (previewBox) previewBox.innerHTML = signatureHtml;
+  if (previewBox) previewBox.innerHTML = window.signatureHtml;
 
   showStep(step2);
 });
@@ -175,13 +241,27 @@ backToStep1Btn?.addEventListener("click", () => {
 // ===========================
 toStep3Btn?.addEventListener("click", () => {
   // safety: if user somehow skipped build
-  if (!signatureHtml) signatureHtml = buildSignatureHtml();
+  if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
   showStep(step3);
 });
 
 // Back Step 3 -> Step 2
 backToStep2Btn?.addEventListener("click", () => {
   showStep(step2);
+});
+
+backToStep3Btn?.addEventListener("click", () => {
+  // Clear Step 4 content
+  const container = document.getElementById("step4Content");
+  if (container) container.innerHTML = "";
+
+  // Reset platform selection completely
+  window.selectedPlatform = null;
+  platformCards.forEach((c) => c.classList.remove("selected"));
+  if (toStep4Btn) toStep4Btn.disabled = true;
+
+  // Go back to Step 3
+  showStep(step3);
 });
 
 // ===========================
@@ -191,80 +271,75 @@ platformCards.forEach((card) => {
   card.addEventListener("click", () => {
     platformCards.forEach((c) => c.classList.remove("selected"));
     card.classList.add("selected");
-    selectedPlatform = card.dataset.platform;
+    window.selectedPlatform = card.dataset.platform;
 
-    if (generateFinalBtn) generateFinalBtn.disabled = false;
+    if (toStep4Btn) toStep4Btn.disabled = false;
   });
+});
+
+toStep4Btn?.addEventListener("click", () => {
+  if (!window.selectedPlatform) return;
+
+  // Πάντα χτίζουμε signatureHtml
+  if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+
+  showStep(step4);
+
+  const t = translations[window.currentLang || "gr"];
+
+  if (window.selectedPlatform === "outlook") {
+    renderOutlookStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "thunderbird") {
+    downloadHtmlFile(window.signatureHtml);
+  }
+
+  if (window.selectedPlatform === "monday") {
+    copyToClipboard(window.signatureHtml);
+  }
 });
 
 // ===========================
 // Final action (depends on platform)
 // ===========================
-generateFinalBtn?.addEventListener("click", async () => {
-  if (!selectedPlatform) return;
+finishBtn?.addEventListener("click", () => {
+  // Reset state
+  window.selectedPlatform = null;
+  window.signatureHtml = "";
 
-  const t = translations[window.currentLang || "gr"];
-  if (!signatureHtml) signatureHtml = buildSignatureHtml();
+  // Clear platform selections
+  platformCards.forEach((c) => c.classList.remove("selected"));
+  if (toStep4Btn) toStep4Btn.disabled = true;
 
-  if (selectedPlatform === "outlook") {
-    // create bookmarklet
-    const js = makeBookmarklet(signatureHtml, t);
+  // Clear form
+  document.getElementById("signatureForm").reset();
+  updateToStep2State();
 
-    // If you kept old container, fill it
-    if (bookmarkletLink) bookmarkletLink.href = js;
-    if (dragTextEl) dragTextEl.innerHTML = t.dragText;
-    if (instructionEl) instructionEl.innerHTML = t.instruction;
+  // Clear Step 4 content
+  const container = document.getElementById("step4Content");
+  if (container) container.innerHTML = "";
 
-    if (bookmarkletContainer) {
-      bookmarkletContainer.style.display = "block";
-      requestAnimationFrame(() => bookmarkletContainer.classList.add("show"));
-      showToast(
-        window.currentLang === "gr"
-          ? "✅ Bookmarklet έτοιμο — σύρε το κουμπί στα bookmarks."
-          : "✅ Bookmarklet ready — drag it to bookmarks."
-      );
-      bookmarkletContainer.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
+  // Success toast
+  showToast(
+    window.currentLang === "gr"
+      ? "🎉 Η διαδικασία ολοκληρώθηκε!"
+      : "🎉 Completed!"
+  );
 
-    // fallback: copy bookmarklet to clipboard
-    const ok = await copyToClipboard(js);
-    showToast(
-      ok
-        ? window.currentLang === "gr"
-          ? "✅ Bookmarklet αντιγράφηκε στο clipboard."
-          : "✅ Bookmarklet copied to clipboard."
-        : window.currentLang === "gr"
-        ? "⚠️ Δεν μπόρεσα να το αντιγράψω — κάνε copy χειροκίνητα."
-        : "⚠️ Could not copy — please copy manually.",
-      ok ? "success" : "error"
-    );
-    return;
-  }
+  // Return to Step 1
+  showStep(step1);
+});
 
-  if (selectedPlatform === "thunderbird") {
-    downloadHtmlFile(signatureHtml);
-    showToast(
-      window.currentLang === "gr"
-        ? "✅ Κατέβηκε αρχείο HTML για import."
-        : "✅ HTML file downloaded for import."
-    );
-    return;
-  }
+document.addEventListener("language-changed", () => {
+  const step4El = document.getElementById("step4");
+  const isVisible = step4El && step4El.offsetParent !== null;
 
-  if (selectedPlatform === "monday") {
-    const ok = await copyToClipboard(signatureHtml);
-    showToast(
-      ok
-        ? window.currentLang === "gr"
-          ? "✅ Η υπογραφή αντιγράφηκε — κάνε paste στο Monday."
-          : "✅ Signature copied — paste it into Monday."
-        : window.currentLang === "gr"
-        ? "⚠️ Δεν μπόρεσα να την αντιγράψω."
-        : "⚠️ Could not copy signature.",
-      ok ? "success" : "error"
-    );
-    return;
+  if (isVisible && window.selectedPlatform === "outlook") {
+    if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+
+    const t = translations[window.currentLang];
+    renderOutlookStep4(window.signatureHtml, t);
   }
 });
 

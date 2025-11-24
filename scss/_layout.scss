@@ -34,6 +34,14 @@ main,
 }
 
 /* Headings */
+h1#titleHeading {
+  color: var(--color-accent);
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 7rem;
+  font-size: clamp(1.2rem, 2vw + 0.7rem, 1.6rem);
+}
+
 h2#titleHeading {
   color: var(--color-accent);
   text-align: center;
@@ -52,39 +60,65 @@ p#subtitleText {
 }
 
 /* ===============================
-       🌐 HEADER BAR
+       🌐 HEADER BAR (New Layout)
    =============================== */
 .header-bar {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--space-xs);
-  margin-bottom: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.25rem 0.15rem;
+  margin-bottom: 3.5rem;
 }
 
-.header-bar label {
-  font-weight: 600;
-  color: var(--color-text);
-  margin: 0;
+/* Help link (left side) */
+.header-help a {
   display: flex;
   align-items: center;
-  gap: var(--space-xxs);
-  font-size: var(--font-size-sm);
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: #0366d6;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  opacity: 0.95;
 }
 
-.header-bar select {
+.header-help a:hover {
+  color: #005bb7;
+  text-decoration: underline;
+}
+
+/* Language block (right side) */
+.header-lang {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  padding-top: 0.1rem;
+}
+
+/* Label inside language selector */
+.header-lang label {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+  margin-bottom: 0.05rem;
+}
+
+/* Select styling */
+.header-lang select {
   padding: var(--space-xxs) var(--space-sm);
   border-radius: var(--border-radius-sm);
-  border: var(--border-width) solid #ccc;
+  border: 1px solid #ccc;
   font-size: var(--font-size-sm);
-  line-height: 1.4;
-  height: 1.875rem; /* 30px */
+  height: 1.875rem;
   cursor: pointer;
   background: var(--color-white);
   transition: border var(--transition-fast);
 }
 
-.header-bar select:hover {
+.header-lang select:hover {
   border-color: var(--color-primary);
 }
 
@@ -175,9 +209,13 @@ hr {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: var(--space-md) 0 var(--space-sm);
-  // margin-top: var(--space-xl);
+
   margin-top: auto;
+  padding: var(--space-lg) 0 var(--space-md);
+
+  // padding: var(--space-md) 0 var(--space-sm);
+  // margin-top: var(--space-xl);
+  // margin-top: auto;
   border-top: 1px solid #e2e2e2;
   // background: linear-gradient(to bottom right, #f9fafc, #ffffff);
   background: #f9fafc;

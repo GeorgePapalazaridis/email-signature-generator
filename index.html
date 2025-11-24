@@ -102,38 +102,37 @@
   </section>
 
 
-  <section id="step3" class="step-section" style="display: none;">
-    <h2 class="step-header">
-      Βήμα 3: Επιλογή πλατφόρμας
-    </h2>
+  <section id="step3" class="step-section" style="display:none;">
+
+    <!-- Step 3 Title -->
+    <h2 id="step3Title" class="step-header"></h2>
+
+    <!-- Subtitle -->
+    <p id="step3Subtitle" class="step-subtitle"></p>
 
     <div id="platformCards" class="platform-cards">
+
       <!-- Outlook -->
       <div class="platform-card" data-platform="outlook">
         <div class="platform-icon">📧</div>
-        <div class="platform-title">Microsoft Outlook</div>
-        <div class="platform-desc">
-          Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet.
-        </div>
+        <div id="outlookTitle" class="platform-title"></div>
+        <div id="outlookDesc" class="platform-desc"></div>
       </div>
 
       <!-- Thunderbird -->
       <div class="platform-card" data-platform="thunderbird">
         <div class="platform-icon">🐦</div>
-        <div class="platform-title">Thunderbird</div>
-        <div class="platform-desc">
-          Λήψη αρχείου .html για import.
-        </div>
+        <div id="thunderTitle" class="platform-title"></div>
+        <div id="thunderDesc" class="platform-desc"></div>
       </div>
 
       <!-- Monday -->
       <div class="platform-card" data-platform="monday">
         <div class="platform-icon">🔵</div>
-        <div class="platform-title">Monday.com</div>
-        <div class="platform-desc">
-          Copy–Paste HTML υπογραφής.
-        </div>
+        <div id="mondayTitle" class="platform-title"></div>
+        <div id="mondayDesc" class="platform-desc"></div>
       </div>
+
     </div>
 
     <!-- Continue + Back buttons -->
@@ -141,11 +140,15 @@
       <button id="backToStep2" class="back-button" type="button"></button>
       <button id="toStep4Btn" class="next-button" type="button" disabled></button>
     </div>
+
   </section>
+
 
   <!-- ====== STEP 4 — BOOKMARKLET (Outlook) ====== -->
   <section id="step4" class="step-section" style="display:none;">
     <h2 id="step4Title" class="step-header"></h2>
+
+    <p id="step4Subtitle" class="step-subtitle"></p>
 
     <!-- Dynamic container: Outlook / Thunderbird / Monday -->
     <div id="step4Content"></div>

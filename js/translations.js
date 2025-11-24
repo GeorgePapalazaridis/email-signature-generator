@@ -23,17 +23,33 @@ export const translations = {
 
     // === HEADINGS ===
     heading: "Prognosis Email Signature Generator",
-    step1Title: "Βήμα 1: Συμπλήρωση στοιχείων",
-    step2Title: "Βήμα 2: Προεπισκόπηση Υπογραφής",
-    step1Subtitle:
-      "Συμπλήρωσε τα στοιχεία σου και πάτα «Δημιουργία Bookmarklet».",
-    step2Subtitle:
-      "Έλεγξε την υπογραφή σου πριν προχωρήσεις στη μέθοδο εγκατάστασης.",
-
-    // === HELP LINK ===
     helpLinkText: "📄 Οδηγίες βήμα-βήμα",
     helpLinkHref: "docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf",
     previewTitle: "Προεπισκόπηση Υπογραφής",
+
+    // Step subtitles
+    step1Title: "Βήμα 1: Συμπλήρωση στοιχείων",
+    step1Subtitle:
+      "Συμπλήρωσε τα στοιχεία σου και πάτα «Δημιουργία Bookmarklet».",
+    step2Title: "Βήμα 2: Προεπισκόπηση Υπογραφής",
+    step2Subtitle: "Έλεγξε την υπογραφή σου πριν συνεχίσεις.",
+    step3Title: "Βήμα 3: Επιλογή πλατφόρμας",
+    step3Subtitle:
+      "Επίλεξε την πλατφόρμα όπου θέλεις να εγκαταστήσεις την υπογραφή σου.",
+
+    step4Title: "Βήμα 4: Εγκατάσταση",
+    step4Subtitle:
+      "Ακολούθησε τις παρακάτω οδηγίες για να εγκαταστήσεις την υπογραφή σου στην επιλεγμένη πλατφόρμα.",
+
+    // === PLATFORM CARDS ===
+    platformOutlookTitle: "Microsoft Outlook",
+    platformOutlookDesc: "Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet.",
+
+    platformThunderbirdTitle: "Thunderbird",
+    platformThunderbirdDesc: "Λήψη αρχείου .html για import.",
+
+    platformMondayTitle: "Monday.com",
+    platformMondayDesc: "Copy–Paste HTML υπογραφής.",
 
     // === BOOKMARKLET SECTION ===
     dragText:
@@ -87,16 +103,31 @@ export const translations = {
 
     // === HEADINGS ===
     heading: "Prognosis Email Signature Generator",
-    step1Title: "Step 1: Fill in your details",
-    step2Title: "Step 2: Signature preview",
-    step1Subtitle: "Fill in your details and click “Generate Bookmarklet”.",
-    step2Subtitle:
-      "Review your signature before choosing an installation method.",
-
-    // === HELP LINK ===
     helpLinkText: "📄 Installation guide",
     helpLinkHref: "docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf",
     previewTitle: "Signature Preview",
+
+    // Step subtitles
+    step1Title: "Step 1: Fill in your details",
+    step1Subtitle: "Fill in your details and click “Generate Bookmarklet”.",
+    step2Title: "Step 2: Signature Preview",
+    step2Subtitle: "Review your signature before continuing.",
+    step3Title: "Step 3: Choose platform",
+    step3Subtitle:
+      "Choose the platform where you want to install your signature.",
+    step4Title: "Step 4: Installation",
+    step4Subtitle:
+      "Follow the instructions below to install your signature on the selected platform.",
+
+    // === PLATFORM CARDS ===
+    platformOutlookTitle: "Microsoft Outlook",
+    platformOutlookDesc: "Automatic signature insertion via Bookmarklet.",
+
+    platformThunderbirdTitle: "Thunderbird",
+    platformThunderbirdDesc: "Download .html file for import.",
+
+    platformMondayTitle: "Monday.com",
+    platformMondayDesc: "Copy–Paste the HTML signature.",
 
     // === BOOKMARKLET SECTION ===
     dragText:
@@ -143,8 +174,14 @@ export function setLanguage(lang) {
   const step1Header = document.querySelector("#step1 .step-header");
   if (step1Header) step1Header.textContent = t.step1Title;
 
-  const step2TitleEl = document.querySelector("#step2Title");
-  if (step2TitleEl) step2TitleEl.textContent = t.step2Title;
+  const step2Title = document.querySelector("#step2Title");
+  if (step2Title) step2Title.textContent = t.step2Title;
+
+  const step3Title = document.querySelector("#step3Title");
+  if (step3Title) step3Title.textContent = t.step3Title;
+
+  const step4Title = document.querySelector("#step4Title");
+  if (step4Title) step4Title.textContent = t.step4Title;
 
   const step1Subtitle = document.getElementById("step1Subtitle");
   if (step1Subtitle) step1Subtitle.textContent = t.step1Subtitle;
@@ -152,8 +189,25 @@ export function setLanguage(lang) {
   const step2Subtitle = document.getElementById("step2Subtitle");
   if (step2Subtitle) step2Subtitle.textContent = t.step2Subtitle;
 
+  const step3Subtitle = document.getElementById("step3Subtitle");
+  if (step3Subtitle) step3Subtitle.textContent = t.step3Subtitle;
+
+  const step4Subtitle = document.getElementById("step4Subtitle");
+  if (step4Subtitle) step4Subtitle.textContent = t.step4Subtitle;
+
   const previewTitle = document.getElementById("previewTitle");
   if (previewTitle) previewTitle.textContent = t.previewTitle;
+
+  document.getElementById("outlookTitle").textContent = t.platformOutlookTitle;
+  document.getElementById("outlookDesc").textContent = t.platformOutlookDesc;
+
+  document.getElementById("thunderTitle").textContent =
+    t.platformThunderbirdTitle;
+  document.getElementById("thunderDesc").textContent =
+    t.platformThunderbirdDesc;
+
+  document.getElementById("mondayTitle").textContent = t.platformMondayTitle;
+  document.getElementById("mondayDesc").textContent = t.platformMondayDesc;
 
   // Help link
   const helpLink = document.getElementById("helpLink");

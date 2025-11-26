@@ -47,6 +47,9 @@ export function buildSignature({
           padding: 20px;
           font-family: 'Montserrat', Arial, Helvetica, sans-serif;
           color: #000 !important;
+          width:100%;
+          max-width:487px;
+          margin:0 auto;
         ">
                 <!-- HEADER -->
                 <tr>
@@ -164,7 +167,6 @@ export function buildSignature({
                                 <!-- WEBSITE -->
                                 <td style="
                     white-space: nowrap;
-                    padding-right: 14px;
                     vertical-align: middle;
                   ">
                                     <img src="https://www.prognosis-biotech.com/apps/icons/20251008/language.png"
@@ -196,7 +198,6 @@ export function buildSignature({
                                 <td style="
                     text-align: right;
                     padding-top: 8px;
-                    padding-right: 14px;
                   ">
                                     <!-- common style -->
                                     ${[

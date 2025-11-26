@@ -226,7 +226,13 @@ toStep2Btn?.addEventListener("click", () => {
 
   window.signatureHtml = buildSignatureHtml();
 
-  if (previewBox) previewBox.innerHTML = window.signatureHtml;
+  if (previewBox) {
+    previewBox.innerHTML = "";
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("signature-wrapper");
+    wrapper.innerHTML = window.signatureHtml;
+    previewBox.appendChild(wrapper);
+  }
 
   showStep(step2);
 });

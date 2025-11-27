@@ -30,12 +30,23 @@
 <body>
   <!-- ====== LANGUAGE SELECTOR ====== -->
   <div class="header-bar">
-    <label for="lang">🌐 Language:</label>
-    <select id="lang">
-      <option value="gr" selected>🇬🇷 Ελληνικά</option>
-      <option value="en">🇬🇧 English</option>
-    </select>
+
+    <div class="header-help">
+      <a id="helpLink" href="assets/docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank"
+        rel="noopener noreferrer">
+      </a>
+    </div>
+
+    <div class="header-lang">
+      <label for="lang">🌐 Language:</label>
+      <select id="lang">
+        <option value="gr" selected>🇬🇷 Ελληνικά</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
+    </div>
+
   </div>
+
 
   <!-- ====== LOGO ====== -->
   <div class="logo">
@@ -48,28 +59,19 @@
   <hr />
 
   <!-- ====== MAIN CONTENT ====== -->
-  <h2 id="titleHeading"></h2>
-  <p id="subtitleText"></p>
-
-  <!-- Help CTA (opens PDF in new tab) -->
-  <p class="help-cta">
-    <a id="helpLink" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank" rel="noopener noreferrer"></a>
-  </p>
-
-  <h3 id="step1Title" class="step-title"></h3>
-  <p id="step1Subtitle" class="step-subtitle"></p>
+  <h1 id="titleHeading"></h1>
 
   <!-- ====== FORM FIELDS ====== -->
-  <section id="step1Section" class="step-section active">
+  <section id="step1" class="step-section active">
+    <h2 class="step-header" id="step1Header"></h2>
 
-    <h3 class="step-header">Βήμα 1: Συμπλήρωση στοιχείων</h3>
-
+    <p id="step1Subtitle" class="step-subtitle"></p>
 
     <form id="signatureForm">
-      <label for="name" id="labelName"></label>
+      <label for="name" id="labelName" class="required"></label>
       <input id="name" placeholder="π.χ. George Papalazaridis" required />
 
-      <label for="title" id="labelTitle"></label>
+      <label for="title" id="labelTitle" class="required"></label>
       <input id="title" placeholder="π.χ. Front End Angular Developer" required />
 
       <label for="address" id="labelAddress"></label>
@@ -81,75 +83,119 @@
       <label for="phone" id="labelPhone"></label>
       <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
-      <!-- ====== GENERATE BUTTON ====== -->
-      <!-- <button id="generateBtn" type="button"></button> -->
-
-      <button id="nextBtn" type="button" disabled>Επόμενο</button>
+      <button id="toStep2Btn" class="next-button" type="button" disabled></button>
     </form>
   </section>
 
+  <section id="step2" class="step-section" style="display:none;">
+    <h2 id="step2Title" class="step-header"></h2>
 
-  <section id="step2Section" class="step-section" style="display: none;">
-    <h3 style="text-align: center; margin-top: 24px;">
-      Βήμα 2: Επιλογή πλατφόρμας
-    </h3>
+    <p id="step2Subtitle" class="step-subtitle"></p>
+
+    <div id="preview-section">
+      <div id="preview-box"></div>
+    </div>
+
+    <div class="step2-actions">
+      <button id="backToStep1" class="back-button" type="button"></button>
+      <button id="toStep3Btn" class="next-button" type="button"></button>
+    </div>
+  </section>
+
+
+  <section id="step3" class="step-section" style="display:none;">
+
+    <!-- Step 3 Title -->
+    <h2 id="step3Title" class="step-header"></h2>
+
+    <!-- Subtitle -->
+    <p id="step3Subtitle" class="step-subtitle"></p>
 
     <div id="platformCards" class="platform-cards">
+
       <!-- Outlook -->
       <div class="platform-card" data-platform="outlook">
         <div class="platform-icon">📧</div>
-        <div class="platform-title">Microsoft Outlook</div>
-        <div class="platform-desc">
-          Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet.
-        </div>
+        <div id="outlookTitle" class="platform-title"></div>
+        <div id="outlookDesc" class="platform-desc"></div>
       </div>
 
       <!-- Thunderbird -->
       <div class="platform-card" data-platform="thunderbird">
         <div class="platform-icon">🐦</div>
-        <div class="platform-title">Thunderbird</div>
-        <div class="platform-desc">
-          Λήψη αρχείου .html για import.
-        </div>
+        <div id="thunderTitle" class="platform-title"></div>
+        <div id="thunderDesc" class="platform-desc"></div>
       </div>
 
       <!-- Monday -->
       <div class="platform-card" data-platform="monday">
         <div class="platform-icon">🔵</div>
-        <div class="platform-title">Monday.com</div>
-        <div class="platform-desc">
-          Copy–Paste HTML υπογραφής.
-        </div>
+        <div id="mondayTitle" class="platform-title"></div>
+        <div id="mondayDesc" class="platform-desc"></div>
       </div>
+
     </div>
 
     <!-- Continue + Back buttons -->
-    <div style="text-align:center; margin-top:32px;">
-      <button id="backToStep1Btn" type="button">Πίσω</button>
-      <button id="step2ContinueBtn" type="button" disabled>Συνέχεια</button>
+    <div class="step2-actions">
+      <button id="backToStep2" class="back-button" type="button"></button>
+      <button id="toStep4Btn" class="next-button" type="button" disabled></button>
     </div>
+
   </section>
 
-  <!-- ====== PREVIEW + BOOKMARKLET SECTION ====== -->
-  <section id="resultSection">
-    <!-- Preview -->
-    <div id="preview-section">
-      <h3 id="previewTitle" class="preview-title"></h3>
-      <div id="preview-box"></div>
-      <!-- Help CTA under preview -->
-      <p class="help-cta help-cta--after">
-        <a id="helpLinkAfter" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank"
-          rel="noopener noreferrer"></a>
+
+  <!-- ====== STEP 4 — BOOKMARKLET (Outlook) ====== -->
+  <section id="step4" class="step-section" style="display:none;">
+    <h2 id="step4Title" class="step-header"></h2>
+
+    <p id="step4Subtitle" class="step-subtitle"></p>
+
+    <!-- Dynamic container: Outlook / Thunderbird / Monday -->
+    <div id="step4Content"></div>
+
+    <div class="step4-actions">
+      <button id="backToStep3" class="back-button" type="button"></button>
+      <button id="finishBtn" class="next-button" type="button"></button>
+    </div>
+
+  </section>
+
+  <!-- ====== MONDAY HTML CLIPBOARD MODAL ====== -->
+  <div id="mondayClipboardModal" class="clipboard-modal hidden" aria-hidden="true">
+    <div class="clipboard-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mondayClipboardTitle">
+
+      <!-- CLOSE BUTTON (X) -->
+      <button class="clipboard-close-btn" id="mondayClipboardCloseBtn" aria-label="Κλείσιμο">
+        &times;
+      </button>
+
+      <h3 id="mondayClipboardTitle" class="clipboard-modal-title">
+
+      </h3>
+
+      <p id="mondayClipboardDesc" class="clipboard-modal-desc">
+
       </p>
-    </div>
 
-    <!-- Bookmarklet -->
-    <div id="bookmarklet-container">
-      <p id="dragText" class="drag-text"></p>
-      <a id="bookmarklet" class="bookmarklet" href="#"></a>
-      <div class="info" id="instructionText"></div>
+      <textarea id="mondayClipboardCode" class="clipboard-modal-code" readonly></textarea>
+
+      <div class="clipboard-modal-actions">
+        <button id="mondayClipboardCopyBtn" class="primary-action-button">
+
+        </button>
+      </div>
     </div>
-  </section>
+  </div>
+
+  <!-- ====== SUCCESS POPUP ====== -->
+  <div id="thankYouPopup" class="thankyou-popup hidden" aria-hidden="true">
+    <div class="thankyou-card">
+      <div class="thankyou-icon">🎉</div>
+      <p id="thankYouMessage"></p>
+    </div>
+    <div class="confetti-container"></div>
+  </div>
 
   <!-- ====== FOOTER ====== -->
   <footer class="footer" role="contentinfo">

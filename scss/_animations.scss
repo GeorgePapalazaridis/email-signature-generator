@@ -49,3 +49,24 @@
     transform: translateY(-15px);
   }
 }
+
+/* === Popup Entrance === */
+@keyframes popIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+  }
+}

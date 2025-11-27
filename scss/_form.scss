@@ -10,11 +10,19 @@ label {
   margin-bottom: 0.35rem;
 }
 
+label.required::after {
+  content: " *";
+  color: var(--color-error);
+  font-weight: 700;
+}
+
 input {
   width: 100%;
-  padding: 0.75rem 0.9rem;
+  // padding: 0.75rem 0.9rem;
+  padding: 0.6rem 0.75rem;
+  height: auto;
   font-size: var(--font-size-md);
-  height: 2.75rem;
+  // height: 2.5rem;
   margin-bottom: 0.85rem;
   border: var(--border-width) solid #ccc;
   border-radius: var(--border-radius-sm);
@@ -38,7 +46,6 @@ input::placeholder {
    =============================== */
 button {
   margin-top: var(--space-md);
-  width: 80%;
   align-self: center;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -67,9 +74,37 @@ button.loading {
 }
 
 button:disabled {
-  background-color: #a0c8e8;
+  background-color: #bcd8f4;
   cursor: not-allowed;
   transform: none;
+}
+
+/* κοινός κανόνας για όλα τα primary "επόμενο/συνέχεια" κουμπιά */
+.next-button {
+  width: auto;
+  padding: 0.6rem 1.25rem;
+  margin-left: auto;
+  margin-right: 0; /* right aligned */
+  border-radius: 6px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.back-button {
+  width: auto;
+  padding: 0.6rem 1.25rem;
+  border-radius: 6px;
+  min-width: 120px;
+  text-align: center;
+
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+
+  margin-right: auto; /* left aligned */
+}
+.back-button:hover {
+  background: #eef6ff;
 }
 
 /* ===============================
@@ -81,7 +116,8 @@ form {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  transform: translateY(-0.5rem);
+  // transform: translateY(-0.5rem);
+  transform: none;
 }
 
 h2#titleHeading,

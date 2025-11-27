@@ -1,72 +1,107 @@
 import { logoBase64 } from "../assets/base64/logo-base64.js";
 import { translations, setLanguage } from "./translations.js";
-import { buildSignature } from "./signature-template.js";
+import {
+  buildSignature,
+  SignaturePlatform,
+} from "../assets/core/signature/signature-builder.service.js";
 import { bindDom } from "./dom-bindings.js";
 
 // ===========================
-// STEP NAV + VALIDATION (Step 1)
+// DOM Refs (new 3-step wizard)
 // ===========================
-const step1Section = document.getElementById("step1Section");
-const step2Section = document.getElementById("step2Section");
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
+const step4 = document.getElementById("step4");
 
-const nextBtn = document.getElementById("nextBtn");
-const backToStep1Btn = document.getElementById("backToStep1Btn");
+// Buttons
+const toStep2Btn = document.getElementById("toStep2Btn");
+const toStep3Btn = document.getElementById("toStep3Btn");
+const toStep4Btn = document.getElementById("toStep4Btn");
 
+const backToStep1Btn = document.getElementById("backToStep1");
+const backToStep2Btn = document.getElementById("backToStep2");
+const backToStep3Btn = document.getElementById("backToStep3");
+
+const finishBtn = document.getElementById("finishBtn");
+
+// Inputs
 const nameInput = document.getElementById("name");
 const titleInput = document.getElementById("title");
+const addressInput = document.getElementById("address");
+const mobileInput = document.getElementById("mobile");
+const phoneInput = document.getElementById("phone");
 
-// required τώρα = name + title (όπως ήδη είχες validation)
+// Preview box (Step 2)
+const previewBox = document.getElementById("preview-box");
+
+// Platform cards (Step 3)
+const platformCards = document.querySelectorAll(".platform-card");
+
+// Optional old/final DOM (if you decide to keep them later)
+const bookmarkletContainer = document.getElementById("bookmarklet-container");
+const bookmarkletLink = document.getElementById("bookmarklet");
+const dragTextEl = document.getElementById("dragText");
+const instructionEl = document.getElementById("instructionText");
+
+// ===========================
+// State
+// ===========================
+window.selectedPlatform = null;
+
+window.signatureHtml = "";
+
+// ===========================
+// Helpers
+// ===========================
+function showStep(stepEl) {
+  [step1, step2, step3, step4].forEach((s) => {
+    if (!s) return;
+    s.style.display = s === stepEl ? "block" : "none";
+  });
+
+  stepEl?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function step1IsValid() {
   return (
-    nameInput.value.trim().length > 0 && titleInput.value.trim().length > 0
+    nameInput?.value.trim().length > 0 && titleInput?.value.trim().length > 0
   );
 }
 
-function updateNextButtonState() {
-  nextBtn.disabled = !step1IsValid();
+function updateToStep2State() {
+  if (!toStep2Btn) return;
+  toStep2Btn.disabled = !step1IsValid();
 }
 
-// listeners για live enable/disable)
-[nameInput, titleInput].forEach((el) => {
-  el.addEventListener("input", updateNextButtonState);
-});
+function showToast(message, type = "success") {
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
 
-updateNextButtonState(); // αρχική κατάσταση
+  setTimeout(() => {
+    toast.style.animation = "toastOut 0.4s ease forwards";
+    setTimeout(() => toast.remove(), 400);
+  }, 2200);
+}
 
-nextBtn.addEventListener("click", () => {
-  if (!step1IsValid()) return;
+function buildSignatureHtml() {
+  const name = nameInput.value.trim();
+  const title = titleInput.value.trim();
+  const address = addressInput.value || "Farsalon 153, Larissa, 41335 - Greece";
+  const mobile = mobileInput.value.trim();
+  const phone = phoneInput.value.trim() || "+30 2410 623 922";
 
-  step1Section.style.display = "none";
-  step2Section.style.display = "block";
-  step2Section.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-backToStep1Btn.addEventListener("click", () => {
-  step2Section.style.display = "none";
-  step1Section.style.display = "block";
-  step1Section.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-// ===========================
-// STEP 2 — Platform selection
-// ===========================
-let selectedPlatform = null;
-const platformCards = document.querySelectorAll(".platform-card");
-const step2ContinueBtn = document.getElementById("step2ContinueBtn"); // FIXED
-
-platformCards.forEach((card) => {
-  card.addEventListener("click", () => {
-    // Clear previous selection
-    platformCards.forEach((c) => c.classList.remove("selected"));
-
-    // Set new selection
-    card.classList.add("selected");
-    selectedPlatform = card.dataset.platform;
-
-    // Enable continue
-    step2ContinueBtn.disabled = false;
+  return buildSignature({
+    name,
+    title,
+    address,
+    phone,
+    mobile,
+    logoBase64,
   });
-});
+}
 
 function makeBookmarklet(signature, t) {
   // Προσοχή: JSON.stringify για ασφαλή embed
@@ -93,55 +128,213 @@ function makeBookmarklet(signature, t) {
   })();`;
 }
 
-// === Helper: Toast notifications ===
-function showToast(message, type = "success") {
-  const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
-  toast.textContent = message;
-  document.body.appendChild(toast);
+function renderOutlookStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
 
-  setTimeout(() => {
-    toast.style.animation = "toastOut 0.4s ease forwards";
-    setTimeout(() => toast.remove(), 400);
-  }, 2200);
+  container.innerHTML = `
+<div class="step4-card">
+
+  <!-- 1) Step 1 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">1. ${t.outlook_step1_title}</h4>
+
+    <a id="bookmarkletButton"
+       href="#"
+       class="bookmarklet-btn">
+      ${t.bookmarkletLabel}
+    </a>
+
+    <p class="step4-note">
+      ${t.outlook_step1_note_intro}<br>
+      ${t.outlook_step1_note_mac}<br>
+      ${t.outlook_step1_note_win}
+    </p>
+
+  </div>
+
+  <!-- 2) Step 2 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">2. ${t.outlook_step2_title}</h4>
+
+    <a href="https://outlook.office.com/" target="_blank" class="outlook-btn">
+      ${t.outlook_open_button}
+    </a>
+  </div>
+
+  <!-- 3) Step 3 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">3. ${t.outlook_step3_title}</h4>
+    <p class="step4-text">
+      ${t.outlook_step3_text}
+    </p>
+  </div>
+
+  <!-- 4) Step 4 -->
+  <div class="step4-section">
+    <h4 class="step4-subtitle">4. ${t.outlook_step4_title}</h4>
+    <p class="step4-text">
+      ${t.outlook_step4_text}
+    </p>
+  </div>
+
+</div>
+  `;
+
+  // Connect Bookmarklet
+  const btn = document.getElementById("bookmarkletButton");
+  if (btn) {
+    btn.href = makeBookmarklet(window.signatureHtml, t);
+  }
 }
 
-// === Κύρια λειτουργία ===
-export function generate() {
-  const t = translations[window.currentLang || "gr"];
+function renderThunderbirdStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
 
-  // === DOM refs ===
-  const resultSection = document.getElementById("resultSection");
-  const previewSection = document.getElementById("preview-section");
-  const previewBox = document.getElementById("preview-box");
-  const bookmarkletContainer = document.getElementById("bookmarklet-container");
-  const link = document.getElementById("bookmarklet");
-  const btn = document.getElementById("generateBtn");
+  const steps = [
+    t.th_step1,
+    t.th_step2,
+    t.th_step3,
+    t.th_step4,
+    t.th_step5,
+    t.th_step6,
+  ]
+    .map((step) => `<li>${step}</li>`)
+    .join("");
 
-  // === Field values ===
-  const name = document.getElementById("name").value.trim();
-  const title = document.getElementById("title").value.trim();
-  const address =
-    document.getElementById("address").value ||
-    "Farsalon 153, Larissa, 41335 - Greece";
-  const mobile = document.getElementById("mobile").value.trim();
-  const phone =
-    document.getElementById("phone").value.trim() || "+30 2410 623 922";
+  container.innerHTML = `
+<div class="step4-card">
 
-  // === Reset view ===
-  if (previewBox) previewBox.innerHTML = "";
-  if (previewSection) previewSection.style.display = "none";
-  if (bookmarkletContainer) {
-    bookmarkletContainer.classList.remove("show");
-    bookmarkletContainer.style.display = "none";
+  <h4 class="step4-subtitle">${t.thunderbird_step_title}</h4>
+  <p class="step4-text">${t.thunderbird_step_instructions}</p>
+
+  <ol class="tb-steps">
+    ${steps}
+  </ol>
+
+  <button id="downloadThunderbirdBtn" class="primary-action-button">
+    ${t.download_button_label}
+  </button>
+
+</div>
+  `;
+
+  const btn = document.getElementById("downloadThunderbirdBtn");
+  btn?.addEventListener("click", () => {
+    downloadHtmlFile(signatureHtml, "prognosis-signature-thunderbird.html");
+    showToast(t.download_success);
+  });
+}
+
+function renderMondayStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
+
+  container.innerHTML = `
+<div class="step4-card">
+
+  <h4 class="step4-subtitle">${t.monday_step_title}</h4>
+  <p class="step4-text">${t.monday_step_instructions}</p>
+
+  <ol class="tb-steps">
+    <li>${t.monday_step_note1}</li>
+    <li>${t.monday_step_note2}</li>
+    <li>${t.monday_step_note3}</li>
+  </ol>
+
+  <button id="copyMondayBtn" class="primary-action-button">
+    ${t.monday_copy_btn_label}
+  </button>
+
+</div>
+  `;
+
+  const btn = document.getElementById("copyMondayBtn");
+  btn?.addEventListener("click", () => {
+    openMondayClipboardModal(signatureHtml, t);
+  });
+}
+
+function openMondayClipboardModal(signatureHtml, t) {
+  const modal = document.getElementById("mondayClipboardModal");
+  const codeEl = document.getElementById("mondayClipboardCode");
+  const titleEl = document.getElementById("mondayClipboardTitle");
+  const descEl = document.getElementById("mondayClipboardDesc");
+  const copyBtn = document.getElementById("mondayClipboardCopyBtn");
+  const closeBtn = document.getElementById("mondayClipboardCloseBtn");
+
+  if (!modal || !codeEl || !copyBtn || !closeBtn) return;
+
+  // Inject translations 💪
+  titleEl.textContent = t.monday_modal_title;
+  descEl.textContent = t.monday_modal_description;
+  copyBtn.textContent = t.monday_modal_copy_btn;
+
+  codeEl.value = signatureHtml.trim();
+
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+
+  const handleClose = () => {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    closeBtn.removeEventListener("click", handleClose);
+    modal.removeEventListener("click", handleBackdropClick);
+    document.removeEventListener("keydown", handleEsc);
+  };
+
+  const handleCopy = async () => {
+    const ok = await copyToClipboard(signatureHtml);
+    showToast(
+      ok ? t.monday_copy_success : "Error copying!",
+      ok ? "success" : "error"
+    );
+  };
+
+  const handleBackdropClick = (e) => e.target === modal && handleClose();
+  const handleEsc = (e) => e.key === "Escape" && handleClose();
+
+  copyBtn.addEventListener("click", handleCopy);
+  closeBtn.addEventListener("click", handleClose);
+  modal.addEventListener("click", handleBackdropClick);
+  document.addEventListener("keydown", handleEsc);
+}
+
+function downloadHtmlFile(html, filename = "prognosis-signature.html") {
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
   }
-  if (resultSection) {
-    resultSection.classList.remove("show");
-    resultSection.style.display = "none";
-  }
+}
 
-  // === Validation ===
-  if (!name || !title) {
+// ===========================
+// Step 1 -> Step 2 (Preview)
+// ===========================
+[nameInput, titleInput].forEach((el) => {
+  el?.addEventListener("input", updateToStep2State);
+});
+
+document.addEventListener("DOMContentLoaded", updateToStep2State);
+
+updateToStep2State();
+
+toStep2Btn?.addEventListener("click", () => {
+  if (!step1IsValid()) {
     const msg =
       window.currentLang === "gr"
         ? "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο"
@@ -150,69 +343,180 @@ export function generate() {
     return;
   }
 
-  // === Loader state στο κουμπί ===
-  const oldText = btn.textContent;
-  btn.disabled = true;
-  btn.classList.add("loading");
-  btn.textContent =
-    window.currentLang === "gr" ? "Δημιουργία..." : "Generating...";
-
-  // === Ελαφρύ delay για UX feedback ===
-  setTimeout(() => {
-    // === Build signature ===
-    const signature = buildSignature({
-      name,
-      title,
-      address,
-      phone,
-      mobile,
+  window.signatureHtml = buildSignature({
+    platform: SignaturePlatform.OUTLOOK,
+    data: {
+      name: nameInput.value.trim(),
+      title: titleInput.value.trim(),
+      address: addressInput.value || "Farsalon 153, Larissa, 41335 - Greece",
+      mobile: mobileInput.value.trim(),
+      phone: phoneInput.value.trim() || "+30 2410 623 922",
       logoBase64,
-    });
+    },
+  });
 
-    // === Make bookmarklet ===
-    const js = makeBookmarklet(signature, t);
-    if (link) link.href = js;
+  if (previewBox) {
+    previewBox.innerHTML = "";
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("signature-wrapper");
+    wrapper.innerHTML = window.signatureHtml;
+    previewBox.appendChild(wrapper);
+  }
 
-    // === Show results ===
-    if (previewBox) previewBox.innerHTML = signature;
-    if (previewSection) previewSection.style.display = "block";
+  showStep(step2);
+});
 
-    // === Show parent section ===
-    if (resultSection) {
-      resultSection.style.display = "block";
-      requestAnimationFrame(() => resultSection.classList.add("show"));
-    }
+// Back Step 2 -> Step 1
+backToStep1Btn?.addEventListener("click", () => {
+  showStep(step1);
+});
 
-    // === Fade-in bookmarklet ===
-    if (bookmarkletContainer) {
-      bookmarkletContainer.style.display = "block";
-      requestAnimationFrame(() => bookmarkletContainer.classList.add("show"));
-    }
+// ===========================
+// Step 2 -> Step 3 (Platform)
+// ===========================
+toStep3Btn?.addEventListener("click", () => {
+  // safety: if user somehow skipped build
+  if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+  showStep(step3);
+});
 
-    // === Smooth scroll στο αποτέλεσμα ===
-    setTimeout(() => {
-      if (resultSection) {
-        resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 200);
+// Back Step 3 -> Step 2
+backToStep2Btn?.addEventListener("click", () => {
+  showStep(step2);
+});
 
-    // === Restore κουμπί ===
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.classList.remove("loading");
-      // === Toast message ===
-      const msg =
-        window.currentLang === "gr"
-          ? "✅ Η υπογραφή δημιουργήθηκε επιτυχώς!"
-          : "✅ Signature generated successfully!";
-      showToast(msg);
+backToStep3Btn?.addEventListener("click", () => {
+  // Clear Step 4 content
+  const container = document.getElementById("step4Content");
+  if (container) container.innerHTML = "";
 
-      btn.textContent = oldText;
-    }, 800);
-  }, 200);
+  // Reset platform selection completely
+  window.selectedPlatform = null;
+  platformCards.forEach((c) => c.classList.remove("selected"));
+  if (toStep4Btn) toStep4Btn.disabled = true;
+
+  // Go back to Step 3
+  showStep(step3);
+});
+
+// ===========================
+// Step 3 Platform selection
+// ===========================
+platformCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    platformCards.forEach((c) => c.classList.remove("selected"));
+    card.classList.add("selected");
+    window.selectedPlatform = card.dataset.platform;
+
+    if (toStep4Btn) toStep4Btn.disabled = false;
+  });
+});
+
+toStep4Btn?.addEventListener("click", () => {
+  if (!window.selectedPlatform) return;
+
+  // Πάντα χτίζουμε signatureHtml
+  if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+
+  showStep(step4);
+
+  const t = translations[window.currentLang || "gr"];
+
+  if (window.selectedPlatform === "outlook") {
+    renderOutlookStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "thunderbird") {
+    renderThunderbirdStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "monday") {
+    renderMondayStep4(window.signatureHtml, t);
+  }
+});
+
+function showThankYouPopup() {
+  const popup = document.getElementById("thankYouPopup");
+  const msg = document.getElementById("thankYouMessage");
+  const t = translations[window.currentLang || "gr"];
+
+  msg.textContent = t.finished_thanks;
+  popup.classList.remove("hidden");
+  popup.setAttribute("aria-hidden", "false");
+
+  // 🎉 Confetti burst
+  const container = popup.querySelector(".confetti-container");
+  container.innerHTML = "";
+
+  const colors = ["#ed6900", "#001489", "#f6a86e", "#ffdd55", "#36c"];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement("div");
+    p.className = "confetti-piece";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = 1 + Math.random() * 1.4 + "s";
+    container.appendChild(p);
+  }
+
+  setTimeout(() => {
+    popup.classList.add("hidden");
+    popup.setAttribute("aria-hidden", "true");
+  }, 2400);
 }
 
-// === Αρχικοποίηση εφαρμογής ===
+// ===========================
+// Final action (depends on platform)
+// ===========================
+finishBtn?.addEventListener("click", () => {
+  // Reset state
+  window.selectedPlatform = null;
+  window.signatureHtml = "";
+
+  // Clear platform selections
+  platformCards.forEach((c) => c.classList.remove("selected"));
+  if (toStep4Btn) toStep4Btn.disabled = true;
+
+  // Clear form
+  document.getElementById("signatureForm").reset();
+  updateToStep2State();
+
+  // Clear Step 4 content
+  const container = document.getElementById("step4Content");
+  if (container) container.innerHTML = "";
+
+  // Return to Step 1
+  showStep(step1);
+
+  // ✨ Success Popup
+  showThankYouPopup();
+});
+
+document.addEventListener("language-changed", () => {
+  const step4El = document.getElementById("step4");
+  const isVisible = step4El && step4El.offsetParent !== null;
+
+  if (!isVisible || !window.selectedPlatform) return;
+
+  if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+
+  const t = translations[window.currentLang];
+
+  if (window.selectedPlatform === "outlook") {
+    renderOutlookStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "thunderbird") {
+    renderThunderbirdStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "monday") {
+    renderMondayStep4(window.signatureHtml, t);
+  }
+});
+
+// ===========================
+// Init
+// ===========================
 document.addEventListener("DOMContentLoaded", () => {
   // Default language
   window.currentLang = "gr";
@@ -220,7 +524,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Δέσιμο DOM handlers
   bindDom({
-    onGenerate: generate,
     onLanguageChange: (lang) => setLanguage(lang),
   });
 

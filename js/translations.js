@@ -240,7 +240,7 @@ export function setLanguage(lang) {
   const step3Title = document.querySelector("#step3Title");
   if (step3Title) step3Title.textContent = t.step3Title;
 
-  const step4Title = document.querySelector("#step4Title");
+  const step4Title = document.getElementById("step4Title");
   if (step4Title) step4Title.textContent = t.step4Title;
 
   const step1Subtitle = document.getElementById("step1Subtitle");
@@ -257,6 +257,38 @@ export function setLanguage(lang) {
 
   const previewTitle = document.getElementById("previewTitle");
   if (previewTitle) previewTitle.textContent = t.previewTitle;
+
+  // === FORM LABELS ===
+  const labelName = document.getElementById("labelName");
+  if (labelName) labelName.textContent = t.name;
+
+  const labelTitle = document.getElementById("labelTitle");
+  if (labelTitle) labelTitle.textContent = t.title;
+
+  const labelAddress = document.getElementById("labelAddress");
+  if (labelAddress) labelAddress.textContent = t.address;
+
+  const labelMobile = document.getElementById("labelMobile");
+  if (labelMobile) labelMobile.textContent = t.mobile;
+
+  const labelPhone = document.getElementById("labelPhone");
+  if (labelPhone) labelPhone.textContent = t.phone;
+
+  // === FORM PLACEHOLDERS ===
+  const nameInput = document.getElementById("name");
+  if (nameInput) nameInput.placeholder = t.namePlaceholder;
+
+  const titleInput = document.getElementById("title");
+  if (titleInput) titleInput.placeholder = t.titlePlaceholder;
+
+  const addressInput = document.getElementById("address");
+  if (addressInput) addressInput.placeholder = t.address;
+
+  const mobileInput = document.getElementById("mobile");
+  if (mobileInput) mobileInput.placeholder = t.mobilePlaceholder;
+
+  const phoneInput = document.getElementById("phone");
+  if (phoneInput) phoneInput.placeholder = t.phone;
 
   document.getElementById("outlookTitle").textContent = t.platformOutlookTitle;
   document.getElementById("outlookDesc").textContent = t.platformOutlookDesc;
@@ -295,39 +327,26 @@ export function setLanguage(lang) {
     );
   }
 
-  // === FORM LABELS ===
-  document.getElementById("labelName").textContent = t.name;
-  document.getElementById("labelTitle").textContent = t.title;
-
-  document.getElementById("labelAddress").textContent = t.address;
-  document.getElementById("labelPhone").textContent = t.phone;
-  document.getElementById("labelMobile").textContent = t.mobile;
-  document.getElementById("mobile").placeholder = t.mobilePlaceholder;
-
-  document.getElementById("step1Header").textContent = t.step1Title;
+  // === Buttons ===
+  const generateBtn = document.getElementById("generateBtn");
+  if (generateBtn) generateBtn.textContent = t.button;
 
   document.getElementById("toStep2Btn").textContent = t.next;
   document.getElementById("toStep3Btn").textContent = t.continue;
   document.getElementById("toStep4Btn").textContent = t.continue;
-
   document.getElementById("backToStep1").textContent = t.back;
   document.getElementById("backToStep2").textContent = t.back;
   document.getElementById("backToStep3").textContent = t.returnToPlatforms;
-
   document.getElementById("finishBtn").textContent = t.finish;
-
-  // === BUTTON ===
-  const generateBtn = document.getElementById("generateBtn");
-  if (generateBtn) generateBtn.textContent = t.button;
 
   // === BOOKMARKLET SECTION ===
   const dragTextEl = document.getElementById("dragText");
-  const instructionEl = document.getElementById("instructionText");
-  const bookmarkletLink = document.getElementById("bookmarklet");
-
   if (dragTextEl) dragTextEl.innerHTML = t.dragText;
+
+  const instructionEl = document.getElementById("instructionText");
   if (instructionEl) instructionEl.innerHTML = t.instruction;
 
+  const bookmarkletLink = document.getElementById("bookmarklet");
   if (bookmarkletLink) {
     bookmarkletLink.textContent = t.bookmarkletLabel;
     bookmarkletLink.setAttribute("data-tooltip", t.bookmarkletTooltip);
@@ -336,6 +355,6 @@ export function setLanguage(lang) {
   // === STATE ===
   window.currentLang = translations[lang] ? lang : "en";
 
-  // Signal to index.js that language changed
+  // Re-render Step 4 if needed
   document.dispatchEvent(new CustomEvent("language-changed"));
 }

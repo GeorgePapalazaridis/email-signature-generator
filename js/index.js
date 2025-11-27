@@ -1,6 +1,9 @@
 import { logoBase64 } from "../assets/base64/logo-base64.js";
 import { translations, setLanguage } from "./translations.js";
-import { buildSignature } from "./signature-template.js";
+import {
+  buildSignature,
+  SignaturePlatform,
+} from "../assets/core/signature/signature-builder.service.js";
 import { bindDom } from "./dom-bindings.js";
 
 // ===========================
@@ -185,6 +188,119 @@ function renderOutlookStep4(signatureHtml, t) {
   }
 }
 
+function renderThunderbirdStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
+
+  const steps = [
+    t.th_step1,
+    t.th_step2,
+    t.th_step3,
+    t.th_step4,
+    t.th_step5,
+    t.th_step6,
+  ]
+    .map((step) => `<li>${step}</li>`)
+    .join("");
+
+  container.innerHTML = `
+<div class="step4-card">
+
+  <h4 class="step4-subtitle">${t.thunderbird_step_title}</h4>
+  <p class="step4-text">${t.thunderbird_step_instructions}</p>
+
+  <ol class="tb-steps">
+    ${steps}
+  </ol>
+
+  <button id="downloadThunderbirdBtn" class="primary-action-button">
+    ${t.download_button_label}
+  </button>
+
+</div>
+  `;
+
+  const btn = document.getElementById("downloadThunderbirdBtn");
+  btn?.addEventListener("click", () => {
+    downloadHtmlFile(signatureHtml, "prognosis-signature-thunderbird.html");
+    showToast(t.download_success);
+  });
+}
+
+function renderMondayStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
+
+  container.innerHTML = `
+<div class="step4-card">
+
+  <h4 class="step4-subtitle">${t.monday_step_title}</h4>
+  <p class="step4-text">${t.monday_step_instructions}</p>
+
+  <ol class="tb-steps">
+    <li>${t.monday_step_note1}</li>
+    <li>${t.monday_step_note2}</li>
+    <li>${t.monday_step_note3}</li>
+  </ol>
+
+  <button id="copyMondayBtn" class="primary-action-button">
+    ${t.monday_copy_btn_label}
+  </button>
+
+</div>
+  `;
+
+  const btn = document.getElementById("copyMondayBtn");
+  btn?.addEventListener("click", () => {
+    openMondayClipboardModal(signatureHtml, t);
+  });
+}
+
+function openMondayClipboardModal(signatureHtml, t) {
+  const modal = document.getElementById("mondayClipboardModal");
+  const codeEl = document.getElementById("mondayClipboardCode");
+  const titleEl = document.getElementById("mondayClipboardTitle");
+  const descEl = document.getElementById("mondayClipboardDesc");
+  const copyBtn = document.getElementById("mondayClipboardCopyBtn");
+  const closeBtn = document.getElementById("mondayClipboardCloseBtn");
+
+  if (!modal || !codeEl || !copyBtn || !closeBtn) return;
+
+  // Inject translations 💪
+  titleEl.textContent = t.monday_modal_title;
+  descEl.textContent = t.monday_modal_description;
+  copyBtn.textContent = t.monday_modal_copy_btn;
+
+  codeEl.value = signatureHtml.trim();
+
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+
+  const handleClose = () => {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    closeBtn.removeEventListener("click", handleClose);
+    modal.removeEventListener("click", handleBackdropClick);
+    document.removeEventListener("keydown", handleEsc);
+  };
+
+  const handleCopy = async () => {
+    const ok = await copyToClipboard(signatureHtml);
+    showToast(
+      ok ? t.monday_copy_success : "Error copying!",
+      ok ? "success" : "error"
+    );
+  };
+
+  const handleBackdropClick = (e) => e.target === modal && handleClose();
+  const handleEsc = (e) => e.key === "Escape" && handleClose();
+
+  copyBtn.addEventListener("click", handleCopy);
+  closeBtn.addEventListener("click", handleClose);
+  modal.addEventListener("click", handleBackdropClick);
+  document.addEventListener("keydown", handleEsc);
+}
+
 function downloadHtmlFile(html, filename = "prognosis-signature.html") {
   const blob = new Blob([html], { type: "text/html;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -212,6 +328,9 @@ async function copyToClipboard(text) {
 [nameInput, titleInput].forEach((el) => {
   el?.addEventListener("input", updateToStep2State);
 });
+
+document.addEventListener("DOMContentLoaded", updateToStep2State);
+
 updateToStep2State();
 
 toStep2Btn?.addEventListener("click", () => {
@@ -224,7 +343,17 @@ toStep2Btn?.addEventListener("click", () => {
     return;
   }
 
-  window.signatureHtml = buildSignatureHtml();
+  window.signatureHtml = buildSignature({
+    platform: SignaturePlatform.OUTLOOK,
+    data: {
+      name: nameInput.value.trim(),
+      title: titleInput.value.trim(),
+      address: addressInput.value || "Farsalon 153, Larissa, 41335 - Greece",
+      mobile: mobileInput.value.trim(),
+      phone: phoneInput.value.trim() || "+30 2410 623 922",
+      logoBase64,
+    },
+  });
 
   if (previewBox) {
     previewBox.innerHTML = "";
@@ -298,11 +427,11 @@ toStep4Btn?.addEventListener("click", () => {
   }
 
   if (window.selectedPlatform === "thunderbird") {
-    downloadHtmlFile(window.signatureHtml);
+    renderThunderbirdStep4(window.signatureHtml, t);
   }
 
   if (window.selectedPlatform === "monday") {
-    copyToClipboard(window.signatureHtml);
+    renderMondayStep4(window.signatureHtml, t);
   }
 });
 

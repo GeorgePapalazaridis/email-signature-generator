@@ -32,7 +32,8 @@
   <div class="header-bar">
 
     <div class="header-help">
-      <a id="helpLink" href="docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank" rel="noopener noreferrer">
+      <a id="helpLink" href="assets/docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank"
+        rel="noopener noreferrer">
       </a>
     </div>
 
@@ -159,6 +160,34 @@
     </div>
 
   </section>
+
+  <!-- ====== MONDAY HTML CLIPBOARD MODAL ====== -->
+  <div id="mondayClipboardModal" class="clipboard-modal hidden" aria-hidden="true">
+    <div class="clipboard-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mondayClipboardTitle">
+
+      <!-- CLOSE BUTTON (X) -->
+      <button class="clipboard-close-btn" id="mondayClipboardCloseBtn" aria-label="Κλείσιμο">
+        &times;
+      </button>
+
+      <h3 id="mondayClipboardTitle" class="clipboard-modal-title">
+
+      </h3>
+
+      <p id="mondayClipboardDesc" class="clipboard-modal-desc">
+
+      </p>
+
+      <textarea id="mondayClipboardCode" class="clipboard-modal-code" readonly></textarea>
+
+      <div class="clipboard-modal-actions">
+        <button id="mondayClipboardCopyBtn" class="primary-action-button">
+
+        </button>
+      </div>
+    </div>
+  </div>
+
 
 
 

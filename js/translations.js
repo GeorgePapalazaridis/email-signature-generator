@@ -1,7 +1,6 @@
 // ===============================
 // 🌐 Translations – Prognosis Signature Generator
 // ===============================
-
 export const translations = {
   gr: {
     // === FORM LABELS ===
@@ -81,6 +80,34 @@ export const translations = {
     continue: "Συνέχεια",
     finish: "Τέλος",
     returnToPlatforms: "Επιστροφή στις πλατφόρμες",
+
+    thunderbird_step_title: "Εγκατάσταση στο Thunderbird",
+    thunderbird_step_instructions:
+      "Ακολούθησε τα παρακάτω βήματα για να εισάγεις την υπογραφή σου στο Thunderbird:",
+
+    th_step1: "Κατέβασε το αρχείο της υπογραφής",
+    th_step2: "Άνοιξε το Thunderbird",
+    th_step3: "Πήγαινε: Ρυθμίσεις → Ρυθμίσεις Λογαριασμού",
+    th_step4: "Ενεργοποίησε: «Επισύναψη υπογραφής από αρχείο (text, HTML)»",
+    th_step5: "Πάτησε “Choose…” και επίλεξε το αρχείο που κατέβασες",
+    th_step6: "Πάτησε OK για αποθήκευση",
+
+    download_button_label: "Κατέβασμα HTML Αρχείου",
+    download_success: "Το αρχείο HTML κατέβηκε!",
+
+    monday_step_title: "Εγκατάσταση σε Monday.com",
+    monday_step_instructions:
+      "Ακολούθησε τα παρακάτω βήματα για να βάλεις την υπογραφή σου σε email μέσα στο Monday.com:",
+    monday_step_note1: "1) Άνοιξε Emails & Activities",
+    monday_step_note2: "2) Πάτησε 'Compose Email'",
+    monday_step_note3: "3) Κάνε επικόλληση (⌘+V / Ctrl+V) της υπογραφής",
+    monday_copy_btn_label: "Αντιγραφή HTML Υπογραφής",
+
+    monday_modal_title: "HTML υπογραφής για Monday.com",
+    monday_modal_description:
+      "Αυτός είναι ο HTML κώδικας που θα κάνεις επικόλληση στο Monday.com. Πάτησε «Copy» για να τον αντιγράψεις στο clipboard.",
+    monday_modal_copy_btn: "Copy HTML",
+    monday_copy_success: "✂️ Το HTML της υπογραφής αντιγράφηκε!",
   },
 
   en: {
@@ -157,6 +184,34 @@ export const translations = {
     continue: "Continue",
     finish: "Finish",
     returnToPlatforms: "Return to platforms",
+
+    thunderbird_step_title: "Install in Thunderbird",
+    thunderbird_step_instructions:
+      "Follow the steps below to import your signature into Thunderbird:",
+
+    th_step1: "Download signature file using the button below",
+    th_step2: "Open Thunderbird",
+    th_step3: "Go to: Settings → Account Settings",
+    th_step4: "Enable: “Attach signature from a file (text, HTML)”",
+    th_step5: "Click “Choose…” and select the downloaded file",
+    th_step6: "Click OK to save changes",
+
+    download_button_label: "Download HTML File",
+    download_success: "HTML file downloaded!",
+
+    monday_step_title: "Install in Monday.com",
+    monday_step_instructions:
+      "Follow the steps below to insert your signature inside Monday.com emails:",
+    monday_step_note1: "1) Open Emails & Activities",
+    monday_step_note2: "2) Click 'Compose Email'",
+    monday_step_note3: "3) Paste your signature (⌘+V / Ctrl+V)",
+    monday_copy_btn_label: "Copy Signature HTML",
+
+    monday_modal_title: "HTML signature for Monday.com",
+    monday_modal_description:
+      "This is the HTML code you will paste into Monday.com. Click “Copy” to copy it to your clipboard.",
+    monday_modal_copy_btn: "Copy HTML",
+    monday_copy_success: "✂️ Signature HTML copied!",
   },
 };
 

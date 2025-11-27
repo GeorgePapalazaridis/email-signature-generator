@@ -97,10 +97,10 @@ export const translations = {
 
     monday_step_title: "Εγκατάσταση σε Monday.com",
     monday_step_instructions:
-      "Ακολούθησε τα παρακάτω βήματα για να βάλεις την υπογραφή σου σε email μέσα στο Monday.com:",
-    monday_step_note1: "1) Άνοιξε Emails & Activities",
-    monday_step_note2: "2) Πάτησε 'Compose Email'",
-    monday_step_note3: "3) Κάνε επικόλληση (⌘+V / Ctrl+V) της υπογραφής",
+      "Ακολούθησε τα παρακάτω βήματα για να επικολλήσεις την υπογραφή σου στα emails του Monday.com:",
+    monday_step_note1: "Άνοιξε Emails & Activities",
+    monday_step_note2: "Πάτησε 'Compose Email'",
+    monday_step_note3: "Κάνε επικόλληση (⌘+V / Ctrl+V) της υπογραφής",
     monday_copy_btn_label: "Αντιγραφή HTML Υπογραφής",
 
     monday_modal_title: "HTML υπογραφής για Monday.com",
@@ -108,6 +108,9 @@ export const translations = {
       "Αυτός είναι ο HTML κώδικας που θα κάνεις επικόλληση στο Monday.com. Πάτησε «Copy» για να τον αντιγράψεις στο clipboard.",
     monday_modal_copy_btn: "Copy HTML",
     monday_copy_success: "✂️ Το HTML της υπογραφής αντιγράφηκε!",
+
+    finished_thanks:
+      "🎉 Ευχαριστούμε που χρησιμοποίησες τον Signature Generator!",
   },
 
   en: {
@@ -144,7 +147,7 @@ export const translations = {
       "Choose the platform where you want to install your signature.",
     step4Title: "Step 4: Installation",
     step4Subtitle:
-      "Follow the instructions below to install your signature on the selected platform.",
+      "Follow the instructions below to correctly install your signature on the selected platform.",
 
     // === PLATFORM CARDS ===
     platformOutlookTitle: "Microsoft Outlook",
@@ -201,10 +204,10 @@ export const translations = {
 
     monday_step_title: "Install in Monday.com",
     monday_step_instructions:
-      "Follow the steps below to insert your signature inside Monday.com emails:",
-    monday_step_note1: "1) Open Emails & Activities",
-    monday_step_note2: "2) Click 'Compose Email'",
-    monday_step_note3: "3) Paste your signature (⌘+V / Ctrl+V)",
+      "Follow the steps below to easily paste your signature inside Monday.com emails:",
+    monday_step_note1: "Open Emails & Activities",
+    monday_step_note2: "Click 'Compose Email'",
+    monday_step_note3: "Paste your signature (⌘+V / Ctrl+V)",
     monday_copy_btn_label: "Copy Signature HTML",
 
     monday_modal_title: "HTML signature for Monday.com",
@@ -212,6 +215,8 @@ export const translations = {
       "This is the HTML code you will paste into Monday.com. Click “Copy” to copy it to your clipboard.",
     monday_modal_copy_btn: "Copy HTML",
     monday_copy_success: "✂️ Signature HTML copied!",
+
+    finished_thanks: "🎉 Thank you for using the Signature Generator!",
   },
 };
 

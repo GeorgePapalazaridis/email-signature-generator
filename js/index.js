@@ -435,6 +435,35 @@ toStep4Btn?.addEventListener("click", () => {
   }
 });
 
+function showThankYouPopup() {
+  const popup = document.getElementById("thankYouPopup");
+  const msg = document.getElementById("thankYouMessage");
+  const t = translations[window.currentLang || "gr"];
+
+  msg.textContent = t.finished_thanks;
+  popup.classList.remove("hidden");
+  popup.setAttribute("aria-hidden", "false");
+
+  // 🎉 Confetti burst
+  const container = popup.querySelector(".confetti-container");
+  container.innerHTML = "";
+
+  const colors = ["#ed6900", "#001489", "#f6a86e", "#ffdd55", "#36c"];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement("div");
+    p.className = "confetti-piece";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = 1 + Math.random() * 1.4 + "s";
+    container.appendChild(p);
+  }
+
+  setTimeout(() => {
+    popup.classList.add("hidden");
+    popup.setAttribute("aria-hidden", "true");
+  }, 2400);
+}
+
 // ===========================
 // Final action (depends on platform)
 // ===========================
@@ -455,26 +484,33 @@ finishBtn?.addEventListener("click", () => {
   const container = document.getElementById("step4Content");
   if (container) container.innerHTML = "";
 
-  // Success toast
-  showToast(
-    window.currentLang === "gr"
-      ? "🎉 Η διαδικασία ολοκληρώθηκε!"
-      : "🎉 Completed!"
-  );
-
   // Return to Step 1
   showStep(step1);
+
+  // ✨ Success Popup
+  showThankYouPopup();
 });
 
 document.addEventListener("language-changed", () => {
   const step4El = document.getElementById("step4");
   const isVisible = step4El && step4El.offsetParent !== null;
 
-  if (isVisible && window.selectedPlatform === "outlook") {
-    if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+  if (!isVisible || !window.selectedPlatform) return;
 
-    const t = translations[window.currentLang];
+  if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+
+  const t = translations[window.currentLang];
+
+  if (window.selectedPlatform === "outlook") {
     renderOutlookStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "thunderbird") {
+    renderThunderbirdStep4(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === "monday") {
+    renderMondayStep4(window.signatureHtml, t);
   }
 });
 

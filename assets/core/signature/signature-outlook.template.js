@@ -34,7 +34,7 @@ export function buildOutlookSignature({
   <table role="presentation" cellpadding="0" cellspacing="0" style="
     width: 100%;
     background: #ffffff !important;
-    padding: 20px;
+    padding: 12px;
     border-radius: 12px;
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   ">
@@ -44,12 +44,12 @@ export function buildOutlookSignature({
             <table role="presentation" cellpadding="0" cellspacing="0" width="487" style="
           background: #ffffff !important;
           border-radius: 12px;
-          padding: 20px;
+          padding: 12px;
           font-family: 'Montserrat', Arial, Helvetica, sans-serif;
           color: #000 !important;
           width:100%;
           max-width:487px;
-          margin:0 auto;
+          margin:0;
         ">
                 <!-- HEADER -->
                 <tr>

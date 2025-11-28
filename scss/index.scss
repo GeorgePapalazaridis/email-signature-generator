@@ -12,7 +12,8 @@
 @use "./base/_layout" as *;
 
 /* 3️⃣ Reusable Components */
-@use "./components/header" as *;
+@use "./components/_header" as *;
+@use "./components/_loader" as *;
 @use "./components/_buttons" as *;
 @use "./components/_form" as *;
 @use "./components/_preview" as *;

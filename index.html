@@ -28,6 +28,11 @@
 </head>
 
 <body>
+  <!-- Loader -->
+  <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+
   <!-- ====== LANGUAGE SELECTOR ====== -->
   <div class="header-bar">
 
@@ -216,6 +221,7 @@
 
 
   <!-- JS entry point -->
+  <script src="js/utils/loader.js"></script>
   <script type="module" src="./js/index.js"></script>
 
   <!-- Fallback for GitHub Pages (subpath-safe) -->

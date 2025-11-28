@@ -13,9 +13,13 @@ export function bindDom({ onLanguageChange }) {
 
   // language change
   if (langSelect && onLanguageChange) {
-    langSelect.addEventListener("change", (e) =>
-      onLanguageChange(e.target.value)
-    );
+    langSelect.addEventListener("change", async (e) => {
+      showLoader();
+
+      await Promise.resolve(onLanguageChange(e.target.value));
+
+      setTimeout(() => hideLoader(), 300);
+    });
   }
 
   console.log("✅ DOM bindings initialized");

@@ -96,8 +96,8 @@
 
 /* DARK MODE (DRAFT) */
 :root[data-theme=dark] {
-  --color-brand-accent: #58a6ff; /* Soft, clear blue for dark backgrounds */
-  --color-brand-accent-light: #79c0ff; /* Hover/active state */
+  --color-brand-accent: #58a6ff;
+  --color-brand-accent-light: #79c0ff;
   --color-text-primary: #e6e6e6;
   --color-text-secondary: #c8c8c8;
   --color-text-muted: #9a9a9a;
@@ -525,6 +525,41 @@ hr {
   filter: brightness(1.25) contrast(1.08);
 }
 
+.loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px) brightness(0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  border: 5px solid var(--color-border-light);
+  border-top-color: var(--color-brand-accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 /* ===============================
        🔘 UNIFIED BUTTON SYSTEM
 =============================== */

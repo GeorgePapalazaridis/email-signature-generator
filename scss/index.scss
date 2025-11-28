@@ -6,24 +6,24 @@
    =================================== */
 
 /* 1️⃣ Design Tokens & Helpers */
-@use "./abstracts/variables" as *;
-@use "./abstracts/colors" as *;
-@use "./helpers/animations" as *;
+@use "./abstracts/_variables" as *;
+@use "./abstracts/_colors" as *;
+@use "./helpers/_animations" as *;
 
 /* 2️⃣ Global layout & structure */
-@use "./base/layout" as *;
+@use "./base/_layout" as *;
 
 /* 3️⃣ Reusable Components */
-@use "./components/buttons" as *;
-@use "./components/form" as *;
-@use "./components/preview" as *;
-@use "./components/toast" as *;
-@use "./components/clipboard" as *;
-@use "./components/thankyou-popup" as *;
+@use "./components/_buttons" as *;
+@use "./components/_form" as *;
+@use "./components/_preview" as *;
+@use "./components/_toast" as *;
+@use "./components/_clipboard" as *;
+@use "./components/_thankyou-popup" as *;
 
 /* 4️⃣ Page-specific styles */
-@use "./pages/step2-platform" as *;
-@use "./pages/step4-outlook" as *;
+@use "./pages/step3-layout-platform" as *;
+@use "./pages/_step4-layout" as *;
 
 .step-section {
   width: 100%;

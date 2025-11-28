@@ -28,6 +28,61 @@ export function makeBookmarklet(signature, t) {
 }
 
 /**
+ * Outlook
+ */
+export function renderOutlookStep4(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
+
+  container.innerHTML = `
+<div class="step4-card">
+  <div class="step4-instructions">
+    <ol class="step4-list">
+
+      <li>
+        <strong>${t.outlook_step1_title}</strong>
+        <div class="step4-btn-wrapper">
+          <a id="bookmarkletButton" class="btn btn-info">
+            ${t.bookmarkletLabel}
+          </a>
+        </div>
+        <p class="step4-note">
+          ${t.outlook_step1_note_intro}<br>
+          ${t.outlook_step1_note_mac}<br>
+          ${t.outlook_step1_note_win}
+        </p>
+      </li>
+
+      <li>
+        <strong>${t.outlook_step2_title}</strong>
+        <div class="step4-btn-wrapper">
+          <a href="https://outlook.office.com/" target="_blank"
+            class="btn btn-info-outline">
+            ${t.outlook_open_button}
+          </a>
+        </div>
+      </li>
+
+      <li>
+        <strong>${t.outlook_step3_title}</strong>
+        <p class="step4-text">${t.outlook_step3_text}</p>
+      </li>
+
+      <li>
+        <strong>${t.outlook_step4_title}</strong>
+        <p class="step4-text">${t.outlook_step4_text}</p>
+      </li>
+
+    </ol>
+  </div>
+</div>
+`;
+
+  const btn = document.getElementById("bookmarkletButton");
+  if (btn) btn.href = makeBookmarklet(signatureHtml, t);
+}
+
+/**
  * Thunderbird
  */
 export function renderThunderbirdStep4(signatureHtml, t) {
@@ -47,64 +102,26 @@ export function renderThunderbirdStep4(signatureHtml, t) {
 
   container.innerHTML = `
 <div class="step4-card">
-  <h4 class="step4-subtitle">${t.thunderbird_step_title}</h4>
-  <p class="step4-text">${t.thunderbird_step_instructions}</p>
-  <ol class="tb-steps">${steps}</ol>
-  <button id="downloadThunderbirdBtn" class="primary-action-button">
-    ${t.download_button_label}
-  </button>
-</div>
-`;
-
-  const btn = document.getElementById("downloadThunderbirdBtn");
-  btn?.addEventListener("click", () => {
-    downloadHtmlFile(signatureHtml, "prognosis-signature-thunderbird.html");
-    showToast(t.download_success);
-  });
-}
-
-/**
- * Outlook
- */
-export function renderOutlookStep4(signatureHtml, t) {
-  const container = document.getElementById("step4Content");
-  if (!container) return;
-
-  container.innerHTML = `
-<div class="step4-card">
-  <div class="step4-section">
-    <h4 class="step4-subtitle">1. ${t.outlook_step1_title}</h4>
-    <a id="bookmarkletButton" href="#" class="bookmarklet-btn">
-      ${t.bookmarkletLabel}
-    </a>
-    <p class="step4-note">
-      ${t.outlook_step1_note_intro}<br>
-      ${t.outlook_step1_note_mac}<br>
-      ${t.outlook_step1_note_win}
-    </p>
+  <div class="step4-instructions">
+    <ol class="step4-list">
+      ${steps}
+    </ol>
   </div>
 
-  <div class="step4-section">
-    <h4 class="step4-subtitle">2. ${t.outlook_step2_title}</h4>
-    <a href="https://outlook.office.com/" target="_blank" class="outlook-btn">
-      ${t.outlook_open_button}
-    </a>
-  </div>
-
-  <div class="step4-section">
-    <h4 class="step4-subtitle">3. ${t.outlook_step3_title}</h4>
-    <p class="step4-text">${t.outlook_step3_text}</p>
-  </div>
-
-  <div class="step4-section">
-    <h4 class="step4-subtitle">4. ${t.outlook_step4_title}</h4>
-    <p class="step4-text">${t.outlook_step4_text}</p>
+  <div class="step4-actions">
+    <button id="downloadThunderbirdBtn" class="btn btn-info">
+      ${t.download_button_label}
+    </button>
   </div>
 </div>
 `;
 
-  const btn = document.getElementById("bookmarkletButton");
-  if (btn) btn.href = makeBookmarklet(signatureHtml, t);
+  document
+    .getElementById("downloadThunderbirdBtn")
+    ?.addEventListener("click", () => {
+      downloadHtmlFile(signatureHtml, "prognosis-signature-thunderbird.html");
+      showToast(t.download_success, "success");
+    });
 }
 
 /**
@@ -164,23 +181,30 @@ export function renderMondayStep4(signatureHtml, t) {
 
   container.innerHTML = `
 <div class="step4-card">
-  <h4 class="step4-subtitle">${t.monday_step_title}</h4>
-  <p class="step4-text">${t.monday_step_instructions}</p>
-  <ol class="tb-steps">
-    <li>${t.monday_step_note1}</li>
-    <li>${t.monday_step_note2}</li>
-    <li>${t.monday_step_note3}</li>
-  </ol>
-  <button id="copyMondayBtn" class="primary-action-button">
-    ${t.monday_copy_btn_label}
-  </button>
+  <div class="step4-instructions">
+    <h4 class="step4-subtitle">${t.monday_step_title}</h4>
+    <p class="step4-text">${t.monday_step_instructions}</p>
+
+    <ol class="step4-list">
+      <li>${t.monday_step_note1}</li>
+      <li>${t.monday_step_note2}</li>
+      <li>${t.monday_step_note3}</li>
+    </ol>
+  </div>
+
+  <div class="step4-actions">
+    <button id="copyMondayBtn" class="btn btn-info">
+      ${t.monday_copy_btn_label}
+    </button>
+  </div>
 </div>
 `;
 
-  const btn = document.getElementById("copyMondayBtn");
-  btn?.addEventListener("click", () =>
-    openMondayClipboardModal(signatureHtml, t)
-  );
+  document
+    .getElementById("copyMondayBtn")
+    ?.addEventListener("click", () =>
+      openMondayClipboardModal(signatureHtml, t)
+    );
 }
 
 /**

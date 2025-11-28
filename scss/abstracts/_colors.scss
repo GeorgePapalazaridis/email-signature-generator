@@ -40,6 +40,9 @@
   --color-gradient-start: #ed6900;
   --color-gradient-end: #f6a86e;
 
+  --step4-card-bg: var(--color-surface-primary);
+  --step4-card-border: var(--color-border-light);
+
   /* ===== COLORS ===== */
   --color-text: #1e1e1e;
   --color-text-muted: #999;
@@ -68,6 +71,9 @@
   --shadow-soft: rgba(0, 0, 0, 0.3);
   --shadow-medium: rgba(0, 0, 0, 0.45);
   --shadow-strong: rgba(0, 0, 0, 0.6);
+
+  --step4-card-bg: var(--color-surface-elevated);
+  --step4-card-border: var(--color-border);
 
   /* Brand colors stay the same */
 }

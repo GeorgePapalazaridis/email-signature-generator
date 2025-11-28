@@ -84,6 +84,8 @@
   --color-step-highlight: #00148910; /* navy with opacity */
   --color-gradient-start: #ed6900;
   --color-gradient-end: #f6a86e;
+  --step4-card-bg: var(--color-surface-primary);
+  --step4-card-border: var(--color-border-light);
   /* ===== COLORS ===== */
   --color-text: #1e1e1e;
   --color-text-muted: #999;
@@ -109,6 +111,8 @@
   --shadow-soft: rgba(0, 0, 0, 0.3);
   --shadow-medium: rgba(0, 0, 0, 0.45);
   --shadow-strong: rgba(0, 0, 0, 0.6);
+  --step4-card-bg: var(--color-surface-elevated);
+  --step4-card-border: var(--color-border);
   /* Brand colors stay the same */
 }
 
@@ -464,121 +468,28 @@ hr {
 }
 /* 3️⃣ Reusable Components */
 /* ===============================
-       🔘 BUTTON
-   =============================== */
-button {
-  margin-top: var(--space-md);
-  align-self: center;
-  background-color: var(--color-brand-primary);
-  color: var(--color-text-inverse);
-  padding: var(--space-xs) var(--space-md);
-  font-size: var(--font-size-md);
-  border: none;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  transition: background var(--transition-normal), transform var(--transition-fast);
-}
-
-button:hover {
-  background-color: var(--color-brand-primary-hover);
-  transform: translateY(-1px);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-button.loading {
-  opacity: 0.7;
-  cursor: wait;
-  transition: opacity var(--transition-slow);
-}
-
-button:disabled {
-  background-color: color-mix(in srgb, var(--color-brand-primary) 40%, var(--color-surface-secondary));
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* κοινός κανόνας για όλα τα primary "επόμενο/συνέχεια" κουμπιά */
-.next-button {
-  width: auto;
-  padding: var(--space-xs) var(--space-lg);
-  margin-left: auto;
-  border-radius: var(--border-radius-md);
-  min-width: 120px;
-  text-align: center;
-}
-
-/* Standard Outline Action Button */
-.back-button {
+       🔘 UNIFIED BUTTON SYSTEM
+=============================== */
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--border-radius-md);
   padding: var(--space-xs) var(--space-lg);
   min-width: 120px;
-  width: auto;
-  border: 2px solid var(--color-brand-primary);
-  border-radius: var(--border-radius-md);
-  background: transparent;
-  color: var(--color-brand-primary);
   font-size: var(--font-size-md);
   font-weight: 500;
   cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--transition-normal), color var(--transition-normal), transform var(--transition-fast);
 }
 
-.back-button:hover:not(:disabled) {
-  background: rgba(237, 105, 0, 0.08); /* light orange tint */
-  transform: translateY(-1px);
-}
-
-.back-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ===============================
-   STEP 2 — BUTTONS LAYOUT
-=============================== */
-.step2-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: var(--space-lg);
-  gap: var(--space-md);
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Outline button (Πίσω) */
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--color-brand-accent-light);
-  color: var(--color-brand-accent-light);
-  padding: 0.55rem 1.25rem;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-size: var(--font-size-md);
-  transition: all var(--transition-fast);
-}
-
-.btn-outline:hover {
-  background: var(--color-step-highlight);
-}
-
-/* Primary button (Συνέχεια) */
+/* 🟠 PRIMARY — MAIN CTA */
 .btn-primary {
   background: var(--color-brand-primary);
-  border: none;
   color: var(--color-text-inverse);
-  padding: 0.55rem 1.25rem;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  font-size: var(--font-size-md);
-  transition: background var(--transition-normal), transform var(--transition-fast);
+  border: none;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -586,71 +497,90 @@ button:disabled {
   transform: translateY(-1px);
 }
 
-.btn-primary:disabled {
-  background: var(--color-border-light);
-  cursor: not-allowed;
+/* 🟣 SECONDARY — BACK */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-brand-primary);
+  color: var(--color-brand-primary);
 }
 
-/* 🔹 Bookmarklet Button */
-.bookmarklet-btn,
-.outlook-btn {
-  display: inline-block;
-  padding: var(--space-xs) var(--space-md);
-  margin-top: var(--space-xxs);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-text-inverse);
-  border-radius: var(--border-radius-md);
-  text-decoration: none;
-  transition: background var(--transition-normal), transform var(--transition-fast);
-}
-
-/* Primary CTA (blue) */
-.bookmarklet-btn {
-  background: var(--color-brand-accent);
-}
-
-.bookmarklet-btn:hover {
-  background: var(--color-brand-accent-light);
-  transform: translateY(-2px);
-}
-
-/* Secondary CTA (green) */
-.outlook-btn {
-  background: var(--color-success);
-}
-
-.outlook-btn:hover {
-  background: color-mix(in srgb, var(--color-success) 85%, black);
-  transform: translateY(-2px);
-}
-
-/* 🧭 Footer Action Buttons */
-.step4-actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-}
-
-/* Primary Next Button */
-.next-button {
-  background: var(--color-brand-primary);
-  color: var(--color-text-inverse);
-  padding: var(--space-xs) var(--space-md);
-  border: none;
-  border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition: background var(--transition-normal), transform var(--transition-fast);
-}
-
-.next-button:hover {
-  background: var(--color-brand-primary-hover);
+.btn-outline:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-surface-primary));
   transform: translateY(-1px);
 }
 
+/* 🔵 INLINE ACTIONS — Bookmarklet / App Launch */
+.btn-info {
+  background: var(--color-brand-accent);
+  color: var(--color-text-inverse);
+  border: none;
+}
+
+.btn-info:hover:not(:disabled) {
+  background: var(--color-brand-accent-light);
+  transform: translateY(-1px);
+}
+
+/* 🔵 Info Outline — Secondary inline action */
+.btn-info-outline {
+  background: transparent;
+  border: 2px solid var(--color-brand-accent);
+  color: var(--color-brand-accent);
+}
+
+.btn-info-outline:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-brand-accent) 12%, var(--color-surface-primary));
+  transform: translateY(-1px);
+}
+
+/* ❌ DISABLED */
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 📍 Layout Buttons - Step 2 */
+.step2-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: 420px;
+  margin: var(--space-xl) auto 0 auto;
+}
+
+/* 📍 Step 4 Buttons - Align like Step 2 */
+.step4-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--space-xl) auto 0 auto;
+  gap: var(--space-md);
+}
+
+.step4-btn-wrapper {
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+#signatureForm .btn-primary {
+  margin-top: var(--space-lg);
+}
+
+/* 📱 Mobile Auto Layout */
 @media (max-width: 480px) {
-  button {
+  .btn {
+    width: 100%;
+    min-width: unset;
+  }
+  .step4-actions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .step4-actions .btn {
+    width: 100%;
+  }
+  #signatureForm .btn-primary {
     width: 90%;
   }
 }
@@ -1054,9 +984,12 @@ a.bookmarklet:hover::after {
   background: var(--color-surface-secondary);
   cursor: pointer;
   transition: all var(--transition-normal);
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xxs);
+  align-items: center;
 }
 
 .platform-card:hover {
@@ -1069,20 +1002,29 @@ a.bookmarklet:hover::after {
   background: var(--color-step-highlight);
 }
 
+.platform-card:focus-visible {
+  outline: 3px solid var(--color-brand-accent-light);
+  outline-offset: 3px;
+}
+
 .platform-icon {
-  font-size: 2rem;
-  color: var(--color-brand-accent);
+  grid-row: span 2;
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .platform-title {
-  font-weight: 600;
   font-size: var(--font-size-lg);
-  margin-bottom: var(--space-xxs);
+  font-weight: 600;
   color: var(--color-text-primary);
+  margin: 0;
 }
 
 .platform-desc {
   font-size: var(--font-size-sm);
+  line-height: 1.35;
   color: var(--color-text-muted);
 }
 
@@ -1090,37 +1032,38 @@ a.bookmarklet:hover::after {
      📩 STEP 4 (Outlook)
 ============================ */
 .step4-card {
-  background: var(--color-surface-primary);
+  background: var(--step4-card-bg);
+  border: var(--border-width) solid var(--step4-card-border);
   border-radius: var(--border-radius-lg);
-  border: var(--border-width) solid var(--color-border-light);
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-xl) var(--space-lg);
   max-width: 650px;
-  margin: 0 auto var(--space-xl) auto;
-  box-shadow: 0 3px 10px var(--shadow-soft);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
 }
 
-.step4-section {
-  margin-bottom: var(--space-lg);
-  text-align: left;
+.step4-instructions {
+  width: 100%;
 }
 
-.step4-subtitle {
-  font-size: var(--font-size-lg);
+.step4-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-left: var(--space-md);
+}
+
+.step4-list li {
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.step4-list li strong {
+  font-size: var(--font-size-md);
   font-weight: 600;
   color: var(--color-text-primary);
-  margin-bottom: var(--space-xs);
-}
-
-.step4-text {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.5;
-}
-
-.step4-note {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  margin-top: var(--space-xxs);
+  margin-bottom: var(--space-xxs);
 }
 
 .step-section {

@@ -4,14 +4,12 @@
 #preview-box {
   width: 100%;
   max-width: 680px;
-
   margin: 0 auto;
 
-  background-color: #ffffff !important;
-  border-radius: 20px !important;
-
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  background-color: var(--color-surface-primary) !important;
+  border-radius: var(--border-radius-lg) !important;
+  border: var(--border-width) solid var(--color-border-light) !important;
+  box-shadow: 0 4px 14px var(--shadow-medium);
 
   display: flex;
   justify-content: center;
@@ -24,8 +22,8 @@
 
 #preview-box > table,
 #preview-box > .signature-wrapper > table {
-  background-color: #ffffff !important;
-  border-radius: 20px !important;
+  background-color: var(--color-surface-primary) !important;
+  border-radius: var(--border-radius-lg) !important;
 }
 
 .signature-wrapper {
@@ -34,7 +32,7 @@
 }
 
 #preview-box .signature-separator {
-  background-color: #b3b3b3 !important;
+  background-color: var(--color-border-strong) !important;
 }
 
 /* ===============================
@@ -45,7 +43,7 @@
   text-align: center;
   display: none;
   opacity: 0;
-  transform: translateY(0.625rem); /* 10px */
+  transform: translateY(0.625rem);
   transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
 
@@ -57,8 +55,8 @@
 
 a.bookmarklet {
   display: inline-block;
-  background: var(--color-primary);
-  color: var(--color-white);
+  background: var(--color-brand-primary);
+  color: var(--color-text-inverse);
   padding: var(--space-sm) var(--space-md);
   text-decoration: none;
   border-radius: var(--border-radius-md);
@@ -70,10 +68,11 @@ a.bookmarklet {
 }
 
 a.bookmarklet:hover {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-brand-primary-hover);
   transform: translateY(-1px);
 }
 
+/* Info below button */
 .info {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -94,8 +93,8 @@ a.bookmarklet::after {
   bottom: 140%;
   left: 50%;
   transform: translate(-50%, 6px);
-  background-color: rgba(40, 40, 40, 0.9);
-  color: var(--color-white);
+  background-color: var(--color-brand-accent);
+  color: var(--color-text-inverse);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--border-radius-md);
   font-size: var(--font-size-sm);
@@ -128,7 +127,7 @@ a.bookmarklet:hover::after {
 .preview-title {
   margin-top: var(--space-lg);
   margin-bottom: var(--space-md);
-  color: var(--color-accent);
+  color: var(--color-brand-accent);
   text-align: center;
   font-size: var(--font-size-lg);
   font-weight: 600;
@@ -136,7 +135,7 @@ a.bookmarklet:hover::after {
 
 .drag-text {
   margin-top: var(--space-lg);
-  color: var(--color-text);
+  color: var(--color-text-primary);
   font-size: var(--font-size-md);
   line-height: 1.5;
 }

@@ -1,34 +1,49 @@
 /* ===============================
    🌐 INDEX (entry point)
    =============================== */
-@use "./_variables";
-@use "./_layout";
-@use "./_form";
-@use "./_step2-platform";
-@use "./step4-outlook";
-@use "./_preview";
-@use "./_toast";
-@use "./_clipboard";
-@use "./_thankyou-popup";
-@use "./_animations";
+/* ===================================
+   SCSS Entry Point
+   =================================== */
+
+/* 1️⃣ Design Tokens & Helpers */
+@use "./abstracts/variables" as *;
+@use "./abstracts/colors" as *;
+@use "./helpers/animations" as *;
+
+/* 2️⃣ Global layout & structure */
+@use "./base/layout" as *;
+
+/* 3️⃣ Reusable Components */
+@use "./components/buttons" as *;
+@use "./components/form" as *;
+@use "./components/preview" as *;
+@use "./components/toast" as *;
+@use "./components/clipboard" as *;
+@use "./components/thankyou-popup" as *;
+
+/* 4️⃣ Page-specific styles */
+@use "./pages/step2-platform" as *;
+@use "./pages/step4-outlook" as *;
 
 .step-section {
   width: 100%;
   margin-top: var(--space-md);
   padding-bottom: var(--space-xxl);
+  color: var(--color-text);
 }
 
 .step-subtitle {
   text-align: center;
+  color: var(--color-text-muted);
 }
 
 .step-header {
   text-align: center;
   margin-top: 0;
-  margin-bottom: 1.25rem;
-  font-size: 1.15rem;
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-lg);
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-brand-accent);
   line-height: 1.3;
 }
 

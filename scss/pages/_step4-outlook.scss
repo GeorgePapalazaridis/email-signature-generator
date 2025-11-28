@@ -1,0 +1,37 @@
+/* ============================
+     📩 STEP 4 (Outlook)
+============================ */
+
+.step4-card {
+  background: var(--color-surface-primary);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--color-border-light);
+  padding: var(--space-lg) var(--space-md);
+  max-width: 650px;
+  margin: 0 auto var(--space-xl) auto;
+  box-shadow: 0 3px 10px var(--shadow-soft);
+}
+
+.step4-section {
+  margin-bottom: var(--space-lg);
+  text-align: left;
+}
+
+.step4-subtitle {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.step4-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.step4-note {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xxs);
+}

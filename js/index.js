@@ -260,6 +260,31 @@ document.addEventListener("language-changed", () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggleBtn");
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    root.setAttribute("data-theme", savedTheme);
+    updateIcon(savedTheme);
+  }
+
+  btn.addEventListener("click", () => {
+    const current = root.getAttribute("data-theme");
+    const newTheme = current === "dark" ? "light" : "dark";
+
+    root.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    updateIcon(newTheme);
+  });
+
+  function updateIcon(theme) {
+    btn.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+});
+
 // ===========================
 // Init
 // ===========================

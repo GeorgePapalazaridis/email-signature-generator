@@ -1,0 +1,65 @@
+/* ===============================
+   STEP 2 — CARD FIXES
+=============================== */
+
+.platform-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.platform-card {
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--color-border-light);
+  background: var(--color-surface-secondary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-template-rows: auto auto;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xxs);
+  align-items: center;
+}
+
+.platform-card:hover {
+  border-color: var(--color-brand-accent-light);
+  background: var(--color-surface-tertiary);
+}
+
+.platform-card.selected {
+  border-color: var(--color-brand-accent);
+  background: var(--color-step-highlight);
+}
+
+.platform-card:focus-visible {
+  outline: 3px solid var(--color-brand-accent-light);
+  outline-offset: 3px;
+}
+
+.platform-icon {
+  grid-row: span 2;
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.platform-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.platform-desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
+  color: var(--color-text-muted);
+}

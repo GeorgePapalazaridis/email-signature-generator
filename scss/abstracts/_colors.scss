@@ -1,0 +1,82 @@
+:root {
+  /* 🎯 Brand */
+  --color-brand-primary: #ed6900; /* Orange */
+  --color-brand-primary-hover: #c85a00;
+  --color-brand-primary-active: #a94d00;
+
+  --color-brand-accent: #0a3d62; /* Dark Navy */
+  --color-brand-accent-light: #0078d4; /* Hover links */
+
+  /* 📝 Text */
+  --color-text-primary: ##3e3e3e;
+  --color-text-secondary: #444;
+  --color-text-muted: #777;
+  --color-text-inverse: #ffffff;
+
+  /* 📦 Surfaces */
+  --color-surface-primary: #f9fafc;
+  --color-surface-secondary: #f8f8ff; /* platform cards */
+  --color-surface-tertiary: #fafafa; /* form bg */
+  --color-surface-footer: #f6f6f6;
+
+  /* 🔲 Borders & Lines */
+  --color-border-light: #ddd;
+  --color-border-strong: #222;
+
+  /* ⚠️ Status */
+  --color-success: #3cc053;
+  --color-error: #e11635;
+  --color-warning: #ffcc00;
+  --color-info: #0066cc;
+
+  /* 🧈 Shadows & Effects */
+  --shadow-soft: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+  --shadow-strong: rgba(0, 0, 0, 0.15);
+
+  /* ✨ Special */
+  --color-step-highlight: #00148910; /* navy with opacity */
+
+  --color-gradient-start: #ed6900;
+  --color-gradient-end: #f6a86e;
+
+  --step4-card-bg: var(--color-surface-primary);
+  --step4-card-border: var(--color-border-light);
+
+  /* ===== COLORS ===== */
+  --color-text: #1e1e1e;
+  --color-text-muted: #999;
+  --color-primary: #0078d4;
+  --color-primary-hover: #005fa3;
+  --color-accent: #0a3d62;
+  --color-border: #e2e4e8;
+  --color-bg: #f9fafc;
+  --color-white: #fff;
+}
+
+/* DARK MODE (DRAFT) */
+:root[data-theme="dark"] {
+  --color-brand-accent: #58a6ff;
+  --color-brand-accent-light: #79c0ff;
+
+  --color-text-primary: #e6e6e6;
+  --color-text-secondary: #c8c8c8;
+  --color-text-muted: #9a9a9a;
+
+  --color-surface-primary: #121212;
+  --color-surface-secondary: #1a1a1a;
+  --color-surface-tertiary: #1f1f1f;
+  --color-surface-footer: #161616;
+
+  --color-border-light: #303030;
+  --color-border-strong: #4a4a4a;
+
+  --shadow-soft: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.45);
+  --shadow-strong: rgba(0, 0, 0, 0.6);
+
+  --step4-card-bg: var(--color-surface-elevated);
+  --step4-card-border: var(--color-border);
+
+  /* Brand colors stay the same */
+}

@@ -28,14 +28,20 @@
 </head>
 
 <body>
+  <!-- Loader -->
+  <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+
   <!-- ====== LANGUAGE SELECTOR ====== -->
   <div class="header-bar">
 
-    <div class="header-help">
-      <a id="helpLink" href="assets/docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf" target="_blank"
-        rel="noopener noreferrer">
-      </a>
+    <div class="header-theme-toggle">
+      <button id="themeToggleBtn" aria-label="Toggle theme">
+        🌗
+      </button>
     </div>
+
 
     <div class="header-lang">
       <label for="lang">🌐 Language:</label>
@@ -50,11 +56,14 @@
 
   <!-- ====== LOGO ====== -->
   <div class="logo">
-    <a href="https://www.prognosis-biotech.com" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
-        alt="Prognosis Biotech Logo" />
-    </a>
+    <div class="logo-container">
+      <a href="https://www.prognosis-biotech.com" target="_blank" rel="noopener noreferrer">
+        <img src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
+          alt="Prognosis Biotech Logo" />
+      </a>
+    </div>
   </div>
+
 
   <hr />
 
@@ -83,7 +92,7 @@
       <label for="phone" id="labelPhone"></label>
       <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
 
-      <button id="toStep2Btn" class="next-button" type="button" disabled></button>
+      <button id="toStep2Btn" class="btn btn-primary" type="button" disabled></button>
     </form>
   </section>
 
@@ -97,8 +106,8 @@
     </div>
 
     <div class="step2-actions">
-      <button id="backToStep1" class="back-button" type="button"></button>
-      <button id="toStep3Btn" class="next-button" type="button"></button>
+      <button id="backToStep1" class="btn btn-outline" type="button"></button>
+      <button id="toStep3Btn" class="btn btn-primary" type=" button"></button>
     </div>
   </section>
 
@@ -138,8 +147,8 @@
 
     <!-- Continue + Back buttons -->
     <div class="step2-actions">
-      <button id="backToStep2" class="back-button" type="button"></button>
-      <button id="toStep4Btn" class="next-button" type="button" disabled></button>
+      <button id="backToStep2" class="btn btn-outline" type="button"></button>
+      <button id="toStep4Btn" class="btn btn-primary" type="button" disabled></button>
     </div>
 
   </section>
@@ -155,8 +164,8 @@
     <div id="step4Content"></div>
 
     <div class="step4-actions">
-      <button id="backToStep3" class="back-button" type="button"></button>
-      <button id="finishBtn" class="next-button" type="button"></button>
+      <button id="backToStep3" class="btn btn-outline" type="button"></button>
+      <button id="finishBtn" class="btn btn-primary" type="button"></button>
     </div>
 
   </section>
@@ -199,15 +208,20 @@
 
   <!-- ====== FOOTER ====== -->
   <footer class="footer" role="contentinfo">
-    <p>
+    <p class="footer-line1">
       © 2025 <strong>Prognosis Signature Generator</strong> — Developed by
+    </p>
+    <p class="footer-line2">
       <a href="https://www.linkedin.com/in/george-papalazaridis-865689120/" target="_blank" rel="noopener noreferrer">
         <span class="footer-icon">💻</span> George Papalazaridis
       </a>
     </p>
   </footer>
 
+
+
   <!-- JS entry point -->
+  <script src="js/utils/loader.js"></script>
   <script type="module" src="./js/index.js"></script>
 
   <!-- Fallback for GitHub Pages (subpath-safe) -->

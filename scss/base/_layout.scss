@@ -1,0 +1,176 @@
+/* ===============================
+       🌐 HEADER BAR
+   =============================== */
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--space-xxs) var(--space-xxs);
+  margin-bottom: var(--space-xxl);
+}
+
+/* Help link */
+.header-help a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xxs);
+  font-size: var(--font-size-sm);
+  color: var(--color-brand-accent-light);
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.95;
+}
+
+.header-help a:hover {
+  color: var(--color-brand-accent);
+  text-decoration: underline;
+}
+
+// theme mode toggle
+.header-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Language section */
+.header-lang {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xxs);
+}
+
+.header-lang label {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+.header-lang select {
+  padding: var(--space-xxs) var(--space-sm);
+  border-radius: var(--border-radius-sm);
+  border: var(--border-width) solid var(--color-border-light);
+  font-size: var(--font-size-sm);
+  height: 1.875rem;
+  cursor: pointer;
+  background: #fff;
+  transition: border var(--transition-fast);
+}
+
+.header-lang select:hover {
+  border-color: var(--color-brand-accent);
+}
+
+/* ===============================
+       💬 HELP CTA
+   =============================== */
+.help-cta {
+  background: var(--color-surface-secondary);
+  border: var(--border-width) solid var(--color-border-light);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-sm) var(--space-md);
+  margin: var(--space-xs) auto var(--space-sm);
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 1px 2px var(--shadow-soft);
+  transition: box-shadow var(--transition-normal);
+}
+
+.help-cta:hover {
+  box-shadow: 0 3px 6px var(--shadow-medium);
+}
+
+.help-cta a {
+  font-size: var(--font-size-sm);
+  color: var(--color-brand-accent-light);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.help-cta a:hover {
+  text-decoration: underline;
+  color: var(--color-brand-accent);
+}
+
+.help-cta--after {
+  margin-top: var(--space-xs);
+  text-align: center;
+  opacity: 0.9;
+}
+
+.help-cta--after a {
+  font-size: var(--font-size-sm);
+  color: var(--color-brand-accent-light);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+.help-cta--after a:hover {
+  color: var(--color-brand-accent);
+  text-decoration: underline;
+}
+
+/* ===============================
+       🧑‍💻 FOOTER
+   =============================== */
+.footer {
+  width: 100%;
+  margin-top: auto;
+  padding: var(--space-lg) 0 var(--space-md);
+  text-align: center;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border-light);
+  font-family: var(--font-family-base);
+}
+
+.footer-line1 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.footer strong {
+  color: var(--color-text-primary);
+}
+
+.footer-line2 {
+  margin: var(--space-xs) 0 0;
+}
+
+.footer a {
+  color: var(--color-brand-accent-light);
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer a:hover {
+  color: var(--color-brand-accent);
+  transform: translateY(-1px);
+}
+
+.footer-icon {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
+    sans-serif;
+  opacity: 0.95;
+  transition: transform var(--transition-fast);
+}
+
+.footer a:hover .footer-icon {
+  transform: rotate(-10deg) scale(1.08);
+}
+
+/* ===============================
+       📱 RESPONSIVE
+   =============================== */
+@media (max-width: 480px) {
+  .help-cta {
+    max-width: 100%;
+  }
+}

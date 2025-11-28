@@ -1,0 +1,134 @@
+/* ===============================
+       🔘 UNIFIED BUTTON SYSTEM
+=============================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--border-radius-md);
+  padding: var(--space-xs) var(--space-lg);
+  min-width: 120px;
+
+  font-size: var(--font-size-md);
+  font-weight: 500;
+
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
+  transition: background var(--transition-normal),
+    color var(--transition-normal), transform var(--transition-fast);
+}
+
+/* 🟠 PRIMARY — MAIN CTA */
+.btn-primary {
+  background: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+  border: none;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-brand-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* 🟣 SECONDARY — BACK */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+.btn-outline:hover:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--color-brand-primary) 12%,
+    var(--color-surface-primary)
+  );
+  transform: translateY(-1px);
+}
+
+/* 🔵 INLINE ACTIONS — Bookmarklet / App Launch */
+.btn-info {
+  background: var(--color-brand-accent);
+  color: var(--color-text-inverse);
+  border: none;
+}
+.btn-info:hover:not(:disabled) {
+  background: var(--color-brand-accent-light);
+  transform: translateY(-1px);
+}
+
+/* 🔵 Info Outline — Secondary inline action */
+.btn-info-outline {
+  background: transparent;
+  border: 2px solid var(--color-brand-accent);
+  color: var(--color-brand-accent);
+}
+
+.btn-info-outline:hover:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--color-brand-accent) 12%,
+    var(--color-surface-primary)
+  );
+  transform: translateY(-1px);
+}
+
+/* ❌ DISABLED */
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 📍 Layout Buttons - Step 2 */
+.step2-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: 420px;
+  margin: var(--space-xl) auto 0 auto;
+}
+
+/* 📍 Step 4 Buttons - Align like Step 2 */
+.step4-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  //   width: 100%;
+  //   max-width: 420px;
+  margin: var(--space-xl) auto 0 auto;
+  gap: var(--space-md);
+}
+
+.step4-btn-wrapper {
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+#signatureForm .btn-primary {
+  margin-top: var(--space-lg);
+}
+
+/* 📱 Mobile Auto Layout */
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .step4-actions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .step4-actions .btn {
+    width: 100%;
+  }
+
+  #signatureForm .btn-primary {
+    width: 90%;
+  }
+}

@@ -5,6 +5,12 @@ import {
   SignaturePlatform,
 } from "../assets/core/signature/signature-builder.service.js";
 import { bindDom } from "./dom-bindings.js";
+import { showToast, showThankYouPopup } from "./notifications.js";
+import {
+  renderOutlookStep4,
+  renderThunderbirdStep4,
+  renderMondayStep4,
+} from "./step4-renderers.js";
 
 // ===========================
 // DOM Refs (new 3-step wizard)
@@ -74,18 +80,6 @@ function updateToStep2State() {
   toStep2Btn.disabled = !step1IsValid();
 }
 
-function showToast(message, type = "success") {
-  const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
-  toast.textContent = message;
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.style.animation = "toastOut 0.4s ease forwards";
-    setTimeout(() => toast.remove(), 400);
-  }, 2200);
-}
-
 function buildSignatureHtml() {
   const name = nameInput.value.trim();
   const title = titleInput.value.trim();
@@ -101,225 +95,6 @@ function buildSignatureHtml() {
     mobile,
     logoBase64,
   });
-}
-
-function makeBookmarklet(signature, t) {
-  // Προσοχή: JSON.stringify για ασφαλή embed
-  return `javascript:(function(){
-    function visible(el){return !!(el && el.offsetParent !== null);}
-    function findEditor(win){
-      var ed = win.document.querySelector('div[role="textbox"][contenteditable="true"]');
-      if (visible(ed)) return ed;
-      var cands = win.document.querySelectorAll('[contenteditable="true"], div[role="textbox"]');
-      for (var i=0;i<cands.length;i++){ if(visible(cands[i])) return cands[i]; }
-      var ifr = win.document.querySelectorAll('iframe');
-      for (var j=0;j<ifr.length;j++){
-        try { var r = findEditor(ifr[j].contentWindow); if (r) return r; } catch(e){}
-      }
-      return null;
-    }
-    var editor = findEditor(window);
-    if(editor){
-      editor.innerHTML = ${JSON.stringify(signature)};
-      alert(${JSON.stringify(t.success)});
-    } else {
-      alert(${JSON.stringify(t.notFound)});
-    }
-  })();`;
-}
-
-function renderOutlookStep4(signatureHtml, t) {
-  const container = document.getElementById("step4Content");
-  if (!container) return;
-
-  container.innerHTML = `
-<div class="step4-card">
-
-  <!-- 1) Step 1 -->
-  <div class="step4-section">
-    <h4 class="step4-subtitle">1. ${t.outlook_step1_title}</h4>
-
-    <a id="bookmarkletButton"
-       href="#"
-       class="bookmarklet-btn">
-      ${t.bookmarkletLabel}
-    </a>
-
-    <p class="step4-note">
-      ${t.outlook_step1_note_intro}<br>
-      ${t.outlook_step1_note_mac}<br>
-      ${t.outlook_step1_note_win}
-    </p>
-
-  </div>
-
-  <!-- 2) Step 2 -->
-  <div class="step4-section">
-    <h4 class="step4-subtitle">2. ${t.outlook_step2_title}</h4>
-
-    <a href="https://outlook.office.com/" target="_blank" class="outlook-btn">
-      ${t.outlook_open_button}
-    </a>
-  </div>
-
-  <!-- 3) Step 3 -->
-  <div class="step4-section">
-    <h4 class="step4-subtitle">3. ${t.outlook_step3_title}</h4>
-    <p class="step4-text">
-      ${t.outlook_step3_text}
-    </p>
-  </div>
-
-  <!-- 4) Step 4 -->
-  <div class="step4-section">
-    <h4 class="step4-subtitle">4. ${t.outlook_step4_title}</h4>
-    <p class="step4-text">
-      ${t.outlook_step4_text}
-    </p>
-  </div>
-
-</div>
-  `;
-
-  // Connect Bookmarklet
-  const btn = document.getElementById("bookmarkletButton");
-  if (btn) {
-    btn.href = makeBookmarklet(window.signatureHtml, t);
-  }
-}
-
-function renderThunderbirdStep4(signatureHtml, t) {
-  const container = document.getElementById("step4Content");
-  if (!container) return;
-
-  const steps = [
-    t.th_step1,
-    t.th_step2,
-    t.th_step3,
-    t.th_step4,
-    t.th_step5,
-    t.th_step6,
-  ]
-    .map((step) => `<li>${step}</li>`)
-    .join("");
-
-  container.innerHTML = `
-<div class="step4-card">
-
-  <h4 class="step4-subtitle">${t.thunderbird_step_title}</h4>
-  <p class="step4-text">${t.thunderbird_step_instructions}</p>
-
-  <ol class="tb-steps">
-    ${steps}
-  </ol>
-
-  <button id="downloadThunderbirdBtn" class="primary-action-button">
-    ${t.download_button_label}
-  </button>
-
-</div>
-  `;
-
-  const btn = document.getElementById("downloadThunderbirdBtn");
-  btn?.addEventListener("click", () => {
-    downloadHtmlFile(signatureHtml, "prognosis-signature-thunderbird.html");
-    showToast(t.download_success);
-  });
-}
-
-function renderMondayStep4(signatureHtml, t) {
-  const container = document.getElementById("step4Content");
-  if (!container) return;
-
-  container.innerHTML = `
-<div class="step4-card">
-
-  <h4 class="step4-subtitle">${t.monday_step_title}</h4>
-  <p class="step4-text">${t.monday_step_instructions}</p>
-
-  <ol class="tb-steps">
-    <li>${t.monday_step_note1}</li>
-    <li>${t.monday_step_note2}</li>
-    <li>${t.monday_step_note3}</li>
-  </ol>
-
-  <button id="copyMondayBtn" class="primary-action-button">
-    ${t.monday_copy_btn_label}
-  </button>
-
-</div>
-  `;
-
-  const btn = document.getElementById("copyMondayBtn");
-  btn?.addEventListener("click", () => {
-    openMondayClipboardModal(signatureHtml, t);
-  });
-}
-
-function openMondayClipboardModal(signatureHtml, t) {
-  const modal = document.getElementById("mondayClipboardModal");
-  const codeEl = document.getElementById("mondayClipboardCode");
-  const titleEl = document.getElementById("mondayClipboardTitle");
-  const descEl = document.getElementById("mondayClipboardDesc");
-  const copyBtn = document.getElementById("mondayClipboardCopyBtn");
-  const closeBtn = document.getElementById("mondayClipboardCloseBtn");
-
-  if (!modal || !codeEl || !copyBtn || !closeBtn) return;
-
-  // Inject translations 💪
-  titleEl.textContent = t.monday_modal_title;
-  descEl.textContent = t.monday_modal_description;
-  copyBtn.textContent = t.monday_modal_copy_btn;
-
-  codeEl.value = signatureHtml.trim();
-
-  modal.classList.remove("hidden");
-  modal.setAttribute("aria-hidden", "false");
-
-  const handleClose = () => {
-    modal.classList.add("hidden");
-    modal.setAttribute("aria-hidden", "true");
-    closeBtn.removeEventListener("click", handleClose);
-    modal.removeEventListener("click", handleBackdropClick);
-    document.removeEventListener("keydown", handleEsc);
-  };
-
-  const handleCopy = async () => {
-    const ok = await copyToClipboard(signatureHtml);
-    showToast(
-      ok ? t.monday_copy_success : "Error copying!",
-      ok ? "success" : "error"
-    );
-  };
-
-  const handleBackdropClick = (e) => e.target === modal && handleClose();
-  const handleEsc = (e) => e.key === "Escape" && handleClose();
-
-  copyBtn.addEventListener("click", handleCopy);
-  closeBtn.addEventListener("click", handleClose);
-  modal.addEventListener("click", handleBackdropClick);
-  document.addEventListener("keydown", handleEsc);
-}
-
-function downloadHtmlFile(html, filename = "prognosis-signature.html") {
-  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
-
-async function copyToClipboard(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    return false;
-  }
 }
 
 // ===========================
@@ -435,35 +210,6 @@ toStep4Btn?.addEventListener("click", () => {
   }
 });
 
-function showThankYouPopup() {
-  const popup = document.getElementById("thankYouPopup");
-  const msg = document.getElementById("thankYouMessage");
-  const t = translations[window.currentLang || "gr"];
-
-  msg.textContent = t.finished_thanks;
-  popup.classList.remove("hidden");
-  popup.setAttribute("aria-hidden", "false");
-
-  // 🎉 Confetti burst
-  const container = popup.querySelector(".confetti-container");
-  container.innerHTML = "";
-
-  const colors = ["#ed6900", "#001489", "#f6a86e", "#ffdd55", "#36c"];
-  for (let i = 0; i < 22; i++) {
-    const p = document.createElement("div");
-    p.className = "confetti-piece";
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.background = colors[Math.floor(Math.random() * colors.length)];
-    p.style.animationDuration = 1 + Math.random() * 1.4 + "s";
-    container.appendChild(p);
-  }
-
-  setTimeout(() => {
-    popup.classList.add("hidden");
-    popup.setAttribute("aria-hidden", "true");
-  }, 2400);
-}
-
 // ===========================
 // Final action (depends on platform)
 // ===========================
@@ -511,6 +257,31 @@ document.addEventListener("language-changed", () => {
 
   if (window.selectedPlatform === "monday") {
     renderMondayStep4(window.signatureHtml, t);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggleBtn");
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    root.setAttribute("data-theme", savedTheme);
+    updateIcon(savedTheme);
+  }
+
+  btn.addEventListener("click", () => {
+    const current = root.getAttribute("data-theme");
+    const newTheme = current === "dark" ? "light" : "dark";
+
+    root.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    updateIcon(newTheme);
+  });
+
+  function updateIcon(theme) {
+    btn.textContent = theme === "dark" ? "☀️" : "🌙";
   }
 });
 

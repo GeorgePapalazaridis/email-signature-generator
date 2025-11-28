@@ -1,0 +1,80 @@
+/* ===== Monday HTML Clipboard Modal ===== */
+
+.clipboard-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35); /* stays raw: overlay */
+}
+
+.clipboard-modal.hidden {
+  display: none;
+}
+
+.clipboard-modal-dialog {
+  position: relative;
+  background: var(--color-surface-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg) var(--space-md) var(--space-sm);
+  max-width: 720px;
+  width: calc(100% - 32px);
+  box-shadow: 0 14px 35px var(--shadow-medium);
+  border: var(--border-width) solid var(--color-border-light);
+  font-family: var(--font-family-base);
+}
+
+.clipboard-modal-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.clipboard-modal-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: var(--space-sm) 0;
+}
+
+.clipboard-modal-code {
+  width: 100%;
+  min-height: 260px;
+  max-height: 420px;
+  font-family: "Menlo", "Consolas", "Courier New", monospace;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-base);
+  padding: var(--space-sm);
+  border-radius: var(--border-radius-md);
+  border: var(--border-width) solid var(--color-border-light);
+  resize: vertical;
+  box-sizing: border-box;
+  background: var(--color-surface-tertiary);
+  color: var(--color-text-primary);
+  white-space: pre;
+  overflow: auto;
+}
+
+.clipboard-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-xxs);
+}
+
+.clipboard-close-btn {
+  position: absolute;
+  top: var(--space-xxs);
+  right: var(--space-md);
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-normal);
+}
+
+.clipboard-close-btn:hover {
+  color: var(--color-text-primary);
+}

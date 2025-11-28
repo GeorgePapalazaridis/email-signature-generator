@@ -1,0 +1,59 @@
+/* ===============================
+     🧱 FORM ELEMENTS
+   =============================== */
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-xxs);
+}
+
+label.required::after {
+  content: " *";
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-sm);
+  border: var(--border-width) solid var(--color-border-light);
+  border-radius: var(--border-radius-sm);
+  background: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  transition: border var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus {
+  border-color: var(--color-brand-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-brand-accent) 25%, transparent);
+}
+
+input::placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ===============================
+       ⚙️ RESPONSIVE & ZOOM STABILITY FIX
+   =============================== */
+form {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+h2#titleHeading,
+p#subtitleText {
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.35;
+}

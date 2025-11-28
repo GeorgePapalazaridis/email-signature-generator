@@ -6,13 +6,13 @@
   top: var(--space-md);
   right: var(--space-lg);
   background-color: var(--color-success);
-  color: var(--color-white);
+  color: var(--color-text-inverse);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--border-radius-md);
   font-size: var(--font-size-sm);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 10px var(--shadow-medium);
   opacity: 0;
-  transform: translateY(-0.9375rem); /* 15px */
+  transform: translateY(-0.9375rem);
   animation: toastIn var(--transition-normal) both;
   z-index: 9999;
 }
@@ -22,10 +22,12 @@
    =============================== */
 .toast-success {
   background-color: var(--color-success);
+  color: var(--color-text-inverse);
 }
 
 .toast-error {
   background-color: var(--color-error);
+  color: var(--color-text-inverse);
 }
 
 /* ===============================

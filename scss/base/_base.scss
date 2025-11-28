@@ -1,0 +1,86 @@
+/* ===============================
+   🧩 GLOBAL LAYOUT & TYPOGRAPHY
+   =============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  max-width: var(--max-width-body);
+  margin: var(--space-xl) auto;
+  padding: var(--space-sm) var(--space-md);
+  line-height: var(--line-height-base);
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  border: var(--border-width) solid var(--color-border-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 3px 10px var(--shadow-soft);
+  transition: box-shadow var(--transition-slow);
+
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+
+  min-width: 500px;
+  overflow-x: auto;
+}
+
+body:hover {
+  box-shadow: 0 6px 18px var(--shadow-medium);
+}
+
+main {
+  transform: translateY(-0.5rem);
+}
+
+/* Headings */
+h1#titleHeading {
+  color: var(--color-brand-accent);
+  text-align: center;
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xxl);
+  font-size: clamp(1.2rem, 2vw + 0.7rem, 1.6rem);
+}
+
+h2#titleHeading {
+  color: var(--color-brand-accent);
+  text-align: center;
+  font-size: clamp(1.1rem, 2vw + 0.7rem, 1.4rem);
+  margin: 0.25rem 0 0.5rem 0;
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+}
+
+p#subtitleText {
+  text-align: center;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+  line-height: 1.45;
+}
+
+/* ===============================
+       ── DIVIDER ──
+   =============================== */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  width: 80%;
+  margin: var(--space-xs) auto var(--space-sm);
+}
+
+/* ===============================
+       📱 RESPONSIVE
+   =============================== */
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-md);
+    margin: var(--space-md) auto;
+  }
+
+  hr {
+    width: 90%;
+  }
+}

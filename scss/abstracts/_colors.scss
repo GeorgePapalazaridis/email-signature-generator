@@ -56,6 +56,9 @@
 
 /* DARK MODE (DRAFT) */
 :root[data-theme="dark"] {
+  --color-brand-accent: #58a6ff;
+  --color-brand-accent-light: #79c0ff;
+
   --color-text-primary: #e6e6e6;
   --color-text-secondary: #c8c8c8;
   --color-text-muted: #9a9a9a;

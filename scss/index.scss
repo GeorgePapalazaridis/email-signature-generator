@@ -1,6 +1,3 @@
-/* ===============================
-   🌐 INDEX (entry point)
-   =============================== */
 /* ===================================
    SCSS Entry Point
    =================================== */
@@ -11,9 +8,11 @@
 @use "./helpers/_animations" as *;
 
 /* 2️⃣ Global layout & structure */
+@use "./base/base" as *;
 @use "./base/_layout" as *;
 
 /* 3️⃣ Reusable Components */
+@use "./components/header" as *;
 @use "./components/_buttons" as *;
 @use "./components/_form" as *;
 @use "./components/_preview" as *;

@@ -1,7 +1,4 @@
 @charset "UTF-8";
-/* ===============================
-   🌐 INDEX (entry point)
-   =============================== */
 /* ===================================
    SCSS Entry Point
    =================================== */
@@ -99,6 +96,8 @@
 
 /* DARK MODE (DRAFT) */
 :root[data-theme=dark] {
+  --color-brand-accent: #58a6ff; /* Soft, clear blue for dark backgrounds */
+  --color-brand-accent-light: #79c0ff; /* Hover/active state */
   --color-text-primary: #e6e6e6;
   --color-text-secondary: #c8c8c8;
   --color-text-muted: #9a9a9a;
@@ -205,14 +204,15 @@ body {
   min-height: 90vh;
   display: flex;
   flex-direction: column;
+  min-width: 500px;
+  overflow-x: auto;
 }
 
 body:hover {
   box-shadow: 0 6px 18px var(--shadow-medium);
 }
 
-main,
-.logo {
+main {
   transform: translateY(-0.5rem);
 }
 
@@ -242,6 +242,28 @@ p#subtitleText {
   line-height: 1.45;
 }
 
+/* ===============================
+       ── DIVIDER ──
+   =============================== */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  width: 80%;
+  margin: var(--space-xs) auto var(--space-sm);
+}
+
+/* ===============================
+       📱 RESPONSIVE
+   =============================== */
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-md);
+    margin: var(--space-md) auto;
+  }
+  hr {
+    width: 90%;
+  }
+}
 /* ===============================
        🌐 HEADER BAR
    =============================== */
@@ -276,21 +298,6 @@ p#subtitleText {
   justify-content: center;
 }
 
-#themeToggleBtn {
-  font-size: 1.35rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0.25rem;
-  transition: transform 0.25s ease, opacity 0.3s ease;
-  opacity: 0.9;
-}
-
-#themeToggleBtn:hover {
-  transform: scale(1.15);
-  opacity: 1;
-}
-
 /* Language section */
 .header-lang {
   display: flex;
@@ -319,34 +326,6 @@ p#subtitleText {
 
 .header-lang select:hover {
   border-color: var(--color-brand-accent);
-}
-
-/* ===============================
-       🧬 LOGO
-   =============================== */
-.logo {
-  text-align: center;
-  margin: 0 0 var(--space-md) 0;
-}
-
-.logo img {
-  max-width: 260px;
-  height: auto;
-  transition: transform var(--transition-slow);
-}
-
-.logo img:hover {
-  transform: scale(1.03);
-}
-
-/* ===============================
-       ── DIVIDER ──
-   =============================== */
-hr {
-  border: none;
-  border-top: 1px solid var(--color-border-light);
-  width: 80%;
-  margin: var(--space-xs) auto var(--space-sm);
 }
 
 /* ===============================
@@ -455,18 +434,97 @@ hr {
        📱 RESPONSIVE
    =============================== */
 @media (max-width: 480px) {
-  body {
-    padding: var(--space-md);
-    margin: var(--space-md) auto;
-  }
-  hr {
-    width: 90%;
-  }
   .help-cta {
     max-width: 100%;
   }
 }
 /* 3️⃣ Reusable Components */
+/* ===============================
+   🌗 THEME TOGGLE BUTTON
+=============================== */
+#themeToggleBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.35rem;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease, opacity 0.3s ease;
+  opacity: 0.95;
+}
+
+/* Light Mode */
+[data-theme=light] #themeToggleBtn {
+  background: rgba(0, 0, 0, 0.05); /* subtle gray */
+}
+
+/* Dark Mode */
+[data-theme=dark] #themeToggleBtn {
+  background: rgba(255, 255, 255, 0.06); /* subtle white tint */
+}
+
+/* Hover */
+#themeToggleBtn:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* Active */
+#themeToggleBtn:active {
+  transform: scale(0.92);
+}
+
+/* ===============================
+   🧬 LOGO
+=============================== */
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+  transform: translateY(-0.5rem);
+}
+
+.logo-container {
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-md);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  justify-content: center;
+  transition: background 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover */
+.logo-container img {
+  max-width: 100%;
+  height: auto;
+  transition: transform var(--transition-slow);
+}
+
+.logo-container img:hover {
+  transform: scale(1.04);
+}
+
+/* Light Theme */
+[data-theme=light] .logo-container {
+  background: var(--color-surface-primary);
+}
+
+/* Dark Theme */
+[data-theme=dark] .logo-container {
+  background: #2e2e2e;
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme=dark] .logo-container img {
+  filter: brightness(1.25) contrast(1.08);
+}
+
 /* ===============================
        🔘 UNIFIED BUTTON SYSTEM
 =============================== */

@@ -41,8 +41,13 @@ export const translations = {
       "Ακολούθησε τις παρακάτω οδηγίες για να εγκαταστήσεις την υπογραφή σου στην επιλεγμένη πλατφόρμα.",
 
     // === PLATFORM CARDS ===
-    platformOutlookTitle: "Microsoft Outlook",
-    platformOutlookDesc: "Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet.",
+    platformOutlookTitle: "Microsoft Outlook (προτείνεται)",
+    platformOutlookDesc:
+      "Προτείνεται — εισαγωγή υπογραφής ως εικόνα για τέλεια απεικόνιση στο Outlook.",
+
+    platformOutlookLegacyTitle: "Outlook (Legacy)",
+    platformOutlookLegacyDesc:
+      "Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet (παλαιή μέθοδος)",
 
     platformThunderbirdTitle: "Thunderbird",
     platformThunderbirdDesc: "Λήψη αρχείου .html για import.",
@@ -111,6 +116,10 @@ export const translations = {
 
     finished_thanks:
       "🎉 Ευχαριστούμε που χρησιμοποίησες τον Signature Generator!",
+
+    platformOutlookLegacyTitle: "Outlook (Legacy)",
+    platformOutlookLegacyDesc:
+      "Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet (παλαιή μέθοδος)",
   },
 
   en: {
@@ -150,8 +159,13 @@ export const translations = {
       "Follow the instructions below to correctly install your signature on the selected platform.",
 
     // === PLATFORM CARDS ===
-    platformOutlookTitle: "Microsoft Outlook",
-    platformOutlookDesc: "Automatic signature insertion via Bookmarklet.",
+    platformOutlookTitle: "Microsoft Outlook (recommended)",
+    platformOutlookDesc:
+      "Recommended — insert your signature as an image for perfect visual accuracy in Outlook.",
+
+    platformOutlookLegacyTitle: "Outlook (Legacy)",
+    platformOutlookLegacyDesc:
+      "Automatic signature insertion via Bookmarklet (old method)",
 
     platformThunderbirdTitle: "Thunderbird",
     platformThunderbirdDesc: "Download .html file for import.",
@@ -217,6 +231,9 @@ export const translations = {
     monday_copy_success: "✂️ Signature HTML copied!",
 
     finished_thanks: "🎉 Thank you for using the Signature Generator!",
+
+    platformOutlookLegacyTitle: "Outlook (Legacy)",
+    platformOutlookLegacyDesc: "Auto-insert via Bookmarklet (old method)",
   },
 };
 
@@ -293,6 +310,11 @@ export function setLanguage(lang) {
   document.getElementById("outlookTitle").textContent = t.platformOutlookTitle;
   document.getElementById("outlookDesc").textContent = t.platformOutlookDesc;
 
+  document.getElementById("outlookLegacyTitle").textContent =
+    t.platformOutlookLegacyTitle;
+  document.getElementById("outlookLegacyDesc").textContent =
+    t.platformOutlookLegacyDesc;
+
   document.getElementById("thunderTitle").textContent =
     t.platformThunderbirdTitle;
   document.getElementById("thunderDesc").textContent =
@@ -300,6 +322,11 @@ export function setLanguage(lang) {
 
   document.getElementById("mondayTitle").textContent = t.platformMondayTitle;
   document.getElementById("mondayDesc").textContent = t.platformMondayDesc;
+
+  document.getElementById("outlookLegacyTitle").textContent =
+    t.platformOutlookLegacyTitle;
+  document.getElementById("outlookLegacyDesc").textContent =
+    t.platformOutlookLegacyDesc;
 
   // Help link
   const helpLink = document.getElementById("helpLink");

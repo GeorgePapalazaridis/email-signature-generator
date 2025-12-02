@@ -7,10 +7,12 @@ import {
 import { bindDom } from "./dom-bindings.js";
 import { showToast, showThankYouPopup } from "./notifications.js";
 import {
-  renderOutlookStep4,
+  renderOutlookStep4_Image,
+  renderOutlookStep4_Legacy, // legacy bookmarklet
   renderThunderbirdStep4,
   renderMondayStep4,
 } from "./step4-renderers.js";
+import { formatPhoneNumber } from "./utils/phone-formatter.js";
 
 // ===========================
 // DOM Refs (new 3-step wizard)
@@ -84,16 +86,22 @@ function buildSignatureHtml() {
   const name = nameInput.value.trim();
   const title = titleInput.value.trim();
   const address = addressInput.value || "Farsalon 153, Larissa, 41335 - Greece";
-  const mobile = mobileInput.value.trim();
-  const phone = phoneInput.value.trim() || "+30 2410 623 922";
+
+  const mobile = formatPhoneNumber(mobileInput.value.trim());
+  const phone = formatPhoneNumber(
+    phoneInput.value.trim() || "+30 2410 623 922"
+  );
 
   return buildSignature({
-    name,
-    title,
-    address,
-    phone,
-    mobile,
-    logoBase64,
+    platform: SignaturePlatform.HTML_STANDARD,
+    data: {
+      name,
+      title,
+      address,
+      phone,
+      mobile,
+      logoBase64,
+    },
   });
 }
 
@@ -119,7 +127,8 @@ toStep2Btn?.addEventListener("click", () => {
   }
 
   window.signatureHtml = buildSignature({
-    platform: SignaturePlatform.OUTLOOK,
+    platform: SignaturePlatform.HTML_STANDARD,
+
     data: {
       name: nameInput.value.trim(),
       title: titleInput.value.trim(),
@@ -150,8 +159,17 @@ backToStep1Btn?.addEventListener("click", () => {
 // Step 2 -> Step 3 (Platform)
 // ===========================
 toStep3Btn?.addEventListener("click", () => {
-  // safety: if user somehow skipped build
   if (!window.signatureHtml) window.signatureHtml = buildSignatureHtml();
+
+  // === Default Outlook Image selection ===
+  window.selectedPlatform = SignaturePlatform.OUTLOOK_IMAGE;
+
+  platformCards.forEach((c) => c.classList.remove("selected"));
+  const defaultCard = document.querySelector('[data-platform="outlook_image"]');
+  if (defaultCard) defaultCard.classList.add("selected");
+
+  if (toStep4Btn) toStep4Btn.disabled = false;
+
   showStep(step3);
 });
 
@@ -197,8 +215,25 @@ toStep4Btn?.addEventListener("click", () => {
 
   const t = translations[window.currentLang || "gr"];
 
-  if (window.selectedPlatform === "outlook") {
-    renderOutlookStep4(window.signatureHtml, t);
+  if (window.selectedPlatform === SignaturePlatform.OUTLOOK_IMAGE) {
+    // 🖼 Render UI
+    renderOutlookStep4_Image(window.signatureHtml, t);
+
+    // 🖼 Bind PNG export button
+    const downloadBtn = document.getElementById("outlookImageDownloadBtn");
+    if (downloadBtn) {
+      downloadBtn.onclick = async () => {
+        await exportSignaturePng({
+          html: window.signatureHtml,
+          fileName: "prognosis-signature.png",
+        });
+      };
+    }
+  }
+
+  if (window.selectedPlatform === SignaturePlatform.OUTLOOK_LEGACY) {
+    // 📑 Παλαιός τρόπος — bookmarklet
+    renderOutlookStep4_Legacy(window.signatureHtml, t);
   }
 
   if (window.selectedPlatform === "thunderbird") {
@@ -247,8 +282,12 @@ document.addEventListener("language-changed", () => {
 
   const t = translations[window.currentLang];
 
-  if (window.selectedPlatform === "outlook") {
-    renderOutlookStep4(window.signatureHtml, t);
+  if (window.selectedPlatform === SignaturePlatform.OUTLOOK_IMAGE) {
+    renderOutlookStep4_Image(window.signatureHtml, t);
+  }
+
+  if (window.selectedPlatform === SignaturePlatform.OUTLOOK_LEGACY) {
+    renderOutlookStep4_Legacy(window.signatureHtml, t);
   }
 
   if (window.selectedPlatform === "thunderbird") {
@@ -300,4 +339,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("App initialized ✅");
   console.log("Logo base64 preview:", logoBase64.slice(0, 50) + "...");
+});
+
+phoneInput?.addEventListener("blur", () => {
+  const formatted = formatPhoneNumber(phoneInput.value);
+  phoneInput.value = formatted;
+});
+
+mobileInput?.addEventListener("blur", () => {
+  const formatted = formatPhoneNumber(mobileInput.value);
+  mobileInput.value = formatted;
 });

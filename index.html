@@ -122,11 +122,18 @@
 
     <div id="platformCards" class="platform-cards">
 
-      <!-- Outlook -->
-      <div class="platform-card" data-platform="outlook">
-        <div class="platform-icon">📧</div>
+      <!-- Outlook IMAGE (recommended) -->
+      <div class="platform-card" data-platform="outlook_image">
+        <div class="platform-icon">🖼</div>
         <div id="outlookTitle" class="platform-title"></div>
         <div id="outlookDesc" class="platform-desc"></div>
+      </div>
+
+      <!-- Outlook LEGACY (bookmarklet) -->
+      <div class="platform-card" data-platform="outlook_legacy">
+        <div class="platform-icon">📧</div>
+        <div id="outlookLegacyTitle" class="platform-title"></div>
+        <div id="outlookLegacyDesc" class="platform-desc"></div>
       </div>
 
       <!-- Thunderbird -->
@@ -222,6 +229,7 @@
 
   <!-- JS entry point -->
   <script src="js/utils/loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script type="module" src="./js/index.js"></script>
 
   <!-- Fallback for GitHub Pages (subpath-safe) -->

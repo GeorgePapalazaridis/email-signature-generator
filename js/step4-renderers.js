@@ -1,4 +1,5 @@
 import { showToast } from "./notifications.js";
+import { exportSignaturePng } from "./utils/signature-image-export.js";
 
 /**
  * Bookmarklet creator
@@ -30,7 +31,7 @@ export function makeBookmarklet(signature, t) {
 /**
  * Outlook
  */
-export function renderOutlookStep4(signatureHtml, t) {
+export function renderOutlookStep4_Legacy(signatureHtml, t) {
   const container = document.getElementById("step4Content");
   if (!container) return;
 
@@ -229,4 +230,101 @@ async function copyToClipboard(text) {
   } catch {
     return false;
   }
+}
+
+// 🖼 ΝΕΟ — Outlook Image based Flow (PNG export)
+export function renderOutlookStep4_Image(signatureHtml, t) {
+  const container = document.getElementById("step4Content");
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="outlook-image-flow">
+      <h3 class="step4-subheading">
+        ${t?.outlook_image_step_title || "Download your signature as an image"}
+      </h3>
+
+      <p class="step4-intro">
+        ${
+          t?.outlook_image_step_intro ||
+          "We’ll export your signature as a single PNG image, so Outlook keeps it pixel-perfect in both Light and Dark mode."
+        }
+      </p>
+
+      <div class="signature-preview-block">
+        <h4 class="signature-preview-title">
+          ${t?.previewTitle || "Signature Preview"}
+        </h4>
+        <div class="signature-wrapper">
+          ${signatureHtml}
+        </div>
+      </div>
+
+      <div class="outlook-image-actions">
+        <button id="downloadSignatureImageBtn" class="btn btn-primary" type="button">
+          ${t?.outlook_image_download_btn || "Download Signature as PNG"}
+        </button>
+      </div>
+
+      <div class="outlook-image-steps">
+        <ol>
+          <li>
+            ${
+              t?.outlook_image_step1 ||
+              "Click “Download Signature as PNG” and save the file on your computer."
+            }
+          </li>
+          <li>
+            ${
+              t?.outlook_image_step2 ||
+              "Open Outlook Web → Settings → Mail → Compose and Reply → Email Signature."
+            }
+          </li>
+          <li>
+            ${
+              t?.outlook_image_step3 ||
+              "Create a new signature and insert the PNG image from your computer."
+            }
+          </li>
+        </ol>
+      </div>
+    </div>
+  `;
+
+  const downloadBtn = document.getElementById("downloadSignatureImageBtn");
+  if (!downloadBtn) return;
+
+  const originalLabel =
+    t?.outlook_image_download_btn || "Download Signature as PNG";
+  const loadingLabel = t?.outlook_image_downloading || "Generating image…";
+
+  downloadBtn.addEventListener("click", async () => {
+    try {
+      downloadBtn.disabled = true;
+      downloadBtn.textContent = loadingLabel;
+
+      await exportSignaturePng({
+        html: signatureHtml,
+        fileName: "prognosis-email-signature.png",
+      });
+
+      if (typeof showToast === "function") {
+        showToast(
+          t?.outlook_image_download_success || "✅ Signature image downloaded!",
+          "success"
+        );
+      }
+    } catch (err) {
+      console.error("Error exporting signature PNG", err);
+      if (typeof showToast === "function") {
+        showToast(
+          t?.outlook_image_download_error ||
+            "⚠️ Could not generate the image. Please try again.",
+          "error"
+        );
+      }
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = originalLabel;
+    }
+  });
 }

@@ -1,4 +1,4 @@
-import { allowOnlyPhoneChars } from "../js/utils.js";
+import { allowOnlyPhoneChars } from "../js/utils/phone-validator.js";
 
 export function bindDom({ onLanguageChange }) {
   const mobileInput = document.getElementById("mobile");

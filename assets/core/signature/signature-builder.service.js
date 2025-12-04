@@ -1,6 +1,6 @@
 import { buildOutlookSignatureWebV3 } from "./signature-outlook-web-v3.template.js";
 import { buildHtmlStandardSignature } from "./signature-html-standard.template.js";
-import { formatPhoneNumber } from "../../../../js/utils/phone-formatter.js";
+import { formatPhoneNumber } from "../../../js/utils/phone-formatter.js";
 
 export const SignaturePlatform = {
   OUTLOOK: "outlook",

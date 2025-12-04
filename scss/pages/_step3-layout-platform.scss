@@ -1,5 +1,5 @@
 /* ===============================
-   STEP 2 — CARD FIXES
+   STEP 3 — PLATFORM CARDS
 =============================== */
 
 .platform-cards {
@@ -20,12 +20,10 @@
   cursor: pointer;
   transition: all var(--transition-normal);
 
-  display: grid;
-  grid-template-columns: 48px auto;
-  grid-template-rows: auto auto;
-  column-gap: var(--space-md);
-  row-gap: var(--space-xxs);
-  align-items: center;
+  /* NEW stable layout */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
 }
 
 .platform-card:hover {
@@ -44,22 +42,60 @@
 }
 
 .platform-icon {
-  grid-row: span 2;
+  flex-shrink: 0;
   font-size: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Group text nicely without weird breaks */
+.platform-title,
+.platform-desc {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin: 0;
+}
+
 .platform-title {
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--color-text-primary);
-  margin: 0;
+  margin-top: -2px; /* slight alignment */
 }
 
 .platform-desc {
   font-size: var(--font-size-sm);
   line-height: 1.35;
   color: var(--color-text-muted);
+}
+
+/* ===============================
+   🎯 FIX: Natural text wrapping + layout stability
+   =============================== */
+
+.platform-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+/* Ensure icon remains fixed-sized */
+.platform-icon {
+  flex-shrink: 0;
+}
+
+/* Smooth text wrapping, title + desc grouped naturally */
+.platform-title,
+.platform-desc {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin: 0; /* in case any UA adds margin */
+}
+
+/* VISUAL DETAIL: Give tiny vertical alignment correction */
+.platform-title {
+  margin-top: -2px;
 }

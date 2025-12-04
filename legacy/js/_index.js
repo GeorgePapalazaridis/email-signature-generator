@@ -8,7 +8,6 @@ import { bindDom } from "./dom-bindings.js";
 import { showToast, showThankYouPopup } from "./notifications.js";
 import {
   renderOutlookStep4_Image,
-  renderOutlookStep4_Legacy, // legacy bookmarklet
   renderThunderbirdStep4,
   renderMondayStep4,
 } from "./step4-renderers.js";
@@ -45,12 +44,6 @@ const previewBox = document.getElementById("preview-box");
 
 // Platform cards (Step 3)
 const platformCards = document.querySelectorAll(".platform-card");
-
-// Optional old/final DOM (if we decide to keep them later)
-const bookmarkletContainer = document.getElementById("bookmarklet-container");
-const bookmarkletLink = document.getElementById("bookmarklet");
-const dragTextEl = document.getElementById("dragText");
-const instructionEl = document.getElementById("instructionText");
 
 // ===========================
 // State
@@ -273,10 +266,6 @@ toStep4Btn?.addEventListener("click", () => {
     }
   }
 
-  if (window.selectedPlatform === SignaturePlatform.OUTLOOK) {
-    renderOutlookStep4_Legacy(window.signatureHtml, t);
-  }
-
   if (window.selectedPlatform === "thunderbird") {
     renderThunderbirdStep4(window.signatureHtml, t);
   }
@@ -328,10 +317,6 @@ document.addEventListener("language-changed", () => {
   } else {
     if (!window.signatureHtml) {
       window.signatureHtml = buildSignatureHtml();
-    }
-
-    if (window.selectedPlatform === SignaturePlatform.OUTLOOK) {
-      renderOutlookStep4_Legacy(window.signatureHtml, t);
     }
 
     if (window.selectedPlatform === "thunderbird") {

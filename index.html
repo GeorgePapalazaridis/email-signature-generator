@@ -28,195 +28,212 @@
 </head>
 
 <body>
-  <!-- Loader -->
-  <div id="loader" class="loader hidden">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- ====== LANGUAGE SELECTOR ====== -->
-  <div class="header-bar">
-
-    <div class="header-theme-toggle">
-      <button id="themeToggleBtn" aria-label="Toggle theme">
-        🌗
-      </button>
+  <div class="app-container">
+    <!-- Loader -->
+    <div id="loader" class="loader hidden">
+      <div class="spinner"></div>
     </div>
 
+    <!-- ====== LANGUAGE SELECTOR ====== -->
+    <div class="header-bar">
 
-    <div class="header-lang">
-      <label for="lang">🌐 Language:</label>
-      <select id="lang">
-        <option value="gr" selected>🇬🇷 Ελληνικά</option>
-        <option value="en">🇬🇧 English</option>
-      </select>
-    </div>
-
-  </div>
-
-
-  <!-- ====== LOGO ====== -->
-  <div class="logo">
-    <div class="logo-container">
-      <a href="https://www.prognosis-biotech.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
-          alt="Prognosis Biotech Logo" />
-      </a>
-    </div>
-  </div>
-
-
-  <hr />
-
-  <!-- ====== MAIN CONTENT ====== -->
-  <h1 id="titleHeading"></h1>
-
-  <!-- ====== FORM FIELDS ====== -->
-  <section id="step1" class="step-section active">
-    <h2 class="step-header" id="step1Header"></h2>
-
-    <p id="step1Subtitle" class="step-subtitle"></p>
-
-    <form id="signatureForm">
-      <label for="name" id="labelName" class="required"></label>
-      <input id="name" placeholder="π.χ. George Papalazaridis" required />
-
-      <label for="title" id="labelTitle" class="required"></label>
-      <input id="title" placeholder="π.χ. Front End Angular Developer" required />
-
-      <label for="address" id="labelAddress"></label>
-      <input id="address" value="Farsalon 153, Larissa, 41335 - Greece" />
-
-      <label for="mobile" id="labelMobile"></label>
-      <input id="mobile" placeholder="π.χ. +30 6987 331 449" />
-
-      <label for="phone" id="labelPhone"></label>
-      <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
-
-      <button id="toStep2Btn" class="btn btn-primary" type="button" disabled></button>
-    </form>
-  </section>
-
-  <section id="step2" class="step-section" style="display:none;">
-    <h2 id="step2Title" class="step-header"></h2>
-
-    <p id="step2Subtitle" class="step-subtitle"></p>
-
-    <div id="preview-section">
-      <div id="preview-box"></div>
-    </div>
-
-    <div class="step2-actions">
-      <button id="backToStep1" class="btn btn-outline" type="button"></button>
-      <button id="toStep3Btn" class="btn btn-primary" type=" button"></button>
-    </div>
-  </section>
-
-
-  <section id="step3" class="step-section" style="display:none;">
-
-    <!-- Step 3 Title -->
-    <h2 id="step3Title" class="step-header"></h2>
-
-    <!-- Subtitle -->
-    <p id="step3Subtitle" class="step-subtitle"></p>
-
-    <div id="platformCards" class="platform-cards">
-
-      <!-- Outlook IMAGE (recommended) -->
-      <div class="platform-card" data-platform="outlook">
-        <div class="platform-icon">📧</div>
-        <div id="outlookTitle" class="platform-title"></div>
-        <div id="outlookDesc" class="platform-desc"></div>
-      </div>
-
-      <!-- Thunderbird -->
-      <div class="platform-card" data-platform="thunderbird">
-        <div class="platform-icon">🐦</div>
-        <div id="thunderTitle" class="platform-title"></div>
-        <div id="thunderDesc" class="platform-desc"></div>
-      </div>
-
-      <!-- Monday -->
-      <div class="platform-card" data-platform="monday">
-        <div class="platform-icon">🔵</div>
-        <div id="mondayTitle" class="platform-title"></div>
-        <div id="mondayDesc" class="platform-desc"></div>
-      </div>
-
-    </div>
-
-    <!-- Continue + Back buttons -->
-    <div class="step2-actions">
-      <button id="backToStep2" class="btn btn-outline" type="button"></button>
-      <button id="toStep4Btn" class="btn btn-primary" type="button" disabled></button>
-    </div>
-
-  </section>
-
-
-  <!-- ====== STEP 4 — Outlook ====== -->
-  <section id="step4" class="step-section" style="display:none;">
-    <h2 id="step4Title" class="step-header"></h2>
-
-    <p id="step4Subtitle" class="step-subtitle"></p>
-
-    <!-- Dynamic container: Outlook / Thunderbird / Monday -->
-    <div id="step4Content"></div>
-
-    <div class="step4-actions">
-      <button id="backToStep3" class="btn btn-outline" type="button"></button>
-      <button id="finishBtn" class="btn btn-primary" type="button"></button>
-    </div>
-
-  </section>
-
-  <!-- ====== MONDAY HTML CLIPBOARD MODAL ====== -->
-  <div id="mondayClipboardModal" class="clipboard-modal hidden" aria-hidden="true">
-    <div class="clipboard-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mondayClipboardTitle">
-
-      <!-- CLOSE BUTTON (X) -->
-      <button class="clipboard-close-btn" id="mondayClipboardCloseBtn" aria-label="Κλείσιμο">
-        &times;
-      </button>
-
-      <h3 id="mondayClipboardTitle" class="clipboard-modal-title">
-
-      </h3>
-
-      <p id="mondayClipboardDesc" class="clipboard-modal-desc">
-
-      </p>
-
-      <textarea id="mondayClipboardCode" class="clipboard-modal-code" readonly></textarea>
-
-      <div class="clipboard-modal-actions">
-        <button id="mondayClipboardCopyBtn" class="btn btn-info-outline">
-
+      <div class="header-theme-toggle">
+        <button id="themeToggleBtn" aria-label="Toggle theme">
+          🌗
         </button>
       </div>
-    </div>
-  </div>
 
-  <!-- ====== SUCCESS POPUP ====== -->
-  <div id="thankYouPopup" class="thankyou-popup hidden" aria-hidden="true">
-    <div class="thankyou-card">
-      <div class="thankyou-icon">🎉</div>
-      <p id="thankYouMessage"></p>
-    </div>
-    <div class="confetti-container"></div>
-  </div>
 
-  <!-- ====== FOOTER ====== -->
-  <footer class="footer" role="contentinfo">
-    <p class="footer-line1">
-      © 2025 <strong>Prognosis Signature Generator</strong> — Developed by
-    </p>
-    <p class="footer-line2">
-      <a href="https://www.linkedin.com/in/george-papalazaridis-865689120/" target="_blank" rel="noopener noreferrer">
-        <span class="footer-icon">💻</span> George Papalazaridis
-      </a>
-    </p>
-  </footer>
+      <div class="header-lang">
+        <label for="lang">🌐 Language:</label>
+        <select id="lang">
+          <option value="gr" selected>🇬🇷 Ελληνικά</option>
+          <option value="en">🇬🇧 English</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <!-- ====== LOGO ====== -->
+    <div class="logo">
+      <div class="logo-container">
+        <a href="https://www.prognosis-biotech.com" target="_blank" rel="noopener noreferrer">
+          <img src="https://www.prognosis-biotech.com/wp-content/uploads/prognosis-biotech-logo.png"
+            alt="Prognosis Biotech Logo" />
+        </a>
+      </div>
+    </div>
+
+
+    <hr />
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <h1 id="titleHeading"></h1>
+
+    <!-- ====== FORM FIELDS ====== -->
+    <section id="step1" class="step-section active">
+      <h2 class="step-header" id="step1Header"></h2>
+
+      <p id="step1Subtitle" class="step-subtitle"></p>
+
+      <form id="signatureForm" class="form-grid">
+
+        <div class="form-item">
+          <label for="name" id="labelName" class="required"></label>
+          <input id="name" placeholder="π.χ. George Papalazaridis" required />
+        </div>
+
+        <div class="form-item">
+          <label for="title" id="labelTitle" class="required"></label>
+          <input id="title" placeholder="π.χ. Front End Angular Developer" required />
+        </div>
+
+        <div class="form-item full">
+          <label for="address" id="labelAddress"></label>
+          <input id="address" value="Farsalon 153, Larissa, 41335 - Greece" />
+        </div>
+
+        <div class="form-item">
+          <label for="mobile" id="labelMobile"></label>
+          <input id="mobile" placeholder="π.χ. +30 6987 331 449" />
+        </div>
+
+        <div class="form-item">
+          <label for="phone" id="labelPhone"></label>
+          <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
+        </div>
+
+        <div class="form-item full form-actions">
+          <button id="toStep2Btn" class="btn btn-primary" type="button" disabled></button>
+        </div>
+
+      </form>
+
+    </section>
+
+    <section id="step2" class="step-section" style="display:none;">
+      <h2 id="step2Title" class="step-header"></h2>
+
+      <p id="step2Subtitle" class="step-subtitle"></p>
+
+      <div id="preview-section">
+        <div id="preview-box"></div>
+      </div>
+
+      <div class="step2-actions">
+        <button id="backToStep1" class="btn btn-outline" type="button"></button>
+        <button id="toStep3Btn" class="btn btn-primary" type=" button"></button>
+      </div>
+    </section>
+
+
+    <section id="step3" class="step-section" style="display:none;">
+
+      <!-- Step 3 Title -->
+      <h2 id="step3Title" class="step-header"></h2>
+
+      <!-- Subtitle -->
+      <p id="step3Subtitle" class="step-subtitle"></p>
+
+      <div id="platformCards" class="platform-cards">
+
+        <!-- Outlook IMAGE (recommended) -->
+        <div class="platform-card" data-platform="outlook">
+          <div class="platform-icon">📧</div>
+          <div id="outlookTitle" class="platform-title"></div>
+          <div id="outlookDesc" class="platform-desc"></div>
+        </div>
+
+        <!-- Thunderbird -->
+        <div class="platform-card" data-platform="thunderbird">
+          <div class="platform-icon">🐦</div>
+          <div id="thunderTitle" class="platform-title"></div>
+          <div id="thunderDesc" class="platform-desc"></div>
+        </div>
+
+        <!-- Monday -->
+        <div class="platform-card" data-platform="monday">
+          <div class="platform-icon">🔵</div>
+          <div id="mondayTitle" class="platform-title"></div>
+          <div id="mondayDesc" class="platform-desc"></div>
+        </div>
+
+      </div>
+
+      <!-- Continue + Back buttons -->
+      <div class="step2-actions">
+        <button id="backToStep2" class="btn btn-outline" type="button"></button>
+        <button id="toStep4Btn" class="btn btn-primary" type="button" disabled></button>
+      </div>
+
+    </section>
+
+
+    <!-- ====== STEP 4 — Outlook ====== -->
+    <section id="step4" class="step-section" style="display:none;">
+      <h2 id="step4Title" class="step-header"></h2>
+
+      <p id="step4Subtitle" class="step-subtitle"></p>
+
+      <!-- Dynamic container: Outlook / Thunderbird / Monday -->
+      <div id="step4Content"></div>
+
+      <div class="step4-actions">
+        <button id="backToStep3" class="btn btn-outline" type="button"></button>
+        <button id="finishBtn" class="btn btn-primary" type="button"></button>
+      </div>
+
+    </section>
+
+    <!-- ====== MONDAY HTML CLIPBOARD MODAL ====== -->
+    <div id="mondayClipboardModal" class="clipboard-modal hidden" aria-hidden="true">
+      <div class="clipboard-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mondayClipboardTitle">
+
+        <!-- CLOSE BUTTON (X) -->
+        <button class="clipboard-close-btn" id="mondayClipboardCloseBtn" aria-label="Κλείσιμο">
+          &times;
+        </button>
+
+        <h3 id="mondayClipboardTitle" class="clipboard-modal-title">
+
+        </h3>
+
+        <p id="mondayClipboardDesc" class="clipboard-modal-desc">
+
+        </p>
+
+        <textarea id="mondayClipboardCode" class="clipboard-modal-code" readonly></textarea>
+
+        <div class="clipboard-modal-actions">
+          <button id="mondayClipboardCopyBtn" class="btn btn-info-outline">
+
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SUCCESS POPUP ====== -->
+    <div id="thankYouPopup" class="thankyou-popup hidden" aria-hidden="true">
+      <div class="thankyou-card">
+        <div class="thankyou-icon">🎉</div>
+        <p id="thankYouMessage"></p>
+      </div>
+      <div class="confetti-container"></div>
+    </div>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer" role="contentinfo">
+      <p class="footer-line1">
+        © 2025 <strong>Prognosis Signature Generator</strong> — Developed by
+      </p>
+      <p class="footer-line2">
+        <a href="https://www.linkedin.com/in/george-papalazaridis-865689120/" target="_blank" rel="noopener noreferrer">
+          <span class="footer-icon">💻</span> George Papalazaridis
+        </a>
+      </p>
+    </footer>
+  </div>
 
 
 

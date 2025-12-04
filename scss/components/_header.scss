@@ -45,13 +45,12 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: var(--space-xl);
   transform: translateY(-0.5rem);
 }
 
 .logo-container {
   width: 100%;
-  max-width: 420px;
+  max-width: 380px;
   padding: var(--space-md);
   border-radius: var(--border-radius-lg);
   display: flex;

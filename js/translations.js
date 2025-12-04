@@ -41,7 +41,7 @@ export const translations = {
       "Ακολούθησε τις παρακάτω οδηγίες για να εγκαταστήσεις την υπογραφή σου στην επιλεγμένη πλατφόρμα.",
 
     // === PLATFORM CARDS ===
-    platformOutlookTitle: "Microsoft Outlook (προτείνεται)",
+    platformOutlookTitle: "Microsoft Outlook",
     platformOutlookDesc:
       "Προτείνεται — εισαγωγή υπογραφής ως εικόνα για τέλεια απεικόνιση στο Outlook.",
 
@@ -168,7 +168,7 @@ export const translations = {
       "Follow the instructions below to correctly install your signature on the selected platform.",
 
     // === PLATFORM CARDS ===
-    platformOutlookTitle: "Microsoft Outlook (recommended)",
+    platformOutlookTitle: "Microsoft Outlook",
     platformOutlookDesc:
       "Recommended — insert your signature as an image for perfect visual accuracy in Outlook.",
 

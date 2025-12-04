@@ -114,6 +114,17 @@
 }
 
 /* ===============================
+       🧑‍💻 Wrapper around the full wizard content 
+   =============================== */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: auto;
+  margin: 0 auto;
+  padding-inline: var(--space-md);
+}
+
+/* ===============================
        🧑‍💻 FOOTER
    =============================== */
 .footer {
@@ -193,5 +204,13 @@
 
   .footer {
     padding: var(--space-xl) 0 var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .platform-cards,
+  form.form-grid {
+    max-width: 360px;
+    margin-inline: auto;
   }
 }

@@ -167,10 +167,31 @@
 }
 
 /* ===============================
-       📱 RESPONSIVE
+   📱 RESPONSIVE – HEADER & FOOTER
    =============================== */
-@media (max-width: 480px) {
+
+@media (max-width: 1024px) {
+  .header-bar {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-bar {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .header-lang {
+    align-items: center;
+  }
+
   .help-cta {
     max-width: 100%;
+  }
+
+  .footer {
+    padding: var(--space-xl) 0 var(--space-md);
   }
 }

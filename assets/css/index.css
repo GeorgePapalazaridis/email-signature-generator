@@ -253,15 +253,40 @@ hr {
 }
 
 /* ===============================
-       📱 RESPONSIVE
+   📱 RESPONSIVE – BASE LAYOUT
    =============================== */
-@media (max-width: 480px) {
+/* Tablet */
+@media (max-width: 1024px) {
   body {
+    max-width: 900px;
     padding: var(--space-md);
+  }
+}
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    max-width: 100%;
     margin: var(--space-md) auto;
+    padding: var(--space-sm);
+    border-radius: 0;
+    box-shadow: none;
+    min-width: 0;
   }
   hr {
-    width: 90%;
+    width: 95%;
+  }
+  main {
+    transform: none;
+  }
+}
+/* Very small devices */
+@media (max-width: 480px) {
+  h1#titleHeading {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+  }
+  p#subtitleText {
+    font-size: var(--font-size-sm);
   }
 }
 /* ===============================
@@ -431,11 +456,27 @@ hr {
 }
 
 /* ===============================
-       📱 RESPONSIVE
+   📱 RESPONSIVE – HEADER & FOOTER
    =============================== */
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
+  .header-bar {
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .header-bar {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+  .header-lang {
+    align-items: center;
+  }
   .help-cta {
     max-width: 100%;
+  }
+  .footer {
+    padding: var(--space-xl) 0 var(--space-md);
   }
 }
 /* 3️⃣ Reusable Components */
@@ -491,7 +532,7 @@ hr {
 
 .logo-container {
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   padding: var(--space-md);
   border-radius: var(--border-radius-lg);
   display: flex;

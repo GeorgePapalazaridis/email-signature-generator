@@ -247,14 +247,3 @@ document.addEventListener("language-changed", () => {
   }
 });
 
-// ===========================
-// Init
-// ===========================
-document.addEventListener("DOMContentLoaded", () => {
-  window.currentLang = "gr";
-  setLanguage("gr");
-  bindDom({ onLanguageChange: (lang) => setLanguage(lang) });
-
-  updateToStep2State();
-  console.log("🚀 Signature Wizard Active");
-});

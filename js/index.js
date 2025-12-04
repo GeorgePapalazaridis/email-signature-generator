@@ -3,6 +3,9 @@ import { bindDom } from "./dom-bindings.js";
 import "./signature-wizard.js"; // Wizard logic here
 import { logoBase64 } from "../assets/base64/logo-base64.js";
 
+// ===========================
+// Init
+// ===========================
 document.addEventListener("DOMContentLoaded", () => {
   // Default language
   window.currentLang = "gr";

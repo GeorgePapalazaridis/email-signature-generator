@@ -12,8 +12,10 @@ export function buildHtmlStandardSignature({
     <img src="https://www.prognosis-biotech.com/apps/icons/20251008/M.png" alt="Mobile" width="10" height="10"
         style="display:inline-block; vertical-align:middle; margin-right:6px; border:0;">
     <a href="tel:${mobile}" style="
-          font-family:'Montserrat', Arial, Helvetica, sans-serif;
-          font-size:13px; font-weight:500; color:#000 !important; text-decoration:none;
+        display:inline-flex;
+        align-items:center;
+        font-family:'Montserrat', Arial, Helvetica, sans-serif;
+        font-size:13px; font-weight:500; color:#000 !important; text-decoration:none;
         ">
         ${mobile}
     </a>
@@ -37,7 +39,7 @@ export function buildHtmlStandardSignature({
                 border-radius:12px;
                 padding:12px;
                 width:100%;
-                max-width:487px;
+                max-width:467px;
                 margin:0;
             ">
                 <!-- HEADER -->
@@ -101,8 +103,14 @@ export function buildHtmlStandardSignature({
                                 <td style="white-space:nowrap; padding-right:14px; vertical-align:middle;">
                                     <img src="https://www.prognosis-biotech.com/apps/icons/20251008/call.png" width="13"
                                         height="14" style="vertical-align:middle; margin-right:6px">
-                                    <a href="tel:${phone}"
-                                        style="color:#000 !important; font-weight:500; text-decoration:none;">
+                                    <a href="tel:${phone}" style="
+                                        display:inline-flex;
+                                        align-items:center;
+                                        font-size:13px;
+                                        font-weight:500;
+                                        color:#000 !important;
+                                        text-decoration:none;
+                                    ">
                                         ${phone}
                                     </a>
                                 </td>
@@ -147,7 +155,7 @@ export function buildHtmlStandardSignature({
                                     ]
                                       .map(
                                         ([icon, url]) => `
-                                    <a href="${url}" target="_blank" style="display:inline-block; margin-left:14px;">
+                                    <a href="${url}" target="_blank" style="display:inline-block; margin-left:12px;">
                                         <img src="https://www.prognosis-biotech.com/apps/icons/20251008/${icon}.png"
                                             width="20" height="20" style="display:block; border:0;">
                                     </a>

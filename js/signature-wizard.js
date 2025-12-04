@@ -222,6 +222,31 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===========================
+// Translation Change Handling
+// ===========================
+
+document.addEventListener("language-changed", () => {
+  const step4Visible =
+    step4 && step4.style.display !== "none" && window.selectedPlatform;
+
+  if (!step4Visible) return;
+
+  const t = translations[window.currentLang];
+  window.signatureHtml = buildSignature({
+    platform: window.selectedPlatform,
+    data: buildData(),
+  });
+
+  if (window.selectedPlatform === SignaturePlatform.OUTLOOK) {
+    renderOutlookStep4_WebCopyPaste(window.signatureHtml, t);
+  } else if (window.selectedPlatform === "thunderbird") {
+    renderThunderbirdStep4(window.signatureHtml, t);
+  } else if (window.selectedPlatform === "monday") {
+    renderMondayStep4(window.signatureHtml, t);
+  }
+});
+
+// ===========================
 // Init
 // ===========================
 document.addEventListener("DOMContentLoaded", () => {

@@ -127,6 +127,8 @@ export const translations = {
     copy_signature_btn_label: "Αντιγραφή Υπογραφής",
     open_outlook_web_btn_label: "Άνοιγμα Outlook Web",
     preview_label: "Προεπισκόπηση Υπογραφής",
+    toast_copied_success: "Υπογραφή αντιγράφηκε!",
+    toast_copy_fallback: "Αντιγραφή μέσω fallback!",
   },
 
   en: {
@@ -248,6 +250,9 @@ export const translations = {
     copy_signature_btn_label: "Copy Signature",
     open_outlook_web_btn_label: "Open Outlook Web",
     preview_label: "Signature Preview",
+
+    toast_copied_success: "Signature copied!",
+    toast_copy_fallback: "Copy fallback executed!",
   },
 };
 

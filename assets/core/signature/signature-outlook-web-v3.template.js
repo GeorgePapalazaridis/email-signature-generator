@@ -79,7 +79,7 @@ export function buildOutlookSignatureWebV3({
                 style="display:block; height:auto; border:0; border-radius:12px;">
             </a>
           </td>
-          <td align="center" width="50%" style="font-size:16px; line-height:1.4; color:#000;">
+          <td align="center" width="45%" style="font-size:16px; line-height:1.4; color:#000;">
             Food Safety & Clinical Diagnostics
           </td>
         </tr>
@@ -156,7 +156,7 @@ export function buildOutlookSignatureWebV3({
 
   <!-- DISCLAIMER -->
   <tr>
-    <td style="font-size:10px; color:#7d7d7d; line-height:1.4;">
+    <td style="font-size:10px; color:#7d7d7d; line-height:1.5; text-align:justify; word-spacing:1px;">
       <strong>DISCLAIMER:</strong>
        This email is intended solely for the recipient(s) and may contain
         confidential information. By reading this email, you agree to treat

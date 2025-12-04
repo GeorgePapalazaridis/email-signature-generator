@@ -5,6 +5,8 @@ import { formatPhoneNumber } from "../../../js/utils/phone-formatter.js";
 export const SignaturePlatform = {
   OUTLOOK: "outlook",
   HTML_STANDARD: "html_standard",
+  ΤHUNDERBIRD: "thunderbird",
+  MONDAY: "monday",
 };
 
 export function buildSignature({ platform, data }) {
@@ -27,6 +29,8 @@ export function buildSignature({ platform, data }) {
       console.log("🖼 Using Outlook IMAGE - Web V3 template");
       return buildOutlookSignatureWebV3(normalizedData);
 
+    case SignaturePlatform.TΗUNDERBIRD:
+    case SignaturePlatform.MONDAY:
     case SignaturePlatform.HTML_STANDARD:
       console.log("🧩 Using HTML Standard template");
       return buildHtmlStandardSignature(normalizedData);

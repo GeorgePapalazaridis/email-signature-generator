@@ -13,11 +13,11 @@ export function renderOutlookStep4_WebCopyPaste(signatureHtml, t) {
   <!-- Step 1 -->
   <div class="step4-instructions">
     <ol class="step4-list">
-      <li>${t.outlook_step1}</li>
+      <li>${t.outlook.step1}</li>
     </ol>
   </div>
 
-  <div class="signature-preview-label">${t.preview_label}</div>
+  <div class="signature-preview-label">${t.outlook.previewLabel}</div>
   <div class="signature-preview-block">
     <div id="signaturePreview" class="signature-wrapper">
       ${signatureHtml}
@@ -26,13 +26,13 @@ export function renderOutlookStep4_WebCopyPaste(signatureHtml, t) {
 
   <div class="step4-actions-inner-btns">
     <button id="copyOutlookBtn" class="btn btn-info">
-      ${t.copy_signature_btn_label}
+      ${t.buttons.copyHtmlOutlook}
     </button>
   </div>
 
   <div class="step4-instructions">
     <ol class="step4-list" start="2">
-      <li>${t.outlook_step2}</li>
+      <li>${t.outlook.step2}</li>
     </ol>
   </div>
 
@@ -40,13 +40,13 @@ export function renderOutlookStep4_WebCopyPaste(signatureHtml, t) {
     <a href="https://outlook.office.com/mail/options/accounts-category/signatures-subcategory"
        target="_blank"
        class="btn btn-info-outline">
-      ${t.open_outlook_web_btn_label}
+      ${t.outlook.openOutlook}
     </a>
   </div>
 
   <div class="step4-instructions">
     <ol class="step4-list" start="3">
-      <li>${t.outlook_step3}</li>
+      <li>${t.outlook.step3}</li>
     </ol>
   </div>
 
@@ -70,10 +70,10 @@ function bindOutlookCopy(signatureHtml, t) {
         }),
       ]);
 
-      showToast(t.toast_copied_success, "success");
+      showToast(t.success.copied, "success");
     } catch {
       document.execCommand("copy");
-      showToast(t.toast_copy_fallback, "info");
+      showToast(t.success.fallbackCopy, "info");
     }
   });
 }
@@ -86,12 +86,12 @@ export function renderThunderbirdStep4(signatureHtml, t) {
   if (!container) return;
 
   const steps = [
-    t.th_step1,
-    t.th_step2,
-    t.th_step3,
-    t.th_step4,
-    t.th_step5,
-    t.th_step6,
+    t.thunderbird.step1,
+    t.thunderbird.step2,
+    t.thunderbird.step3,
+    t.thunderbird.step4,
+    t.thunderbird.step5,
+    t.thunderbird.step6,
   ]
     .map((step) => `<li>${step}</li>`)
     .join("");
@@ -106,7 +106,7 @@ export function renderThunderbirdStep4(signatureHtml, t) {
 
   <div class="step4-actions-inner-btns">
     <button id="downloadThunderbirdBtn" class="btn btn-info">
-      ${t.download_button_label}
+      ${t.thunderbird.download}
     </button>
   </div>
 </div>
@@ -116,7 +116,7 @@ export function renderThunderbirdStep4(signatureHtml, t) {
     .getElementById("downloadThunderbirdBtn")
     ?.addEventListener("click", () => {
       downloadHtmlFile(signatureHtml, "prognosis-signature-thunderbird.html");
-      showToast(t.download_success, "success");
+      showToast(t.thunderbird.downloadSuccess, "success");
     });
 }
 
@@ -134,9 +134,9 @@ export function openMondayClipboardModal(signatureHtml, t) {
 
   if (!modal || !codeEl || !copyBtn || !closeBtn) return;
 
-  titleEl.textContent = t.monday_modal_title;
-  descEl.textContent = t.monday_modal_description;
-  copyBtn.textContent = t.monday_modal_copy_btn;
+  titleEl.textContent = t.monday.modalTitle;
+  descEl.textContent = t.monday.modalDescription;
+  copyBtn.textContent = t.buttons.copyHtml;
 
   codeEl.value = signatureHtml.trim();
 
@@ -154,7 +154,7 @@ export function openMondayClipboardModal(signatureHtml, t) {
   const handleCopy = async () => {
     const ok = await copyToClipboard(signatureHtml);
     showToast(
-      ok ? t.monday_copy_success : "Error copying!",
+      ok ? t.monday.copySuccess : "Error copying!",
       ok ? "success" : "error"
     );
   };
@@ -178,19 +178,19 @@ export function renderMondayStep4(signatureHtml, t) {
   container.innerHTML = `
 <div class="step4-card">
   <div class="step4-instructions">
-    <h4 class="step4-subtitle">${t.monday_step_title}</h4>
-    <p class="step4-text">${t.monday_step_instructions}</p>
+    <h4 class="step4-subtitle">${t.monday.stepTitle}</h4>
+    <p class="step4-text">${t.monday.stepInstructions}</p>
 
     <ol class="step4-list">
-      <li>${t.monday_step_note1}</li>
-      <li>${t.monday_step_note2}</li>
-      <li>${t.monday_step_note3}</li>
+      <li>${t.monday.stepNote1}</li>
+      <li>${t.monday.stepNote2}</li>
+      <li>${t.monday.stepNote3}</li>
     </ol>
   </div>
 
   <div class="step4-actions-inner-btns">
     <button id="copyMondayBtn" class="btn btn-info">
-      ${t.monday_copy_btn_label}
+      ${t.monday.copyBtn}
     </button>
   </div>
 </div>
@@ -202,26 +202,6 @@ export function renderMondayStep4(signatureHtml, t) {
       openMondayClipboardModal(signatureHtml, t)
     );
 }
-
-toStep4Btn.addEventListener("click", () => {
-  if (!selectedPlatform) return;
-  const t = translations[window.currentLang];
-
-  signatureHtml = buildSignature({
-    platform: selectedPlatform,
-    data: buildData(),
-  });
-
-  showStep(step4);
-
-  if (selectedPlatform === SignaturePlatform.OUTLOOK) {
-    renderOutlookStep4_WebCopyPaste(signatureHtml, t);
-  } else if (selectedPlatform === SignaturePlatform.THUNDERBIRD) {
-    renderThunderbirdStep4(signatureHtml, t);
-  } else if (selectedPlatform === SignaturePlatform.MONDAY) {
-    renderMondayStep4(signatureHtml, t);
-  }
-});
 
 /**
  * Helpers

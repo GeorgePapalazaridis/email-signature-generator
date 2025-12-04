@@ -84,13 +84,6 @@ p#subtitleText {
   justify-content: flex-end;
 }
 
-/* Center on mobile */
-@media (max-width: 768px) {
-  .form-actions {
-    justify-content: center;
-  }
-}
-
 /* Collapse → Single column */
 @media (max-width: 768px) {
   .form-grid {
@@ -105,5 +98,6 @@ p#subtitleText {
 
   .form-actions {
     margin-top: var(--space-md);
+    justify-content: center;
   }
 }

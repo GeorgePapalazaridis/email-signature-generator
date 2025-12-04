@@ -12,7 +12,6 @@
   border-radius: var(--border-radius-lg);
   border: var(--border-width) solid var(--color-border-light);
   box-shadow: 0 4px 14px var(--shadow-medium);
-  padding: var(--space-md) var(--space-lg);
 
   isolation: isolate;
   color-scheme: light;
@@ -77,13 +76,6 @@
 
 #preview-box .signature-separator {
   background-color: var(--color-border-strong) !important;
-}
-
-/* Smaller padding on phones */
-@media (max-width: 480px) {
-  #preview-box {
-    padding: var(--space-sm);
-  }
 }
 
 /* ===============================

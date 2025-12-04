@@ -1,4 +1,3 @@
-// index.js — Clean App Bootstrap
 import { setLanguage } from "./translations.js";
 import { bindDom } from "./dom-bindings.js";
 import "./signature-wizard.js"; // Wizard logic here

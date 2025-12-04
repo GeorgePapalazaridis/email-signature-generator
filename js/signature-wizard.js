@@ -107,7 +107,7 @@ function previewSignature() {
 toStep2Btn?.addEventListener("click", () => {
   if (!step1IsValid()) {
     const t = translations[window.currentLang] || translations["en"];
-    showToast(t.alertMissing, "error");
+    showToast(t.form.alertMissing, "error");
     return;
   }
 
@@ -163,7 +163,7 @@ toStep4Btn?.addEventListener("click", () => {
   const t = translations[window.currentLang];
 
   if (window.selectedPlatform === SignaturePlatform.OUTLOOK) {
-    renderOutlookStep4_WebCopyPaste(signatureHtml, t);
+    renderOutlookStep4_WebCopyPaste(window.signatureHtml, t);
   } else if (window.selectedPlatform === "thunderbird") {
     renderThunderbirdStep4(window.signatureHtml, t);
   } else if (window.selectedPlatform === "monday") {

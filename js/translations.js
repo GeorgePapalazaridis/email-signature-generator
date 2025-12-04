@@ -1,258 +1,269 @@
+import { setText, setPlaceholder } from "./utils/dom-utils.js";
+
 // ===============================
 // 🌐 Translations – Prognosis Signature Generator
 // ===============================
 export const translations = {
   gr: {
-    // === FORM LABELS ===
-    name: "Ονοματεπώνυμο",
-    namePlaceholder: "π.χ. George Papalazaridis",
-    title: "Θέση / Τίτλος",
-    titlePlaceholder: "π.χ. Front End Angular Developer",
-    phone: "Σταθερό τηλέφωνο",
-    address: "Διεύθυνση",
-    mobile: "Κινητό",
-    mobilePlaceholder: "π.χ. +30 6987 331 449",
+    //
+    // 🏷️ FORM LABELS
+    //
+    form: {
+      name: "Ονοματεπώνυμο",
+      namePlaceholder: "π.χ. George Papalazaridis",
+      title: "Θέση / Τίτλος",
+      titlePlaceholder: "π.χ. Front End Angular Developer",
+      phone: "Σταθερό τηλέφωνο",
+      mobile: "Κινητό",
+      mobilePlaceholder: "π.χ. +30 6987 331 449",
+      address: "Διεύθυνση",
 
-    // === BUTTONS & MESSAGES ===
-    button: "Δημιουργία Bookmarklet",
-    alertMissing: "Συμπλήρωσε τουλάχιστον όνομα και τίτλο",
-    success: "✅ Το signature προστέθηκε!",
-    notFound:
-      "⚠️ Δεν βρέθηκε ο editor. Άνοιξε Ρυθμίσεις → Mail → Compose & reply → Email signature.",
+      alertMissing: "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο",
+    },
 
-    // === HEADINGS ===
+    //
+    // 🔹 GLOBAL BUTTONS
+    //
+    buttons: {
+      next: "Επόμενο",
+      back: "Πίσω",
+      continue: "Συνέχεια",
+      finish: "Τέλος",
+      returnToPlatforms: "Επιστροφή στις πλατφόρμες",
+      copyHtml: "Αντιγραφή HTML",
+      copyHtmlOutlook: "Αντιγραφή HTML Υπογραφής",
+    },
+
+    //
+    // ✨ STEP HEADERS / SUBTITLES
+    //
+    steps: {
+      step1Title: "Βήμα 1: Συμπλήρωση στοιχείων",
+      step1Subtitle:
+        "Συμπλήρωσε τα στοιχεία σου για να δημιουργήσουμε την υπογραφή.",
+
+      step2Title: "Βήμα 2: Προεπισκόπηση Υπογραφής",
+      step2Subtitle: "Έλεγξε την υπογραφή σου πριν συνεχίσεις.",
+
+      step3Title: "Βήμα 3: Επιλογή πλατφόρμας",
+      step3Subtitle:
+        "Επίλεξε την πλατφόρμα όπου θέλεις να εγκαταστήσεις την υπογραφή σου.",
+
+      step4Title: "Βήμα 4: Εγκατάσταση",
+      step4Subtitle:
+        "Ακολούθησε τις παρακάτω οδηγίες για να ολοκληρώσεις την εγκατάσταση.",
+    },
+
+    //
+    // 🪟 PLATFORM TITLES & DESCRIPTIONS
+    //
+    platforms: {
+      outlook: {
+        title: "Microsoft Outlook",
+        desc: "Εισαγωγή υπογραφής ως εικόνα για τέλεια απεικόνιση στο Outlook.",
+      },
+      thunderbird: {
+        title: "Thunderbird",
+        desc: "Λήψη αρχείου .html για import.",
+      },
+      monday: {
+        title: "Monday.com",
+        desc: "Copy–Paste HTML υπογραφής.",
+      },
+    },
+
+    //
+    // 💾 OUTLOOK WEB FLOW
+    //
+    outlook: {
+      step1: "Πάτησε «Αντιγραφή Υπογραφής».",
+      step2:
+        "Άνοιξε Outlook → Ρυθμίσεις → Compose and Reply → Email Signature.",
+      step3: "Κάνε επικόλληση με Ctrl+V (Windows) ή Cmd+V (Mac).",
+
+      previewLabel: "Προεπισκόπηση Υπογραφής",
+      copyHtmlButton: "Αντιγραφή Υπογραφής",
+      openOutlook: "Άνοιγμα Outlook Web",
+    },
+
+    //
+    // 📨 THUNDERBIRD FLOW
+    //
+    thunderbird: {
+      step1: "Κατέβασε το αρχείο της υπογραφής",
+      step2: "Άνοιξε το Thunderbird",
+      step3: "Πήγαινε: Ρυθμίσεις → Ρυθμίσεις Λογαριασμού",
+      step4: "Ενεργοποίησε: «Επισύναψη υπογραφής από αρχείο (text, HTML)»",
+      step5: "Πάτησε “Choose…” και επίλεξε το αρχείο που κατέβασες",
+      step6: "Πάτησε OK για αποθήκευση",
+
+      download: "Κατέβασμα HTML Αρχείου",
+      downloadSuccess: "Το αρχείο HTML κατέβηκε!",
+    },
+
+    //
+    // ☁ Monday.com FLOW
+    //
+    monday: {
+      stepTitle: "Εγκατάσταση σε Monday.com",
+      stepInstructions:
+        "Ακολούθησε τα παρακάτω βήματα για να επικολλήσεις την υπογραφή σου:",
+      stepNote1: "Άνοιξε Emails & Activities",
+      stepNote2: "Πάτησε 'Compose Email'",
+      stepNote3: "Κάνε επικόλληση (⌘+V / Ctrl+V) της υπογραφής",
+      copyBtn: "Αντιγραφή HTML Υπογραφής",
+
+      modalTitle: "HTML υπογραφής για Monday.com",
+      modalDescription:
+        "Πάτησε «Copy» για να αντιγράψεις τον HTML κώδικα στο clipboard.",
+      copySuccess: "✂️ Το HTML της υπογραφής αντιγράφηκε!",
+    },
+
+    //
+    // 🎉 SUCCESS
+    //
+    success: {
+      installDone:
+        "🎉 Ευχαριστούμε που χρησιμοποίησες τον Signature Generator!",
+      copied: "Υπογραφή αντιγράφηκε!",
+      fallbackCopy: "Αντιγραφή μέσω fallback!",
+    },
+
+    //
+    // 🧭 OTHER HEADERS
+    //
     heading: "Prognosis Email Signature Generator",
-    helpLinkText: "📄 Οδηγίες βήμα-βήμα",
-    helpLinkHref: "docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf",
     previewTitle: "Προεπισκόπηση Υπογραφής",
-
-    // Step subtitles
-    step1Title: "Βήμα 1: Συμπλήρωση στοιχείων",
-    step1Subtitle:
-      "Συμπλήρωσε τα στοιχεία σου και πάτα «Δημιουργία Bookmarklet».",
-    step2Title: "Βήμα 2: Προεπισκόπηση Υπογραφής",
-    step2Subtitle: "Έλεγξε την υπογραφή σου πριν συνεχίσεις.",
-    step3Title: "Βήμα 3: Επιλογή πλατφόρμας",
-    step3Subtitle:
-      "Επίλεξε την πλατφόρμα όπου θέλεις να εγκαταστήσεις την υπογραφή σου.",
-
-    step4Title: "Βήμα 4: Εγκατάσταση",
-    step4Subtitle:
-      "Ακολούθησε τις παρακάτω οδηγίες για να εγκαταστήσεις την υπογραφή σου στην επιλεγμένη πλατφόρμα.",
-
-    // === PLATFORM CARDS ===
-    platformOutlookTitle: "Microsoft Outlook",
-    platformOutlookDesc:
-      "Προτείνεται — εισαγωγή υπογραφής ως εικόνα για τέλεια απεικόνιση στο Outlook.",
-
-    platformThunderbirdTitle: "Thunderbird",
-    platformThunderbirdDesc: "Λήψη αρχείου .html για import.",
-
-    platformMondayTitle: "Monday.com",
-    platformMondayDesc: "Copy–Paste HTML υπογραφής.",
-
-    // === BOOKMARKLET SECTION ===
-    dragText:
-      "Αν όλα εμφανίζονται σωστά παραπάνω, <strong>σύρε το παρακάτω κουμπί</strong> στη μπάρα των σελιδοδεικτών σου:",
-    instruction:
-      "➡️ Στη συνέχεια, άνοιξε το <strong>Outlook Web</strong> (Ρυθμίσεις → Υπογραφές) και πάτησε το bookmark για να προστεθεί αυτόματα η υπογραφή σου.",
-    bookmarkletTooltip: "Σύρε αυτό το κουμπί στη μπάρα των σελιδοδεικτών σου",
-
-    outlook_step1_title:
-      "Σύρε το bookmarklet 'Δημιουργία Υπογραφής' στη μπάρα σελιδοδεικτών",
-    outlook_step1_note_intro:
-      "Αν δεν εμφανίζεται η μπάρα σελιδοδεικτών στον browser σου:",
-    outlook_step1_note_mac: "• Σε macOS: Menu → View → Show Bookmarks Bar",
-    outlook_step1_note_win:
-      "• Σε Windows: πάτα Ctrl + Shift + B για να την εμφανίσεις",
-
-    outlook_step2_title: "Άνοιξε το Outlook Web",
-    outlook_open_button: "Άνοιγμα Outlook Web",
-    outlook_step3_title: "Πήγαινε: Ρυθμίσεις → Λογαριασμός → Υπογραφές",
-    outlook_step3_text:
-      "Δημιούργησε νέα υπογραφή και κάνε κλικ μέσα στο πεδίο κειμένου.",
-    outlook_step4_title: "Πάτα το bookmarklet",
-    outlook_step4_text:
-      "Κάνε κλικ στο bookmarklet “Δημιουργία Υπογραφής” που αποθήκευσες προηγουμένως. Η υπογραφή θα προστεθεί αυτόματα στο πεδίο.",
-    bookmarkletLabel: "Δημιουργία Υπογραφής",
-
-    next: "Επόμενο",
-    back: "Πίσω",
-    continue: "Συνέχεια",
-    finish: "Τέλος",
-    returnToPlatforms: "Επιστροφή στις πλατφόρμες",
-
-    thunderbird_step_title: "Εγκατάσταση στο Thunderbird",
-    thunderbird_step_instructions:
-      "Ακολούθησε τα παρακάτω βήματα για να εισάγεις την υπογραφή σου στο Thunderbird:",
-
-    th_step1: "Κατέβασε το αρχείο της υπογραφής",
-    th_step2: "Άνοιξε το Thunderbird",
-    th_step3: "Πήγαινε: Ρυθμίσεις → Ρυθμίσεις Λογαριασμού",
-    th_step4: "Ενεργοποίησε: «Επισύναψη υπογραφής από αρχείο (text, HTML)»",
-    th_step5: "Πάτησε “Choose…” και επίλεξε το αρχείο που κατέβασες",
-    th_step6: "Πάτησε OK για αποθήκευση",
-
-    download_button_label: "Κατέβασμα HTML Αρχείου",
-    download_success: "Το αρχείο HTML κατέβηκε!",
-
-    monday_step_title: "Εγκατάσταση σε Monday.com",
-    monday_step_instructions:
-      "Ακολούθησε τα παρακάτω βήματα για να επικολλήσεις την υπογραφή σου στα emails του Monday.com:",
-    monday_step_note1: "Άνοιξε Emails & Activities",
-    monday_step_note2: "Πάτησε 'Compose Email'",
-    monday_step_note3: "Κάνε επικόλληση (⌘+V / Ctrl+V) της υπογραφής",
-    monday_copy_btn_label: "Αντιγραφή HTML Υπογραφής",
-
-    monday_modal_title: "HTML υπογραφής για Monday.com",
-    monday_modal_description:
-      "Αυτός είναι ο HTML κώδικας που θα κάνεις επικόλληση στο Monday.com. Πάτησε «Copy» για να τον αντιγράψεις στο clipboard.",
-    monday_modal_copy_btn: "Copy HTML",
-    monday_copy_success: "✂️ Το HTML της υπογραφής αντιγράφηκε!",
-
-    finished_thanks:
-      "🎉 Ευχαριστούμε που χρησιμοποίησες τον Signature Generator!",
-
-    alertMissing: "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο",
-
-    step4_outlook_title: "Εγκατάσταση υπογραφής στο Outlook",
-    step4_outlook_subtitle:
-      "Αντέγραψε την υπογραφή σου και εφάρμοσέ την στο Outlook Web.",
-
-    outlook_step1: "Πάτησε «Αντιγραφή Υπογραφής».",
-    outlook_step2:
-      "Άνοιξε Outlook → Ρυθμίσεις → Compose and Reply → Email Signature.",
-    outlook_step3: "Κάνε επικόλληση με Ctrl+V (Windows) ή Cmd+V (Mac).",
-
-    copy_signature_btn_label: "Αντιγραφή Υπογραφής",
-    open_outlook_web_btn_label: "Άνοιγμα Outlook Web",
-    preview_label: "Προεπισκόπηση Υπογραφής",
-    toast_copied_success: "Υπογραφή αντιγράφηκε!",
-    toast_copy_fallback: "Αντιγραφή μέσω fallback!",
   },
 
   en: {
-    // === FORM LABELS ===
-    name: "Full Name",
-    namePlaceholder: "e.g. George Papalazaridis",
-    title: "Job Title",
-    titlePlaceholder: "e.g. Front End Angular Developer",
-    phone: "Office Phone",
-    address: "Address",
-    mobile: "Mobile",
-    mobilePlaceholder: "e.g. +30 6987 331 449",
+    //
+    // 🏷️ FORM LABELS
+    //
+    form: {
+      name: "Full Name",
+      namePlaceholder: "e.g. George Papalazaridis",
+      title: "Job Title",
+      titlePlaceholder: "e.g. Front End Angular Developer",
+      phone: "Office Phone",
+      mobile: "Mobile",
+      mobilePlaceholder: "e.g. +30 6987 331 449",
+      address: "Address",
 
-    // === BUTTONS & MESSAGES ===
-    button: "Generate Bookmarklet",
-    alertMissing: "Please fill in at least your name and title",
-    success: "✅ Signature inserted successfully!",
-    notFound:
-      "⚠️ Editor not found. Open Settings → Mail → Compose & reply → Email signature.",
+      alertMissing: "⚠️ Please fill in at least Name and Job Title",
+    },
 
-    // === HEADINGS ===
+    //
+    // 🔹 GLOBAL BUTTONS
+    //
+    buttons: {
+      next: "Next",
+      back: "Back",
+      continue: "Continue",
+      finish: "Finish",
+      returnToPlatforms: "Return to platforms",
+      copyHtml: "Copy HTML",
+      copyHtmlOutlook: "Copy Signature HTML",
+    },
+
+    //
+    // ✨ STEP HEADERS / SUBTITLES
+    //
+    steps: {
+      step1Title: "Step 1: Fill in your details",
+      step1Subtitle: "Fill in your information to generate your signature.",
+
+      step2Title: "Step 2: Signature Preview",
+      step2Subtitle: "Review your signature before continuing.",
+
+      step3Title: "Step 3: Choose platform",
+      step3Subtitle:
+        "Select the platform where you want to install your signature.",
+
+      step4Title: "Step 4: Installation",
+      step4Subtitle: "Follow the instructions below to complete installation.",
+    },
+
+    //
+    // 🪟 PLATFORM TITLES & DESCRIPTIONS
+    //
+    platforms: {
+      outlook: {
+        title: "Microsoft Outlook",
+        desc: "Insert signature as an image for perfect visual accuracy in Outlook.",
+      },
+      thunderbird: {
+        title: "Thunderbird",
+        desc: "Download .html file for import.",
+      },
+      monday: {
+        title: "Monday.com",
+        desc: "Copy–Paste signature HTML.",
+      },
+    },
+
+    //
+    // 💾 OUTLOOK WEB FLOW
+    //
+    outlook: {
+      step1: "Click “Copy Signature”.",
+      step2: "Open Outlook → Settings → Compose and Reply → Email Signature.",
+      step3: "Paste with Ctrl+V (Windows) or Cmd+V (Mac).",
+
+      previewLabel: "Signature Preview",
+      copyHtmlButton: "Copy Signature",
+      openOutlook: "Open Outlook Web",
+    },
+
+    //
+    // 📨 THUNDERBIRD FLOW
+    //
+    thunderbird: {
+      step1: "Download the signature file using the button below",
+      step2: "Open Thunderbird",
+      step3: "Go to: Settings → Account Settings",
+      step4: "Enable: “Attach signature from a file (text, HTML)”",
+      step5: "Click “Choose…” and select the downloaded file",
+      step6: "Click OK to save changes",
+
+      download: "Download HTML File",
+      downloadSuccess: "HTML file downloaded!",
+    },
+
+    //
+    // ☁ Monday.com FLOW
+    //
+    monday: {
+      stepTitle: "Install in Monday.com",
+      stepInstructions: "Follow the steps below to paste your signature:",
+
+      stepNote1: "Open Emails & Activities",
+      stepNote2: "Click ‘Compose Email’",
+      stepNote3: "Paste your signature (⌘+V / Ctrl+V)",
+
+      copyBtn: "Copy Signature HTML",
+
+      modalTitle: "HTML signature for Monday.com",
+      modalDescription:
+        "Click “Copy” to copy the HTML signature to your clipboard.",
+
+      copySuccess: "✂️ Signature HTML copied!",
+    },
+
+    //
+    // 🎉 SUCCESS MESSAGES
+    //
+    success: {
+      installDone: "🎉 Thank you for using the Signature Generator!",
+      copied: "Signature copied!",
+      fallbackCopy: "Copy fallback executed!",
+    },
+
+    //
+    // 🧭 OTHER HEADERS
+    //
     heading: "Prognosis Email Signature Generator",
-    helpLinkText: "📄 Installation guide",
-    helpLinkHref: "docs/Οδηγίες Εγκατάστασης Υπογραφής Email.pdf",
     previewTitle: "Signature Preview",
-
-    // Step subtitles
-    step1Title: "Step 1: Fill in your details",
-    step1Subtitle: "Fill in your details and click “Generate Bookmarklet”.",
-    step2Title: "Step 2: Signature Preview",
-    step2Subtitle: "Review your signature before continuing.",
-    step3Title: "Step 3: Choose platform",
-    step3Subtitle:
-      "Choose the platform where you want to install your signature.",
-    step4Title: "Step 4: Installation",
-    step4Subtitle:
-      "Follow the instructions below to correctly install your signature on the selected platform.",
-
-    // === PLATFORM CARDS ===
-    platformOutlookTitle: "Microsoft Outlook",
-    platformOutlookDesc:
-      "Recommended — insert your signature as an image for perfect visual accuracy in Outlook.",
-
-    platformThunderbirdTitle: "Thunderbird",
-    platformThunderbirdDesc: "Download .html file for import.",
-
-    platformMondayTitle: "Monday.com",
-    platformMondayDesc: "Copy–Paste the HTML signature.",
-
-    // === BOOKMARKLET SECTION ===
-    dragText:
-      "If everything looks correct above, <strong>drag the button below</strong> to your bookmarks bar:",
-    instruction:
-      "➡️ Then open <strong>Outlook Web</strong> (Settings → Signatures) and click the bookmark to insert your signature automatically.",
-    bookmarkletTooltip: "Drag this button to your bookmarks bar",
-
-    outlook_step1_title:
-      "Drag the “Generate Signature” bookmarklet to your bookmarks bar",
-    outlook_step1_note_intro: "If your browser’s bookmarks bar is not visible:",
-    outlook_step1_note_mac: "• On macOS: Menu → View → Show Bookmarks Bar",
-    outlook_step1_note_win: "• On Windows: press Ctrl + Shift + B to show it",
-
-    outlook_step2_title: "Open Outlook Web",
-    outlook_open_button: "Open Outlook Web",
-    outlook_step3_title: "Go to: Settings → Account → Signatures",
-    outlook_step3_text:
-      "Create a new signature and click inside the editor box.",
-    outlook_step4_title: "Click the bookmarklet",
-    outlook_step4_text:
-      "Click the “Generate Signature” bookmarklet you saved earlier. The signature will be inserted automatically.",
-    bookmarkletLabel: "Generate Signature",
-
-    next: "Next",
-    back: "Back",
-    continue: "Continue",
-    finish: "Finish",
-    returnToPlatforms: "Return to platforms",
-
-    thunderbird_step_title: "Install in Thunderbird",
-    thunderbird_step_instructions:
-      "Follow the steps below to import your signature into Thunderbird:",
-
-    th_step1: "Download signature file using the button below",
-    th_step2: "Open Thunderbird",
-    th_step3: "Go to: Settings → Account Settings",
-    th_step4: "Enable: “Attach signature from a file (text, HTML)”",
-    th_step5: "Click “Choose…” and select the downloaded file",
-    th_step6: "Click OK to save changes",
-
-    download_button_label: "Download HTML File",
-    download_success: "HTML file downloaded!",
-
-    monday_step_title: "Install in Monday.com",
-    monday_step_instructions:
-      "Follow the steps below to easily paste your signature inside Monday.com emails:",
-    monday_step_note1: "Open Emails & Activities",
-    monday_step_note2: "Click 'Compose Email'",
-    monday_step_note3: "Paste your signature (⌘+V / Ctrl+V)",
-    monday_copy_btn_label: "Copy Signature HTML",
-
-    monday_modal_title: "HTML signature for Monday.com",
-    monday_modal_description:
-      "This is the HTML code you will paste into Monday.com. Click “Copy” to copy it to your clipboard.",
-    monday_modal_copy_btn: "Copy HTML",
-    monday_copy_success: "✂️ Signature HTML copied!",
-
-    finished_thanks: "🎉 Thank you for using the Signature Generator!",
-    alertMissing: "⚠️ Please fill in at least Name and Job Title",
-
-    step4_outlook_title: "Set up your Outlook signature",
-    step4_outlook_subtitle:
-      "Copy your signature below and apply it in Outlook Web.",
-
-    outlook_step1: "Click “Copy Signature”.",
-    outlook_step2:
-      "Open Outlook → Settings → Compose and Reply → Email Signature.",
-    outlook_step3: "Paste with Ctrl+V (Windows) or Cmd+V (Mac).",
-
-    copy_signature_btn_label: "Copy Signature",
-    open_outlook_web_btn_label: "Open Outlook Web",
-    preview_label: "Signature Preview",
-
-    toast_copied_success: "Signature copied!",
-    toast_copy_fallback: "Copy fallback executed!",
   },
 };
 
@@ -263,134 +274,69 @@ export function setLanguage(lang) {
   const t = translations[lang] || translations["en"];
   if (!t) return;
 
-  // === HEADINGS ===
-  const titleHeading = document.getElementById("titleHeading");
-  if (titleHeading) titleHeading.textContent = t.heading;
+  //
+  // 🧭 HEADINGS & SUBTITLES
+  //
+  setText("titleHeading", t.heading);
 
-  const step1Header = document.querySelector("#step1 .step-header");
-  if (step1Header) step1Header.textContent = t.step1Title;
+  setText("step1Header", t.steps.step1Title);
+  setText("step2Title", t.steps.step2Title);
+  setText("step3Title", t.steps.step3Title);
+  setText("step4Title", t.steps.step4Title);
 
-  const step2Title = document.querySelector("#step2Title");
-  if (step2Title) step2Title.textContent = t.step2Title;
+  setText("step1Subtitle", t.steps.step1Subtitle);
+  setText("step2Subtitle", t.steps.step2Subtitle);
+  setText("step3Subtitle", t.steps.step3Subtitle);
+  setText("step4Subtitle", t.steps.step4Subtitle);
 
-  const step3Title = document.querySelector("#step3Title");
-  if (step3Title) step3Title.textContent = t.step3Title;
+  //
+  // 🏷️ FORM LABELS
+  //
+  setText("labelName", t.form.name);
+  setText("labelTitle", t.form.title);
+  setText("labelAddress", t.form.address);
+  setText("labelMobile", t.form.mobile);
+  setText("labelPhone", t.form.phone);
 
-  const step4Title = document.getElementById("step4Title");
-  if (step4Title) step4Title.textContent = t.step4Title;
+  //
+  // ✍️ FORM PLACEHOLDERS
+  //
+  setPlaceholder("name", t.form.namePlaceholder);
+  setPlaceholder("title", t.form.titlePlaceholder);
+  setPlaceholder("address", t.form.address);
+  setPlaceholder("mobile", t.form.mobilePlaceholder);
+  setPlaceholder("phone", t.form.phone);
 
-  const step1Subtitle = document.getElementById("step1Subtitle");
-  if (step1Subtitle) step1Subtitle.textContent = t.step1Subtitle;
+  //
+  // 🪟 PLATFORM CARDS
+  //
+  setText("outlookTitle", t.platforms.outlook.title);
+  setText("outlookDesc", t.platforms.outlook.desc);
 
-  const step2Subtitle = document.getElementById("step2Subtitle");
-  if (step2Subtitle) step2Subtitle.textContent = t.step2Subtitle;
+  setText("thunderTitle", t.platforms.thunderbird.title);
+  setText("thunderDesc", t.platforms.thunderbird.desc);
 
-  const step3Subtitle = document.getElementById("step3Subtitle");
-  if (step3Subtitle) step3Subtitle.textContent = t.step3Subtitle;
+  setText("mondayTitle", t.platforms.monday.title);
+  setText("mondayDesc", t.platforms.monday.desc);
 
-  const step4Subtitle = document.getElementById("step4Subtitle");
-  if (step4Subtitle) step4Subtitle.textContent = t.step4Subtitle;
+  //
+  // 🔘 GLOBAL BUTTONS
+  //
+  setText("toStep2Btn", t.buttons.next);
+  setText("toStep3Btn", t.buttons.continue);
+  setText("toStep4Btn", t.buttons.continue);
+  setText("backToStep1", t.buttons.back);
+  setText("backToStep2", t.buttons.back);
+  setText("backToStep3", t.buttons.returnToPlatforms);
+  setText("finishBtn", t.buttons.finish);
 
-  const previewTitle = document.getElementById("previewTitle");
-  if (previewTitle) previewTitle.textContent = t.previewTitle;
-
-  // === FORM LABELS ===
-  const labelName = document.getElementById("labelName");
-  if (labelName) labelName.textContent = t.name;
-
-  const labelTitle = document.getElementById("labelTitle");
-  if (labelTitle) labelTitle.textContent = t.title;
-
-  const labelAddress = document.getElementById("labelAddress");
-  if (labelAddress) labelAddress.textContent = t.address;
-
-  const labelMobile = document.getElementById("labelMobile");
-  if (labelMobile) labelMobile.textContent = t.mobile;
-
-  const labelPhone = document.getElementById("labelPhone");
-  if (labelPhone) labelPhone.textContent = t.phone;
-
-  // === FORM PLACEHOLDERS ===
-  const nameInput = document.getElementById("name");
-  if (nameInput) nameInput.placeholder = t.namePlaceholder;
-
-  const titleInput = document.getElementById("title");
-  if (titleInput) titleInput.placeholder = t.titlePlaceholder;
-
-  const addressInput = document.getElementById("address");
-  if (addressInput) addressInput.placeholder = t.address;
-
-  const mobileInput = document.getElementById("mobile");
-  if (mobileInput) mobileInput.placeholder = t.mobilePlaceholder;
-
-  const phoneInput = document.getElementById("phone");
-  if (phoneInput) phoneInput.placeholder = t.phone;
-
-  document.getElementById("outlookTitle").textContent = t.platformOutlookTitle;
-  document.getElementById("outlookDesc").textContent = t.platformOutlookDesc;
-
-  document.getElementById("thunderTitle").textContent =
-    t.platformThunderbirdTitle;
-  document.getElementById("thunderDesc").textContent =
-    t.platformThunderbirdDesc;
-
-  document.getElementById("mondayTitle").textContent = t.platformMondayTitle;
-  document.getElementById("mondayDesc").textContent = t.platformMondayDesc;
-
-  // Help link
-  const helpLink = document.getElementById("helpLink");
-  if (helpLink) {
-    helpLink.textContent = t.helpLinkText;
-    helpLink.href = t.helpLinkHref;
-    helpLink.setAttribute(
-      "aria-label",
-      lang === "gr"
-        ? "Άνοιγμα αρχείου PDF με οδηγίες εγκατάστασης σε νέο παράθυρο"
-        : "Open PDF installation guide in a new tab"
-    );
-  }
-
-  // Second help link (below preview)
-  const helpLinkAfter = document.getElementById("helpLinkAfter");
-  if (helpLinkAfter) {
-    helpLinkAfter.textContent = t.helpLinkText;
-    helpLinkAfter.href = t.helpLinkHref;
-    helpLinkAfter.setAttribute(
-      "aria-label",
-      lang === "gr"
-        ? "Άνοιγμα αρχείου PDF με οδηγίες εγκατάστασης σε νέο παράθυρο"
-        : "Open PDF installation guide in a new tab"
-    );
-  }
-
-  // === Buttons ===
-  const generateBtn = document.getElementById("generateBtn");
-  if (generateBtn) generateBtn.textContent = t.button;
-
-  document.getElementById("toStep2Btn").textContent = t.next;
-  document.getElementById("toStep3Btn").textContent = t.continue;
-  document.getElementById("toStep4Btn").textContent = t.continue;
-  document.getElementById("backToStep1").textContent = t.back;
-  document.getElementById("backToStep2").textContent = t.back;
-  document.getElementById("backToStep3").textContent = t.returnToPlatforms;
-  document.getElementById("finishBtn").textContent = t.finish;
-
-  // === BOOKMARKLET SECTION ===
-  const dragTextEl = document.getElementById("dragText");
-  if (dragTextEl) dragTextEl.innerHTML = t.dragText;
-
-  const instructionEl = document.getElementById("instructionText");
-  if (instructionEl) instructionEl.innerHTML = t.instruction;
-
-  const bookmarkletLink = document.getElementById("bookmarklet");
-  if (bookmarkletLink) {
-    bookmarkletLink.textContent = t.bookmarkletLabel;
-    bookmarkletLink.setAttribute("data-tooltip", t.bookmarkletTooltip);
-  }
-
-  // === STATE ===
+  //
+  // 🌍 STATE
+  //
   window.currentLang = translations[lang] ? lang : "en";
 
-  // Re-render Step 4 if needed
+  //
+  // 🔄 Refresh Step4 elements if visible
+  //
   document.dispatchEvent(new CustomEvent("language-changed"));
 }

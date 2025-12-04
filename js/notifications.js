@@ -25,7 +25,7 @@ export function showThankYouPopup() {
 
   const t = translations[window.currentLang || "gr"] || translations["gr"];
 
-  msg.textContent = t.finished_thanks;
+  msg.textContent = t.success.installDone;
   popup.classList.remove("hidden");
   popup.setAttribute("aria-hidden", "false");
 

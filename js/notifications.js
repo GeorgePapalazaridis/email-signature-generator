@@ -1,4 +1,4 @@
-import { translations } from "./translations.js";
+import { translations } from "./translations/translations.data.js";
 
 /**
  * Simple top toast (error/success)

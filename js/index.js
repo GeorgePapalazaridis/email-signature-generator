@@ -1,4 +1,4 @@
-import { setLanguage } from "./translations.js";
+import { setLanguage } from "./translations/translations.apply.js";
 import { bindDom } from "./dom-bindings.js";
 import "./signature-wizard.js"; // Wizard logic here
 import { logoBase64 } from "../assets/base64/logo-base64.js";

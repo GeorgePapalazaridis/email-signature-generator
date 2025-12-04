@@ -1,4 +1,5 @@
-import { translations, setLanguage } from "./translations.js";
+import { translations } from "./translations/translations.data.js";
+import { setLanguage } from "./translations/translations.apply.js";
 import { bindDom } from "./dom-bindings.js";
 import { showToast, showThankYouPopup } from "./notifications.js";
 

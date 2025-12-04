@@ -4,17 +4,22 @@
 .toast {
   position: fixed;
   top: var(--space-md);
-  right: var(--space-lg);
+  left: 50%;
+  transform: translate(-50%, 0);
+
   background-color: var(--color-success);
   color: var(--color-text-inverse);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--border-radius-md);
   font-size: var(--font-size-sm);
   box-shadow: 0 4px 10px var(--shadow-medium);
+
   opacity: 0;
-  transform: translateY(-0.9375rem);
   animation: toastIn var(--transition-normal) both;
   z-index: 9999;
+  pointer-events: none; /* Για να μην κλικάρεται */
+  max-width: 80vw;
+  text-align: center;
 }
 
 /* ===============================
@@ -35,4 +40,15 @@
    =============================== */
 .toast.fade-out {
   animation: toastOut var(--transition-normal) both;
+}
+
+.toast-container {
+  position: fixed;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  z-index: 9999;
 }

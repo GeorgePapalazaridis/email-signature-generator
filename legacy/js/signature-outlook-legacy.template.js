@@ -1,4 +1,4 @@
-export function buildOutlookSignature({
+export function buildOutlookSignatureLegacy({
   name,
   title,
   address,

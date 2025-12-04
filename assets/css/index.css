@@ -253,15 +253,39 @@ hr {
 }
 
 /* ===============================
-       📱 RESPONSIVE
+   📱 RESPONSIVE – BASE LAYOUT
    =============================== */
-@media (max-width: 480px) {
+/* Tablet */
+@media (max-width: 1024px) {
   body {
+    max-width: 900px;
     padding: var(--space-md);
+  }
+}
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    max-width: 100%;
     margin: var(--space-md) auto;
+    padding: var(--space-sm);
+    border-radius: 0;
+    box-shadow: none;
   }
   hr {
-    width: 90%;
+    width: 95%;
+  }
+  main {
+    transform: none;
+  }
+}
+/* Very small devices */
+@media (max-width: 480px) {
+  h1#titleHeading {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+  }
+  p#subtitleText {
+    font-size: var(--font-size-sm);
   }
 }
 /* ===============================
@@ -379,6 +403,17 @@ hr {
 }
 
 /* ===============================
+       🧑‍💻 Wrapper around the full wizard content 
+   =============================== */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: auto;
+  margin: 0 auto;
+  padding-inline: var(--space-md);
+}
+
+/* ===============================
        🧑‍💻 FOOTER
    =============================== */
 .footer {
@@ -431,11 +466,34 @@ hr {
 }
 
 /* ===============================
-       📱 RESPONSIVE
+   📱 RESPONSIVE – HEADER & FOOTER
    =============================== */
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
+  .header-bar {
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .header-bar {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+  .header-lang {
+    align-items: center;
+  }
   .help-cta {
     max-width: 100%;
+  }
+  .footer {
+    padding: var(--space-xl) 0 var(--space-md);
+  }
+}
+@media (max-width: 480px) {
+  .platform-cards,
+  form.form-grid {
+    max-width: 360px;
+    margin-inline: auto;
   }
 }
 /* 3️⃣ Reusable Components */
@@ -485,13 +543,12 @@ hr {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: var(--space-xl);
   transform: translateY(-0.5rem);
 }
 
 .logo-container {
   width: 100%;
-  max-width: 480px;
+  max-width: 380px;
   padding: var(--space-md);
   border-radius: var(--border-radius-lg);
   display: flex;
@@ -647,6 +704,8 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 500px;
   margin: var(--space-xl) auto 0 auto;
   gap: var(--space-md);
 }
@@ -656,20 +715,54 @@ hr {
   margin-bottom: var(--space-sm);
 }
 
+/* Internal buttons should ALWAYS be centered */
+.step4-actions-inner-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Make the inner buttons feel primary CTA */
+.step4-actions-inner-btns .btn-info {
+  width: 100%;
+  padding-block: var(--space-sm); /* ➜ Taller button */
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0 auto 18px auto;
+}
+
 #signatureForm .btn-primary {
   margin-top: var(--space-lg);
 }
 
+#copyOutlookBtn:hover::after {
+  content: "📋 Ready to paste!";
+  position: absolute;
+  bottom: -22px;
+  font-size: 12px;
+  color: var(--color-brand-accent);
+}
+
+@media (max-width: 480px) {
+  .step4-actions-inner-btns .btn-info {
+    width: 100%;
+  }
+}
 /* 📱 Mobile Auto Layout */
 @media (max-width: 480px) {
   .btn {
     width: 100%;
     min-width: unset;
   }
+  .step4-actions-inner-btns,
   .step4-actions {
     flex-direction: column;
     gap: var(--space-sm);
   }
+  .step4-actions-inner-btns .btn,
   .step4-actions .btn {
     width: 100%;
   }
@@ -737,28 +830,74 @@ p#subtitleText {
 }
 
 /* ===============================
+   📐 GRID LAYOUT FOR STEP 1 FORM
+   =============================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md) var(--space-lg);
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.form-grid .full {
+  grid-column: span 2;
+}
+
+.form-item input {
+  margin-bottom: 0;
+}
+
+/* Button alignment (Desktop / Tablet) */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Center on mobile */
+@media (max-width: 768px) {
+  .form-actions {
+    justify-content: center;
+  }
+}
+/* Collapse → Single column */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    gap: var(--space-md);
+  }
+  .form-grid .full {
+    grid-column: span 1;
+  }
+  .form-actions {
+    margin-top: var(--space-md);
+  }
+}
+/* ===============================
      🪄 PREVIEW BOX (fixed)
    =============================== */
+/* Signature preview itself */
 #preview-box {
-  width: 100%;
-  max-width: 680px;
+  display: inline-block;
+  width: auto;
+  max-width: none; /* allows natural signature width */
   margin: 0 auto;
-  background-color: var(--color-surface-primary) !important;
-  border-radius: var(--border-radius-lg) !important;
-  border: var(--border-width) solid var(--color-border-light) !important;
+  background: var(--color-surface-primary);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--color-border-light);
   box-shadow: 0 4px 14px var(--shadow-medium);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: auto;
+  padding: var(--space-md) var(--space-lg);
   isolation: isolate;
   color-scheme: light;
+  overflow: hidden; /* needed for rounded corners */
 }
 
 #preview-box > table,
 #preview-box > .signature-wrapper > table {
-  background-color: var(--color-surface-primary) !important;
-  border-radius: var(--border-radius-lg) !important;
+  background-color: var(--color-surface-primary);
+  border-radius: var(--border-radius-lg);
 }
 
 .signature-wrapper {
@@ -767,82 +906,44 @@ p#subtitleText {
 }
 
 #preview-box .signature-separator {
+  background-color: var(--color-border-strong);
+}
+
+/* ===============================
+     🪄 PREVIEW — Step 2
+   =============================== */
+/* Outer scrollable wrapper */
+#preview-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-sm);
+  overflow-x: auto; /* enable horizontal scroll */
+  scrollbar-width: thin;
+  /* nice fade on edges */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+
+/* Ensure signature table inside stays intact */
+#preview-box > .signature-wrapper {
+  display: inline-block;
+}
+
+#preview-box table {
+  margin: auto;
+}
+
+#preview-box .signature-separator {
   background-color: var(--color-border-strong) !important;
 }
 
-/* ===============================
-     🔖 BOOKMARKLET SECTION
-   =============================== */
-#bookmarklet-container {
-  margin-top: var(--space-xl);
-  text-align: center;
-  display: none;
-  opacity: 0;
-  transform: translateY(0.625rem);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+/* Smaller padding on phones */
+@media (max-width: 480px) {
+  #preview-box {
+    padding: var(--space-sm);
+  }
 }
-
-#bookmarklet-container.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-a.bookmarklet {
-  display: inline-block;
-  background: var(--color-brand-primary);
-  color: var(--color-text-inverse);
-  padding: var(--space-sm) var(--space-md);
-  text-decoration: none;
-  border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  transition: background-color var(--transition-normal), transform var(--transition-fast);
-  position: relative;
-}
-
-a.bookmarklet:hover {
-  background-color: var(--color-brand-primary-hover);
-  transform: translateY(-1px);
-}
-
-/* Info below button */
-.info {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  margin-top: var(--space-sm);
-  text-align: center;
-  line-height: 1.5;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ===============================
-     💬 BOOKMARKLET TOOLTIP
-   =============================== */
-a.bookmarklet::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 140%;
-  left: 50%;
-  transform: translate(-50%, 6px);
-  background-color: var(--color-brand-accent);
-  color: var(--color-text-inverse);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-normal), transform var(--transition-normal);
-}
-
-a.bookmarklet:hover::after {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
 /* ===============================
      🧭 RESULT SECTION LAYOUT
    =============================== */
@@ -873,13 +974,25 @@ a.bookmarklet:hover::after {
   line-height: 1.5;
 }
 
+@media (max-width: 768px) {
+  #preview-box {
+    max-width: 100%;
+    padding: var(--space-sm);
+  }
+}
+@media (max-width: 480px) {
+  #preview-box {
+    padding: var(--space-xs);
+  }
+}
 /* ===============================
    ✅ TOAST NOTIFICATION
    =============================== */
 .toast {
   position: fixed;
   top: var(--space-md);
-  right: var(--space-lg);
+  left: 50%;
+  transform: translate(-50%, 0);
   background-color: var(--color-success);
   color: var(--color-text-inverse);
   padding: var(--space-sm) var(--space-md);
@@ -887,9 +1000,11 @@ a.bookmarklet:hover::after {
   font-size: var(--font-size-sm);
   box-shadow: 0 4px 10px var(--shadow-medium);
   opacity: 0;
-  transform: translateY(-0.9375rem);
   animation: toastIn var(--transition-normal) both;
   z-index: 9999;
+  pointer-events: none; /* Για να μην κλικάρεται */
+  max-width: 80vw;
+  text-align: center;
 }
 
 /* ===============================
@@ -910,6 +1025,17 @@ a.bookmarklet:hover::after {
    =============================== */
 .toast.fade-out {
   animation: toastOut var(--transition-normal) both;
+}
+
+.toast-container {
+  position: fixed;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  z-index: 9999;
 }
 
 /* ===== Monday HTML Clipboard Modal ===== */
@@ -1058,7 +1184,7 @@ a.bookmarklet:hover::after {
 
 /* 4️⃣ Page-specific styles */
 /* ===============================
-   STEP 2 — CARD FIXES
+   STEP 3 — PLATFORM CARDS
 =============================== */
 .platform-cards {
   display: flex;
@@ -1077,12 +1203,10 @@ a.bookmarklet:hover::after {
   background: var(--color-surface-secondary);
   cursor: pointer;
   transition: all var(--transition-normal);
-  display: grid;
-  grid-template-columns: 48px auto;
-  grid-template-rows: auto auto;
-  column-gap: var(--space-md);
-  row-gap: var(--space-xxs);
-  align-items: center;
+  /* NEW stable layout */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
 }
 
 .platform-card:hover {
@@ -1101,18 +1225,27 @@ a.bookmarklet:hover::after {
 }
 
 .platform-icon {
-  grid-row: span 2;
+  flex-shrink: 0;
   font-size: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Group text nicely without weird breaks */
+.platform-title,
+.platform-desc {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin: 0;
+}
+
 .platform-title {
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--color-text-primary);
-  margin: 0;
+  margin-top: -2px; /* slight alignment */
 }
 
 .platform-desc {
@@ -1121,8 +1254,36 @@ a.bookmarklet:hover::after {
   color: var(--color-text-muted);
 }
 
+/* ===============================
+   🎯 FIX: Natural text wrapping + layout stability
+   =============================== */
+.platform-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+/* Ensure icon remains fixed-sized */
+.platform-icon {
+  flex-shrink: 0;
+}
+
+/* Smooth text wrapping, title + desc grouped naturally */
+.platform-title,
+.platform-desc {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  margin: 0; /* in case any UA adds margin */
+}
+
+/* VISUAL DETAIL: Give tiny vertical alignment correction */
+.platform-title {
+  margin-top: -2px;
+}
+
 /* ============================
-     📩 STEP 4 (Outlook)
+     📩 STEP 4
 ============================ */
 .step4-card {
   background: var(--step4-card-bg);
@@ -1133,7 +1294,6 @@ a.bookmarklet:hover::after {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
 }
 
 .step4-instructions {
@@ -1159,6 +1319,56 @@ a.bookmarklet:hover::after {
   margin-bottom: var(--space-xxs);
 }
 
+/* ===============================
+   STEP 4 — Outlook only styling
+================================ */
+.step4-card.outlook-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Centered label just above preview */
+.signature-preview-label {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ================================
+   Outlook Signature Preview Styling
+================================ */
+.signature-preview-block {
+  border: 2px dashed var(--color-brand-accent);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md);
+  background: #ffffff;
+  margin: 0 auto var(--space-sm) auto;
+  max-width: 600px;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.signature-preview-block:hover {
+  background: #ffffff; /* No tint */
+  box-shadow: 0 14px 36px -6px rgba(0, 0, 0, 0.22);
+  transform: translateY(-2px); /* ✨ Subtle lift for premium feeling */
+}
+
+/* Keep content scrollable if wide */
+.signature-wrapper {
+  overflow-x: auto;
+}
+
+/* Mobile tightening */
+@media (max-width: 480px) {
+  .signature-preview-block {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+}
 .step-section {
   width: 100%;
   margin-top: var(--space-md);

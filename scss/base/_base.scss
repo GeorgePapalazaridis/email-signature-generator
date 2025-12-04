@@ -72,15 +72,43 @@ hr {
 }
 
 /* ===============================
-       📱 RESPONSIVE
+   📱 RESPONSIVE – BASE LAYOUT
    =============================== */
-@media (max-width: 480px) {
+
+/* Tablet */
+@media (max-width: 1024px) {
   body {
+    max-width: 900px;
     padding: var(--space-md);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  body {
+    max-width: 100%;
     margin: var(--space-md) auto;
+    padding: var(--space-sm);
+    border-radius: 0;
+    box-shadow: none;
   }
 
   hr {
-    width: 90%;
+    width: 95%;
+  }
+
+  main {
+    transform: none;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+  h1#titleHeading {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-lg);
+  }
+  p#subtitleText {
+    font-size: var(--font-size-sm);
   }
 }

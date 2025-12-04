@@ -1,29 +1,29 @@
 /* ===============================
      🪄 PREVIEW BOX (fixed)
    =============================== */
+/* Signature preview itself */
 #preview-box {
-  width: 100%;
-  max-width: 680px;
+  display: inline-block;
+  width: auto;
+  max-width: none; /* allows natural signature width */
   margin: 0 auto;
 
-  background-color: var(--color-surface-primary) !important;
-  border-radius: var(--border-radius-lg) !important;
-  border: var(--border-width) solid var(--color-border-light) !important;
+  background: var(--color-surface-primary);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--color-border-light);
   box-shadow: 0 4px 14px var(--shadow-medium);
+  padding: var(--space-md) var(--space-lg);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  overflow-x: auto;
   isolation: isolate;
   color-scheme: light;
+
+  overflow: hidden; /* needed for rounded corners */
 }
 
 #preview-box > table,
 #preview-box > .signature-wrapper > table {
-  background-color: var(--color-surface-primary) !important;
-  border-radius: var(--border-radius-lg) !important;
+  background-color: var(--color-surface-primary);
+  border-radius: var(--border-radius-lg);
 }
 
 .signature-wrapper {
@@ -32,82 +32,58 @@
 }
 
 #preview-box .signature-separator {
+  background-color: var(--color-border-strong);
+}
+
+/* ===============================
+     🪄 PREVIEW — Step 2
+   =============================== */
+
+/* Outer scrollable wrapper */
+#preview-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-sm);
+
+  overflow-x: auto; /* enable horizontal scroll */
+  scrollbar-width: thin;
+
+  /* nice fade on edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
+/* Ensure signature table inside stays intact */
+#preview-box > .signature-wrapper {
+  display: inline-block;
+}
+
+#preview-box table {
+  margin: auto;
+}
+
+#preview-box .signature-separator {
   background-color: var(--color-border-strong) !important;
 }
 
-/* ===============================
-     🔖 BOOKMARKLET SECTION
-   =============================== */
-#bookmarklet-container {
-  margin-top: var(--space-xl);
-  text-align: center;
-  display: none;
-  opacity: 0;
-  transform: translateY(0.625rem);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
-}
-
-#bookmarklet-container.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-a.bookmarklet {
-  display: inline-block;
-  background: var(--color-brand-primary);
-  color: var(--color-text-inverse);
-  padding: var(--space-sm) var(--space-md);
-  text-decoration: none;
-  border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  transition: background-color var(--transition-normal),
-    transform var(--transition-fast);
-  position: relative;
-}
-
-a.bookmarklet:hover {
-  background-color: var(--color-brand-primary-hover);
-  transform: translateY(-1px);
-}
-
-/* Info below button */
-.info {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  margin-top: var(--space-sm);
-  text-align: center;
-  line-height: 1.5;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ===============================
-     💬 BOOKMARKLET TOOLTIP
-   =============================== */
-a.bookmarklet::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 140%;
-  left: 50%;
-  transform: translate(-50%, 6px);
-  background-color: var(--color-brand-accent);
-  color: var(--color-text-inverse);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-normal),
-    transform var(--transition-normal);
-}
-
-a.bookmarklet:hover::after {
-  opacity: 1;
-  transform: translate(-50%, 0);
+/* Smaller padding on phones */
+@media (max-width: 480px) {
+  #preview-box {
+    padding: var(--space-sm);
+  }
 }
 
 /* ===============================
@@ -138,4 +114,17 @@ a.bookmarklet:hover::after {
   color: var(--color-text-primary);
   font-size: var(--font-size-md);
   line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  #preview-box {
+    max-width: 100%;
+    padding: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  #preview-box {
+    padding: var(--space-xs);
+  }
 }

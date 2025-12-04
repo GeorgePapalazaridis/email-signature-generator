@@ -1,85 +1,81 @@
 import { showToast } from "./notifications.js";
 
 /**
- * Bookmarklet creator
+ * Outlook — Web Copy/Paste Flow (Select + Copy Signature HTML)
  */
-export function makeBookmarklet(signature, t) {
-  return `javascript:(function(){
-    function visible(el){return !!(el && el.offsetParent !== null);}
-    function findEditor(win){
-      var ed = win.document.querySelector('div[role="textbox"][contenteditable="true"]');
-      if (visible(ed)) return ed;
-      var cands = win.document.querySelectorAll('[contenteditable="true"], div[role="textbox"]');
-      for (var i=0;i<cands.length;i++){ if(visible(cands[i])) return cands[i]; }
-      var ifr = win.document.querySelectorAll('iframe');
-      for (var j=0;j<ifr.length;j++){
-        try { var r = findEditor(ifr[j].contentWindow); if (r) return r; } catch(e){}
-      }
-      return null;
-    }
-    var editor = findEditor(window);
-    if(editor){
-      editor.innerHTML = ${JSON.stringify(signature)};
-      alert(${JSON.stringify(t.success)});
-    } else {
-      alert(${JSON.stringify(t.notFound)});
-    }
-  })();`;
-}
-
-/**
- * Outlook
- */
-export function renderOutlookStep4(signatureHtml, t) {
+export function renderOutlookStep4_WebCopyPaste(signatureHtml, t) {
   const container = document.getElementById("step4Content");
   if (!container) return;
 
   container.innerHTML = `
-<div class="step4-card">
+<div class="step4-card outlook-layout">
+
+  <!-- Step 1 -->
   <div class="step4-instructions">
     <ol class="step4-list">
-
-      <li>
-        <strong>${t.outlook_step1_title}</strong>
-        <div class="step4-btn-wrapper">
-          <a id="bookmarkletButton" class="btn btn-info">
-            ${t.bookmarkletLabel}
-          </a>
-        </div>
-        <p class="step4-note">
-          ${t.outlook_step1_note_intro}<br>
-          ${t.outlook_step1_note_mac}<br>
-          ${t.outlook_step1_note_win}
-        </p>
-      </li>
-
-      <li>
-        <strong>${t.outlook_step2_title}</strong>
-        <div class="step4-btn-wrapper">
-          <a href="https://outlook.office.com/" target="_blank"
-            class="btn btn-info-outline">
-            ${t.outlook_open_button}
-          </a>
-        </div>
-      </li>
-
-      <li>
-        <strong>${t.outlook_step3_title}</strong>
-        <p class="step4-text">${t.outlook_step3_text}</p>
-      </li>
-
-      <li>
-        <strong>${t.outlook_step4_title}</strong>
-        <p class="step4-text">${t.outlook_step4_text}</p>
-      </li>
-
+      <li>${t.outlook_step1}</li>
     </ol>
   </div>
-</div>
-`;
 
-  const btn = document.getElementById("bookmarkletButton");
-  if (btn) btn.href = makeBookmarklet(signatureHtml, t);
+  <div class="signature-preview-label">${t.preview_label}</div>
+  <div class="signature-preview-block">
+    <div id="signaturePreview" class="signature-wrapper">
+      ${signatureHtml}
+    </div>
+  </div>
+
+  <div class="step4-actions-inner-btns">
+    <button id="copyOutlookBtn" class="btn btn-info">
+      ${t.copy_signature_btn_label}
+    </button>
+  </div>
+
+  <div class="step4-instructions">
+    <ol class="step4-list" start="2">
+      <li>${t.outlook_step2}</li>
+    </ol>
+  </div>
+
+  <div class="step4-actions-inner-btns">
+    <a href="https://outlook.office.com/mail/options/accounts-category/signatures-subcategory"
+       target="_blank"
+       class="btn btn-info-outline">
+      ${t.open_outlook_web_btn_label}
+    </a>
+  </div>
+
+  <div class="step4-instructions">
+    <ol class="step4-list" start="3">
+      <li>${t.outlook_step3}</li>
+    </ol>
+  </div>
+
+</div>
+  `;
+
+  bindOutlookCopy(signatureHtml, t);
+}
+
+function bindOutlookCopy(signatureHtml, t) {
+  const previewEl = document.getElementById("signaturePreview");
+  const copyBtn = document.getElementById("copyOutlookBtn");
+
+  if (!copyBtn || !previewEl) return;
+
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "text/html": new Blob([previewEl.innerHTML], { type: "text/html" }),
+        }),
+      ]);
+
+      showToast(t.toast_copied_success, "success");
+    } catch {
+      document.execCommand("copy");
+      showToast(t.toast_copy_fallback, "info");
+    }
+  });
 }
 
 /**
@@ -108,7 +104,7 @@ export function renderThunderbirdStep4(signatureHtml, t) {
     </ol>
   </div>
 
-  <div class="step4-actions">
+  <div class="step4-actions-inner-btns">
     <button id="downloadThunderbirdBtn" class="btn btn-info">
       ${t.download_button_label}
     </button>
@@ -192,7 +188,7 @@ export function renderMondayStep4(signatureHtml, t) {
     </ol>
   </div>
 
-  <div class="step4-actions">
+  <div class="step4-actions-inner-btns">
     <button id="copyMondayBtn" class="btn btn-info">
       ${t.monday_copy_btn_label}
     </button>
@@ -206,6 +202,26 @@ export function renderMondayStep4(signatureHtml, t) {
       openMondayClipboardModal(signatureHtml, t)
     );
 }
+
+toStep4Btn.addEventListener("click", () => {
+  if (!selectedPlatform) return;
+  const t = translations[window.currentLang];
+
+  signatureHtml = buildSignature({
+    platform: selectedPlatform,
+    data: buildData(),
+  });
+
+  showStep(step4);
+
+  if (selectedPlatform === SignaturePlatform.OUTLOOK) {
+    renderOutlookStep4_WebCopyPaste(signatureHtml, t);
+  } else if (selectedPlatform === SignaturePlatform.THUNDERBIRD) {
+    renderThunderbirdStep4(signatureHtml, t);
+  } else if (selectedPlatform === SignaturePlatform.MONDAY) {
+    renderMondayStep4(signatureHtml, t);
+  }
+});
 
 /**
  * Helpers

@@ -45,10 +45,6 @@ export const translations = {
     platformOutlookDesc:
       "Προτείνεται — εισαγωγή υπογραφής ως εικόνα για τέλεια απεικόνιση στο Outlook.",
 
-    platformOutlookLegacyTitle: "Outlook (Legacy)",
-    platformOutlookLegacyDesc:
-      "Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet (παλαιή μέθοδος)",
-
     platformThunderbirdTitle: "Thunderbird",
     platformThunderbirdDesc: "Λήψη αρχείου .html για import.",
 
@@ -117,9 +113,20 @@ export const translations = {
     finished_thanks:
       "🎉 Ευχαριστούμε που χρησιμοποίησες τον Signature Generator!",
 
-    platformOutlookLegacyTitle: "Outlook (Legacy)",
-    platformOutlookLegacyDesc:
-      "Αυτόματη εισαγωγή υπογραφής μέσω Bookmarklet (παλαιή μέθοδος)",
+    alertMissing: "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο",
+
+    step4_outlook_title: "Εγκατάσταση υπογραφής στο Outlook",
+    step4_outlook_subtitle:
+      "Αντέγραψε την υπογραφή σου και εφάρμοσέ την στο Outlook Web.",
+
+    outlook_step1: "Πάτησε «Αντιγραφή Υπογραφής».",
+    outlook_step2:
+      "Άνοιξε Outlook → Ρυθμίσεις → Compose and Reply → Email Signature.",
+    outlook_step3: "Κάνε επικόλληση με Ctrl+V (Windows) ή Cmd+V (Mac).",
+
+    copy_signature_btn_label: "Αντιγραφή Υπογραφής",
+    open_outlook_web_btn_label: "Άνοιγμα Outlook Web",
+    preview_label: "Προεπισκόπηση Υπογραφής",
   },
 
   en: {
@@ -162,10 +169,6 @@ export const translations = {
     platformOutlookTitle: "Microsoft Outlook (recommended)",
     platformOutlookDesc:
       "Recommended — insert your signature as an image for perfect visual accuracy in Outlook.",
-
-    platformOutlookLegacyTitle: "Outlook (Legacy)",
-    platformOutlookLegacyDesc:
-      "Automatic signature insertion via Bookmarklet (old method)",
 
     platformThunderbirdTitle: "Thunderbird",
     platformThunderbirdDesc: "Download .html file for import.",
@@ -231,9 +234,20 @@ export const translations = {
     monday_copy_success: "✂️ Signature HTML copied!",
 
     finished_thanks: "🎉 Thank you for using the Signature Generator!",
+    alertMissing: "⚠️ Please fill in at least Name and Job Title",
 
-    platformOutlookLegacyTitle: "Outlook (Legacy)",
-    platformOutlookLegacyDesc: "Auto-insert via Bookmarklet (old method)",
+    step4_outlook_title: "Set up your Outlook signature",
+    step4_outlook_subtitle:
+      "Copy your signature below and apply it in Outlook Web.",
+
+    outlook_step1: "Click “Copy Signature”.",
+    outlook_step2:
+      "Open Outlook → Settings → Compose and Reply → Email Signature.",
+    outlook_step3: "Paste with Ctrl+V (Windows) or Cmd+V (Mac).",
+
+    copy_signature_btn_label: "Copy Signature",
+    open_outlook_web_btn_label: "Open Outlook Web",
+    preview_label: "Signature Preview",
   },
 };
 
@@ -310,11 +324,6 @@ export function setLanguage(lang) {
   document.getElementById("outlookTitle").textContent = t.platformOutlookTitle;
   document.getElementById("outlookDesc").textContent = t.platformOutlookDesc;
 
-  document.getElementById("outlookLegacyTitle").textContent =
-    t.platformOutlookLegacyTitle;
-  document.getElementById("outlookLegacyDesc").textContent =
-    t.platformOutlookLegacyDesc;
-
   document.getElementById("thunderTitle").textContent =
     t.platformThunderbirdTitle;
   document.getElementById("thunderDesc").textContent =
@@ -322,11 +331,6 @@ export function setLanguage(lang) {
 
   document.getElementById("mondayTitle").textContent = t.platformMondayTitle;
   document.getElementById("mondayDesc").textContent = t.platformMondayDesc;
-
-  document.getElementById("outlookLegacyTitle").textContent =
-    t.platformOutlookLegacyTitle;
-  document.getElementById("outlookLegacyDesc").textContent =
-    t.platformOutlookLegacyDesc;
 
   // Help link
   const helpLink = document.getElementById("helpLink");

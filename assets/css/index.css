@@ -647,6 +647,8 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 500px;
   margin: var(--space-xl) auto 0 auto;
   gap: var(--space-md);
 }
@@ -656,20 +658,54 @@ hr {
   margin-bottom: var(--space-sm);
 }
 
+/* Internal buttons should ALWAYS be centered */
+.step4-actions-inner-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Make the inner buttons feel primary CTA */
+.step4-actions-inner-btns .btn-info {
+  width: 100%;
+  padding-block: var(--space-sm); /* ➜ Taller button */
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0 auto 18px auto;
+}
+
 #signatureForm .btn-primary {
   margin-top: var(--space-lg);
 }
 
+#copyOutlookBtn:hover::after {
+  content: "📋 Ready to paste!";
+  position: absolute;
+  bottom: -22px;
+  font-size: 12px;
+  color: var(--color-brand-accent);
+}
+
+@media (max-width: 480px) {
+  .step4-actions-inner-btns .btn-info {
+    width: 100%;
+  }
+}
 /* 📱 Mobile Auto Layout */
 @media (max-width: 480px) {
   .btn {
     width: 100%;
     min-width: unset;
   }
+  .step4-actions-inner-btns,
   .step4-actions {
     flex-direction: column;
     gap: var(--space-sm);
   }
+  .step4-actions-inner-btns .btn,
   .step4-actions .btn {
     width: 100%;
   }
@@ -1122,7 +1158,7 @@ a.bookmarklet:hover::after {
 }
 
 /* ============================
-     📩 STEP 4 (Outlook)
+     📩 STEP 4
 ============================ */
 .step4-card {
   background: var(--step4-card-bg);
@@ -1133,7 +1169,6 @@ a.bookmarklet:hover::after {
   margin-inline: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
 }
 
 .step4-instructions {
@@ -1159,6 +1194,56 @@ a.bookmarklet:hover::after {
   margin-bottom: var(--space-xxs);
 }
 
+/* ===============================
+   STEP 4 — Outlook only styling
+================================ */
+.step4-card.outlook-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Centered label just above preview */
+.signature-preview-label {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ================================
+   Outlook Signature Preview Styling
+================================ */
+.signature-preview-block {
+  border: 2px dashed var(--color-brand-accent);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md);
+  background: #ffffff;
+  margin: 0 auto var(--space-sm) auto;
+  max-width: 600px;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.signature-preview-block:hover {
+  background: #ffffff; /* No tint */
+  box-shadow: 0 14px 36px -6px rgba(0, 0, 0, 0.22);
+  transform: translateY(-2px); /* ✨ Subtle lift for premium feeling */
+}
+
+/* Keep content scrollable if wide */
+.signature-wrapper {
+  overflow-x: auto;
+}
+
+/* Mobile tightening */
+@media (max-width: 480px) {
+  .signature-preview-block {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+}
 .step-section {
   width: 100%;
   margin-top: var(--space-md);

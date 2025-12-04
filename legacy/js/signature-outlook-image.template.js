@@ -4,6 +4,15 @@
  * UI-approved by Marketing ✔
  * Do NOT modify spacing, sizes, alignment without review.
  */
+import { callIcon } from "../../assets/base64/icons/call.js";
+import { mobileIcon } from "../../assets/base64/icons/mobile.js";
+
+import { wwwIcon } from "../../assets/base64/icons/www.js";
+import { factoryIcon } from "../../assets/base64/icons/factory.js";
+import { instagramIcon } from "../../assets/base64/icons/instagram.js";
+import { facebookIcon } from "../../assets/base64/icons/facebook.js";
+import { youtubeIcon } from "../../assets/base64/icons/youtube.js";
+import { linkedInIcon } from "../../assets/base64/icons/linkedIn.js";
 
 export function buildOutlookSignatureNew({
   name,
@@ -23,7 +32,7 @@ export function buildOutlookSignatureNew({
     mobileHTML = `
 <!-- Mobile -->
 <td style="white-space:nowrap; padding-right:18px; vertical-align:middle; min-width:130px;">
-    <img src="https://www.prognosis-biotech.com/apps/icons/20251008/M.png" alt="Mobile" width="10" height="10"
+    <img src="${mobileIcon}" alt="Mobile" width="10" height="10"
         style="display:inline-block; vertical-align:middle; margin-right:6px; border:0;">
     <a href="tel:${safeMobile}" style="font-family:'Montserrat', Arial, Helvetica, sans-serif;
           font-size:13px; font-weight:500; color:#000 !important; text-decoration:none;
@@ -158,11 +167,23 @@ export function buildOutlookSignatureNew({
                             <tr>
                                 <!-- PHONE -->
                                 <td style="white-space:nowrap; padding-right:14px; vertical-align:middle;">
-                                    <img src="https://www.prognosis-biotech.com/apps/icons/20251008/call.png" width="13"
-                                        height="14" style="vertical-align:middle; margin-right:6px;">
+                                    <img 
+                                    src="${callIcon}"
+                                    alt="Phone"
+                                    width="14"
+                                    height="15"
+                                    style="
+                                        width:14px;
+                                        height:15px;
+                                        display:inline-block;
+                                        vertical-align:middle;
+                                        margin-right:6px;
+                                        border:0;
+                                    "
+                                    >
                                     <a href="tel:${safePhone}"
-                                        style="color:#000 !important; font-weight:500; text-decoration:none;">
-                                        ${safePhone}
+                                    style="color:#000 !important; font-weight:500; text-decoration:none;">
+                                    ${safePhone}
                                     </a>
                                 </td>
 
@@ -171,8 +192,10 @@ export function buildOutlookSignatureNew({
 
                                 <!-- WEBSITE -->
                                 <td style="white-space:nowrap; vertical-align:middle;">
-                                    <img src="https://www.prognosis-biotech.com/apps/icons/20251008/language.png"
-                                        width="14" height="14" style="vertical-align:-1px; margin-right:6px;">
+                                   <img src="${wwwIcon}"
+                                        alt="Website"
+                                        width="14" height="14"
+                                        style="display:inline-block; vertical-align:middle; margin-right:6px; border:0;">
                                     <a href="https://www.prognosis-biotech.com" target="_blank"
                                         style="color:#000 !important; font-weight:600; text-decoration:none;">
                                         www.prognosis-biotech.com
@@ -183,43 +206,43 @@ export function buildOutlookSignatureNew({
                             <tr>
                                 <!-- ADDRESS -->
                                 <td colspan="2" style="font-size:12px; padding-top:8px; vertical-align:middle;">
-                                    <img src="https://www.prognosis-biotech.com/apps/icons/20251008/factory.png"
-                                        width="15" height="15" style="vertical-align:middle; margin-right:6px;">
+                                    <img src="${factoryIcon}"
+                                        alt="Address"
+                                        width="15"
+                                        height="15"
+                                        style="display:inline-block; vertical-align:middle; margin-right:6px; border:0;">
                                     ${address}
                                 </td>
 
                                 <!-- SOCIAL ICONS -->
                                 <td style="text-align:right; padding-top:8px;">
-                                    ${[
-                                      [
-                                        "linkedIn",
-                                        "https://www.linkedin.com/company/prognosisbiotech",
-                                      ],
-                                      [
-                                        "youtube",
-                                        "https://www.youtube.com/@prognosisbiotech",
-                                      ],
-                                      [
-                                        "facebook",
-                                        "https://www.facebook.com/prognosisbiotechGR/?locale=el_GR",
-                                      ],
-                                      [
-                                        "instagram",
-                                        "https://www.instagram.com/prognosisbiotech/",
-                                      ],
-                                    ]
-                                      .map(
-                                        ([icon, url]) => `
-                                    <a href="${url}" target="_blank"
+
+                                    <a href="https://www.linkedin.com/company/prognosisbiotech" target="_blank"
                                         style="display:inline-block; margin-left:14px; vertical-align:middle;">
-                                        <img src="https://www.prognosis-biotech.com/apps/icons/20251008/${icon}.png"
-                                            width="20" height="20"
-                                            style="display:block; vertical-align:middle; border:0;">
+                                        <img src="${linkedInIcon}" width="20" height="20"
+                                            style="display:inline-block; vertical-align:middle; border:0;" alt="LinkedIn">
                                     </a>
-                                    `
-                                      )
-                                      .join("")}
+
+                                    <a href="https://www.youtube.com/@prognosisbiotech" target="_blank"
+                                        style="display:inline-block; margin-left:14px; vertical-align:middle;">
+                                        <img src="${youtubeIcon}" width="20" height="20"
+                                            style="display:inline-block; vertical-align:middle; border:0;" alt="YouTube">
+                                    </a>
+
+                                    <a href="https://www.facebook.com/prognosisbiotechGR/?locale=el_GR" target="_blank"
+                                        style="display:inline-block; margin-left:14px; vertical-align:middle;">
+                                        <img src="${facebookIcon}" width="20" height="20"
+                                            style="display:inline-block; vertical-align:middle; border:0;" alt="Facebook">
+                                    </a>
+
+                                    <a href="https://www.instagram.com/prognosisbiotech/" target="_blank"
+                                        style="display:inline-block; margin-left:14px; vertical-align:middle;">
+                                        <img src="${instagramIcon}" width="20" height="20"
+                                            style="display:inline-block; vertical-align:middle; border:0;" alt="Instagram">
+                                    </a>
+
                                 </td>
+
                             </tr>
                         </table>
                     </td>
@@ -256,6 +279,23 @@ export function buildOutlookSignatureNew({
     </tr>
 </table>
 `;
+
+  // For Debufging:
+  console.log(
+    "DEBUG [Template] callIcon prefix:",
+    typeof callIcon,
+    String(callIcon).slice(0, 40)
+  );
+
+  const phoneBlockStart = signature.indexOf("<!-- PHONE -->");
+  console.log(
+    "DEBUG [Template] PHONE block:",
+    phoneBlockStart === -1
+      ? "PHONE block not found"
+      : signature.slice(phoneBlockStart, phoneBlockStart + 250)
+  );
+
+  //
 
   return signature.trim();
 }

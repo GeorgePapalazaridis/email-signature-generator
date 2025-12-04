@@ -97,8 +97,8 @@
   justify-content: space-between;
   align-items: center;
 
-  //   width: 100%;
-  //   max-width: 420px;
+  width: 100%;
+  max-width: 500px;
   margin: var(--space-xl) auto 0 auto;
   gap: var(--space-md);
 }
@@ -108,8 +108,43 @@
   margin-bottom: var(--space-sm);
 }
 
+/* Internal buttons should ALWAYS be centered */
+.step4-actions-inner-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  max-width: 500px;
+  // gap: var(--space-md);
+  margin: auto;
+}
+
+/* Make the inner buttons feel primary CTA */
+.step4-actions-inner-btns .btn-info {
+  width: 100%;
+  padding-block: var(--space-sm); /* ➜ Taller button */
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0 auto 18px auto;
+}
+
 #signatureForm .btn-primary {
   margin-top: var(--space-lg);
+}
+
+#copyOutlookBtn:hover::after {
+  content: "📋 Ready to paste!";
+  position: absolute;
+  bottom: -22px;
+  font-size: 12px;
+  color: var(--color-brand-accent);
+}
+
+@media (max-width: 480px) {
+  .step4-actions-inner-btns .btn-info {
+    width: 100%;
+  }
 }
 
 /* 📱 Mobile Auto Layout */
@@ -119,11 +154,13 @@
     min-width: unset;
   }
 
+  .step4-actions-inner-btns,
   .step4-actions {
     flex-direction: column;
     gap: var(--space-sm);
   }
 
+  .step4-actions-inner-btns .btn,
   .step4-actions .btn {
     width: 100%;
   }

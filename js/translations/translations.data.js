@@ -3,9 +3,11 @@
 // ===============================
 export const translations = {
   gr: {
-    //
+    header: {
+      languageLabel: "🌐 Γλώσσα:",
+    },
+
     // 🏷️ FORM LABELS
-    //
     form: {
       name: "Ονοματεπώνυμο",
       namePlaceholder: "π.χ. George Papalazaridis",
@@ -19,9 +21,7 @@ export const translations = {
       alertMissing: "⚠️ Συμπλήρωσε τουλάχιστον Όνομα και Τίτλο",
     },
 
-    //
     // 🔹 GLOBAL BUTTONS
-    //
     buttons: {
       next: "Επόμενο",
       back: "Πίσω",
@@ -30,11 +30,10 @@ export const translations = {
       returnToPlatforms: "Επιστροφή στις πλατφόρμες",
       copyHtml: "Αντιγραφή HTML",
       copyHtmlOutlook: "Αντιγραφή HTML Υπογραφής",
+      clearForm: "Καθαρισμός",
     },
 
-    //
     // ✨ STEP HEADERS / SUBTITLES
-    //
     steps: {
       step1Title: "Βήμα 1: Συμπλήρωση στοιχείων",
       step1Subtitle:
@@ -47,32 +46,31 @@ export const translations = {
       step3Subtitle:
         "Επίλεξε την πλατφόρμα όπου θέλεις να εγκαταστήσεις την υπογραφή σου.",
 
-      step4Title: "Βήμα 4: Εγκατάσταση",
+      step4TitleOutlook: "Βήμα 4: Εγκατάσταση υπογραφής στο Outlook",
+      step4TitleThunderbird: "Βήμα 4: Εγκατάσταση υπογραφής στο Thunderbird",
+      step4TitleMonday: "Βήμα 4: Εγκατάσταση υπογραφής στο Monday.com",
+
       step4Subtitle:
         "Ακολούθησε τις παρακάτω οδηγίες για να ολοκληρώσεις την εγκατάσταση.",
     },
 
-    //
     // 🪟 PLATFORM TITLES & DESCRIPTIONS
-    //
     platforms: {
       outlook: {
         title: "Microsoft Outlook",
-        desc: "Εισαγωγή υπογραφής ως εικόνα για τέλεια απεικόνιση στο Outlook.",
+        desc: "Επικόλληση HTML υπογραφής για τέλεια και σταθερή εμφάνιση στο Outlook.",
       },
       thunderbird: {
         title: "Thunderbird",
-        desc: "Λήψη αρχείου .html για import.",
+        desc: "Λήψη υπογραφής ως HTML αρχείο για εισαγωγή στις ρυθμίσεις λογαριασμού.",
       },
       monday: {
         title: "Monday.com",
-        desc: "Copy–Paste HTML υπογραφής.",
+        desc: "Επικόλληση HTML υπογραφής στα Emails μέσω του Emails & Activities panel.",
       },
     },
 
-    //
     // 💾 OUTLOOK WEB FLOW
-    //
     outlook: {
       step1: "Πάτησε «Αντιγραφή Υπογραφής».",
       step2:
@@ -84,9 +82,7 @@ export const translations = {
       openOutlook: "Άνοιγμα Outlook Web",
     },
 
-    //
     // 📨 THUNDERBIRD FLOW
-    //
     thunderbird: {
       step1: "Κατέβασε το αρχείο της υπογραφής",
       step2: "Άνοιξε το Thunderbird",
@@ -99,9 +95,7 @@ export const translations = {
       downloadSuccess: "Το αρχείο HTML κατέβηκε!",
     },
 
-    //
     // ☁ Monday.com FLOW
-    //
     monday: {
       stepTitle: "Εγκατάσταση σε Monday.com",
       stepInstructions:
@@ -117,9 +111,7 @@ export const translations = {
       copySuccess: "✂️ Το HTML της υπογραφής αντιγράφηκε!",
     },
 
-    //
     // 🎉 SUCCESS
-    //
     success: {
       installDone:
         "🎉 Ευχαριστούμε που χρησιμοποίησες τον Signature Generator!",
@@ -127,17 +119,17 @@ export const translations = {
       fallbackCopy: "Αντιγραφή μέσω fallback!",
     },
 
-    //
     // 🧭 OTHER HEADERS
-    //
     heading: "Prognosis Email Signature Generator",
     previewTitle: "Προεπισκόπηση Υπογραφής",
   },
 
   en: {
-    //
+    header: {
+      languageLabel: "🌐 Language:",
+    },
+
     // 🏷️ FORM LABELS
-    //
     form: {
       name: "Full Name",
       namePlaceholder: "e.g. George Papalazaridis",
@@ -151,9 +143,7 @@ export const translations = {
       alertMissing: "⚠️ Please fill in at least Name and Job Title",
     },
 
-    //
     // 🔹 GLOBAL BUTTONS
-    //
     buttons: {
       next: "Next",
       back: "Back",
@@ -162,11 +152,10 @@ export const translations = {
       returnToPlatforms: "Return to platforms",
       copyHtml: "Copy HTML",
       copyHtmlOutlook: "Copy Signature HTML",
+      clearForm: "Clear",
     },
 
-    //
     // ✨ STEP HEADERS / SUBTITLES
-    //
     steps: {
       step1Title: "Step 1: Fill in your details",
       step1Subtitle: "Fill in your information to generate your signature.",
@@ -178,31 +167,30 @@ export const translations = {
       step3Subtitle:
         "Select the platform where you want to install your signature.",
 
-      step4Title: "Step 4: Installation",
+      step4TitleOutlook: "Step 4: Install your signature in Outlook",
+      step4TitleThunderbird: "Step 4: Install your signature in Thunderbird",
+      step4TitleMonday: "Step 4: Install your signature in Monday.com",
+
       step4Subtitle: "Follow the instructions below to complete installation.",
     },
 
-    //
     // 🪟 PLATFORM TITLES & DESCRIPTIONS
-    //
     platforms: {
       outlook: {
         title: "Microsoft Outlook",
-        desc: "Insert signature as an image for perfect visual accuracy in Outlook.",
+        desc: "Paste the HTML signature for perfect and consistent appearance in Outlook.",
       },
       thunderbird: {
         title: "Thunderbird",
-        desc: "Download .html file for import.",
+        desc: "Download the signature as an HTML file and import it in Account Settings.",
       },
       monday: {
         title: "Monday.com",
-        desc: "Copy–Paste signature HTML.",
+        desc: "Paste the HTML signature into Emails using the Emails & Activities panel.",
       },
     },
 
-    //
     // 💾 OUTLOOK WEB FLOW
-    //
     outlook: {
       step1: "Click “Copy Signature”.",
       step2: "Open Outlook → Settings → Compose and Reply → Email Signature.",
@@ -213,9 +201,7 @@ export const translations = {
       openOutlook: "Open Outlook Web",
     },
 
-    //
     // 📨 THUNDERBIRD FLOW
-    //
     thunderbird: {
       step1: "Download the signature file using the button below",
       step2: "Open Thunderbird",
@@ -228,9 +214,7 @@ export const translations = {
       downloadSuccess: "HTML file downloaded!",
     },
 
-    //
     // ☁ Monday.com FLOW
-    //
     monday: {
       stepTitle: "Install in Monday.com",
       stepInstructions: "Follow the steps below to paste your signature:",
@@ -248,18 +232,14 @@ export const translations = {
       copySuccess: "✂️ Signature HTML copied!",
     },
 
-    //
     // 🎉 SUCCESS MESSAGES
-    //
     success: {
       installDone: "🎉 Thank you for using the Signature Generator!",
       copied: "Signature copied!",
       fallbackCopy: "Copy fallback executed!",
     },
 
-    //
     // 🧭 OTHER HEADERS
-    //
     heading: "Prognosis Email Signature Generator",
     previewTitle: "Signature Preview",
   },

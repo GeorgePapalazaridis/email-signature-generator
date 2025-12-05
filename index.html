@@ -45,7 +45,7 @@
 
 
       <div class="header-lang">
-        <label for="lang">🌐 Language:</label>
+        <label for="lang" id="labelLang"></label>
         <select id="lang">
           <option value="gr" selected>🇬🇷 Ελληνικά</option>
           <option value="en">🇬🇧 English</option>
@@ -81,32 +81,38 @@
 
         <div class="form-item">
           <label for="name" id="labelName" class="required"></label>
-          <input id="name" placeholder="π.χ. George Papalazaridis" required />
+          <input id="name" name="fullName" autocomplete="name" placeholder="π.χ. George Papalazaridis" required />
         </div>
 
         <div class="form-item">
           <label for="title" id="labelTitle" class="required"></label>
-          <input id="title" placeholder="π.χ. Front End Angular Developer" required />
+          <input id="title" name="jobTitle" autocomplete="organization-title"
+            placeholder="π.χ. Front End Angular Developer" required />
         </div>
 
         <div class="form-item full">
           <label for="address" id="labelAddress"></label>
-          <input id="address" value="Farsalon 153, Larissa, 41335 - Greece" />
+          <input id="address" name="workAddress" autocomplete="address-line1"
+            value="Farsalon 153, Larissa, 41335 - Greece" />
         </div>
 
         <div class="form-item">
           <label for="mobile" id="labelMobile"></label>
-          <input id="mobile" placeholder="π.χ. +30 6987 331 449" />
+          <input id="mobile" name="mobilePhone" autocomplete="tel" inputmode="tel"
+            placeholder="π.χ. +30 6969 696 969" />
         </div>
 
         <div class="form-item">
           <label for="phone" id="labelPhone"></label>
-          <input id="phone" placeholder="+30 2410 623 922" value="+30 2410 623 922" />
+          <input id="phone" name="officePhone" autocomplete="tel-national" inputmode="tel"
+            placeholder="+30 2410 623 922" value="+30 2410 623 922" />
         </div>
 
-        <div class="form-item full form-actions">
+        <div class="form-item full form-actions" style="justify-content: space-between;">
+          <button id="clearBtn" class="btn btn-outline" type="button" disabled></button>
           <button id="toStep2Btn" class="btn btn-primary" type="button" disabled></button>
         </div>
+
 
       </form>
 

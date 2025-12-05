@@ -1,7 +1,34 @@
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/demo-online-blue.svg)](https://georgepapalazaridis.github.io/email-signature-generator/)
+
 # ✉️ Corporate Email Signature Generator
 
 A lightweight **browser-based tool** that creates personalized **Outlook Web** email signatures and injects them automatically using a **bookmarklet**.  
-Originally developed for Prognosis Biotech, this project is evolving into a **generic, multi-template signature generator** suitable for any corporate environment.
+Originally developed as a personal initiative to support Prognosis Biotech,
+this project is evolving into a **generic, multi-template corporate email signature generator**.
+
+This project started as a **personal initiative** by **George Papalazaridis**
+to solve an internal need for generating consistent email signatures at
+**Prognosis Biotech**.
+
+The codebase is open source under the MIT License and is designed to evolve
+into a **generic, multi-tenant signature generator** that can be used by other
+companies and individuals.
+
+> **Note:** Prognosis Biotech uses a branded configuration of this tool via a
+> dedicated fork under the `prognosisbiotech` GitHub organization.
+
+---
+
+## Ownership & Licensing
+
+This software was fully designed and developed by **George Papalazaridis**.
+
+Prognosis Biotech is using this tool under the terms of the MIT License via a
+fork of this repository for internal branding purposes.
+
+The **original project** and its **generic roadmap** remain owned and maintained
+by the original author.
 
 ---
 
@@ -55,7 +82,7 @@ This tool provides a **stand-alone, browser-based HTML generator** that:
 ## 🚀 Usage
 
 1. Visit the hosted version of the generator:  
-   👉 [**Open Corporate Signature Generator**](https://your-domain-or-github-pages-link)
+   👉 [**Open Corporate Signature Generator**](https://georgepapalazaridis.github.io/email-signature-generator/)
 
 2. Fill in your personal details:
 

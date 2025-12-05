@@ -855,6 +855,20 @@ p#subtitleText {
   justify-content: flex-end;
 }
 
+/* Improve button alignment inside step1 form */
+.form-grid .form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+/* Remove unintended height expansion */
+.form-grid .form-actions button {
+  height: auto;
+  padding: var(--space-xs) var(--space-lg);
+}
+
 /* Collapse → Single column */
 @media (max-width: 768px) {
   .form-grid {
@@ -1285,6 +1299,7 @@ p#subtitleText {
 }
 
 .step4-instructions {
+  color: var(--color-text-secondary);
   width: 100%;
 }
 

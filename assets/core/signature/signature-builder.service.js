@@ -1,6 +1,7 @@
 import { buildOutlookSignatureWebV3 } from "./signature-outlook-web-v3.template.js";
 import { buildHtmlStandardSignature } from "./signature-html-standard.template.js";
 import { formatPhoneNumber } from "../../../js/utils/phone-formatter.js";
+import { debug } from "../../../js/utils/debug.js";
 
 export const SignaturePlatform = {
   OUTLOOK: "outlook",
@@ -19,24 +20,28 @@ export function buildSignature({ platform, data }) {
 
   // 2️⃣ Default / fallback → standard full HTML
   if (!platform) {
-    console.warn("⚠ No platform provided → fallback to full HTML");
+    debug.warn("⚠ No platform provided → fallback to full HTML");
+
     return buildHtmlStandardSignature(normalizedData);
   }
 
   // 3️⃣ Επιλογή template ανά πλατφόρμα
   switch (platform) {
     case SignaturePlatform.OUTLOOK:
-      console.log("🖼 Using Outlook IMAGE - Web V3 template");
+      debug.log("🖼 Using Outlook IMAGE - Web V3 template");
+
       return buildOutlookSignatureWebV3(normalizedData);
 
     case SignaturePlatform.THUNDERBIRD:
     case SignaturePlatform.MONDAY:
     case SignaturePlatform.HTML_STANDARD:
-      console.log("🧩 Using HTML Standard template");
+      debug.log("🧩 Using HTML Standard template");
+
       return buildHtmlStandardSignature(normalizedData);
 
     default:
-      console.error("❌ Unknown platform → fallback to Web V3 template");
+      debug.error("❌ Unknown platform → fallback to Web V3 template");
+
       return buildOutlookSignatureWebV3(normalizedData);
   }
 }

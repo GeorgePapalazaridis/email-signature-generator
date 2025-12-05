@@ -1,4 +1,5 @@
 import { allowOnlyPhoneChars } from "../js/utils/phone-validator.js";
+import { debug } from "../js/utils/debug.js";
 
 export function bindDom({ onLanguageChange }) {
   const mobileInput = document.getElementById("mobile");
@@ -22,5 +23,5 @@ export function bindDom({ onLanguageChange }) {
     });
   }
 
-  console.log("✅ DOM bindings initialized");
+  debug.log("✅ DOM bindings initialized");
 }

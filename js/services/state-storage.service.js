@@ -1,3 +1,5 @@
+import { debug } from "../utils/debug.js";
+
 const STORAGE_KEY = "signatureWizardState";
 
 export function saveState(partial = {}) {
@@ -7,7 +9,7 @@ export function saveState(partial = {}) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   } catch (e) {
-    console.warn("⚠️ Failed to save state:", e);
+    debug.warn("⚠️ Failed to save state:", e);
   }
 }
 
@@ -16,7 +18,7 @@ export function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch (e) {
-    console.warn("⚠️ Failed to load state:", e);
+    debug.warn("⚠️ Failed to load state:", e);
     return null;
   }
 }
@@ -25,6 +27,6 @@ export function clearState() {
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch (e) {
-    console.warn("⚠️ Failed to clear state:", e);
+    debug.warn("⚠️ Failed to clear state:", e);
   }
 }

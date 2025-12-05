@@ -17,8 +17,14 @@
     const isProduction =
       window.location.hostname === "georgepapalazaridis.github.io";
     const baseUrl = isProduction ? "/email-signature-generator/" : "/";
-    document.write(`<base href="${baseUrl}">`);
+
+    const baseTag = document.createElement("base");
+    baseTag.setAttribute("href", baseUrl);
+
+    // Insert early inside <head> to ensure correct relative paths
+    document.head.prepend(baseTag);
   </script>
+
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/index.css" />

@@ -1398,4 +1398,15 @@ p#subtitleText {
   display: block;
 }
 
+.step-section {
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+body.app-ready .step-section {
+  visibility: visible;
+  opacity: 1;
+}
+
 /*# sourceMappingURL=index.css.map */

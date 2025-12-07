@@ -14,7 +14,9 @@ import { debug } from "../js/utils/debug.js";
 // ===========================
 // Init
 // ===========================
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  showLoader();
+
   // Load saved state before applying translations/UI
   const saved = loadState();
 
@@ -30,10 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 3. Bind language change
   bindDom({
-    onLanguageChange: (lang) => {
+    onLanguageChange: async (lang) => {
+      showLoader();
       window.currentLang = lang;
       saveState({ lang });
+
       setLanguage(lang);
+      restoreWizardState(loadState());
+
+      hideLoader();
     },
   });
 
@@ -42,6 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 3. Events / Steps
   initWizardSteps();
+
+  restoreWizardState(saved);
+
+  setTimeout(() => {
+    hideLoader();
+    document.body.classList.add("app-ready");
+  }, 150);
 
   debug.log("📌 App initialized");
   debug.log("🧩 Wizard fully initialized (All modules & state ready)");

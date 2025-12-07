@@ -131,22 +131,26 @@ export function buildOutlookSignatureWebV3({
 
           <td style="text-align:right; padding-top:8px;">
             <a href="https://www.linkedin.com/company/prognosisbiotech"
-              style="margin-left:12px;">
-              <img src="${linkedInIcon}" width="20" height="20">
+              style="margin-left:12px; text-decoration:none; display:inline-block; border:0;">
+              <img src="${linkedInIcon}" width="20" height="20" style="display:block; border:0;">
             </a>
+
             <a href="https://www.youtube.com/@prognosisbiotech"
-              style="margin-left:12px;">
-              <img src="${youtubeIcon}" width="20" height="20">
+              style="margin-left:12px; text-decoration:none; display:inline-block; border:0;">
+              <img src="${youtubeIcon}" width="20" height="20" style="display:block; border:0;">
             </a>
+
             <a href="https://www.facebook.com/prognosisbiotechGR/?locale=el_GR"
-              style="margin-left:12px;">
-              <img src="${facebookIcon}" width="20" height="20">
+              style="margin-left:12px; text-decoration:none; display:inline-block; border:0;">
+              <img src="${facebookIcon}" width="20" height="20" style="display:block; border:0;">
             </a>
+
             <a href="https://www.instagram.com/prognosisbiotech/"
-              style="margin-left:12px;">
-              <img src="${instagramIcon}" width="20" height="20">
+              style="margin-left:12px; text-decoration:none; display:inline-block; border:0;">
+              <img src="${instagramIcon}" width="20" height="20" style="display:block; border:0;">
             </a>
           </td>
+
         </tr>
       </table>
     </td>

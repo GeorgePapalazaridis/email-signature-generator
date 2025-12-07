@@ -14,9 +14,24 @@
 
   <!-- Base path handling for GitHub Pages -->
   <script type="module">
-    const isProduction =
-      window.location.hostname === "georgepapalazaridis.github.io";
-    const baseUrl = isProduction ? "/email-signature-generator/" : "/";
+    const hostname = window.location.hostname;
+
+    const isGeorge =
+      hostname === "georgepapalazaridis.github.io";
+    const isPrognosis =
+      hostname === "prognosisbiotech.github.io";
+
+    // repo name(s)
+    const personalRepo = "/email-signature-generator/";
+    const prognosisRepo = "/prognosis-email-signature-generator/";
+
+    let baseUrl = "/";
+
+    if (isGeorge) {
+      baseUrl = personalRepo;
+    } else if (isPrognosis) {
+      baseUrl = prognosisRepo;
+    }
 
     const baseTag = document.createElement("base");
     baseTag.setAttribute("href", baseUrl);
@@ -24,7 +39,6 @@
     // Insert early inside <head> to ensure correct relative paths
     document.head.prepend(baseTag);
   </script>
-
 
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/index.css" />

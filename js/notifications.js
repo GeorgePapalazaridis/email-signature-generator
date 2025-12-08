@@ -1,6 +1,15 @@
 import { translations } from "./translations/translations.data.js";
 
 /**
+ * Notifications Module
+ * - Toasts for success/error/info states
+ * - Completion popup with confetti celebration
+ *
+ * Pure UI module — no business logic inside
+ * Translations must be passed in by caller
+ */
+
+/**
  * Simple top toast (error/success)
  */
 export function showToast(message, type = "success") {

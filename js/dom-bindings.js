@@ -1,6 +1,16 @@
 import { allowOnlyPhoneChars } from "../js/utils/phone-validator.js";
 import { debug } from "../js/utils/debug.js";
 
+/**
+ * Binds UI elements to application logic without mixing business functionality.
+ *
+ * Provides:
+ * - Phone number sanitization
+ * - Language selector change event
+ *
+ * Keeps wizard logic fully separated from DOM interactions.
+ */
+
 export function bindDom({ onLanguageChange }) {
   const mobileInput = document.getElementById("mobile");
   const phoneInput = document.getElementById("phone");

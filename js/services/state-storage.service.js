@@ -1,5 +1,12 @@
 import { debug } from "../utils/debug.js";
 
+/**
+ * State Storage Service
+ * - Persists wizard progress in localStorage
+ * - Merge strategy to avoid overwriting data
+ * - Handles read/write failures gracefully using debug logging
+ */
+
 const STORAGE_KEY = "signatureWizardState";
 
 export function saveState(partial = {}) {

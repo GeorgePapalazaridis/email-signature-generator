@@ -11,6 +11,17 @@ import { logoBase64 } from "../assets/base64/logo-base64.js";
 import { setLanguage } from "./translations/translations.apply.js";
 import { debug } from "../js/utils/debug.js";
 
+/**
+ * Application Bootstrap
+ * - Loads saved state
+ * - Applies initial language
+ * - Restores UI view & wizard state
+ * - Binds UI interactions
+ * - Displays content only when ready
+ *
+ * This is the coordinator of the app lifecycle.
+ */
+
 // ===========================
 // Init
 // ===========================

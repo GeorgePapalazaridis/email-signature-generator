@@ -1,3 +1,10 @@
+/**
+ * Multilingual string dictionary for UI localization (EN/GR)
+ * - Consumed by setLanguage() for runtime UI updates
+ * - Keys must remain consistent across languages
+ * - Designed for easy extension (new texts or new languages)
+ */
+
 // ===============================
 // 🌐 Translations – Prognosis Signature Generator
 // ===============================

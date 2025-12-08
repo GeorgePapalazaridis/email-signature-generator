@@ -3,6 +3,14 @@ import { buildHtmlStandardSignature } from "./signature-html-standard.template.j
 import { formatPhoneNumber } from "../../../js/utils/phone-formatter.js";
 import { debug } from "../../../js/utils/debug.js";
 
+/**
+ * Primary HTML Signature builder & platform routing engine.
+ * - Normalizes raw user data (phone/mobile formatting)
+ * - Routes to the correct signature template based on platform
+ * - Provides graceful fallbacks to ensure UI safety
+ * - Extendable for additional platforms if needed
+ */
+
 export const SignaturePlatform = {
   OUTLOOK: "outlook",
   HTML_STANDARD: "html_standard",

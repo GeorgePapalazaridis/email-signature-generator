@@ -1,7 +1,24 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![GitHub Pages](https://img.shields.io/badge/demo-online-blue.svg)](https://georgepapalazaridis.github.io/email-signature-generator/)
+[![Docs](https://img.shields.io/badge/Developer-Handbook-blueviolet.svg)](./Developer-Handbook.md)
 
 # ✉️ Corporate Email Signature Generator
+
+## 📑 Table of Contents
+
+- [Corporate Email Signature Generator](#️-corporate-email-signature-generator)
+- [📚 Developer Handbook](#-developer-handbook)
+- [🧩 The Problem](#-the-problem)
+- [💡 The Solution](#-the-solution)
+- [🛠️ Tech Overview](#️-tech-overview)
+- [✨ Key Features](#-key-features)
+- [🚀 How to Use](#-how-to-use)
+- [📁 Project Structure](#-project-structure)
+- [🔧 Development Notes (for contributors)](#-development-notes-for-contributors)
+- [🧭 Design Principles](#-design-principles)
+- [🔮 Roadmap](#-roadmap)
+- [🌍 Future Evolution — The Vision](#-future-evolution--the-vision)
+- [🧾 License](#-license)
 
 A lightweight **browser-based tool** that generates **Outlook-safe HTML signatures**
 for **copy-paste installation**, ensuring consistent corporate branding across all email clients.
@@ -31,6 +48,24 @@ fork of this repository for internal branding purposes.
 
 The **original project** and its **generic roadmap** remain owned and maintained
 by the original author.
+
+---
+
+## 📚 Developer Handbook
+
+For full technical documentation, architecture breakdown, and
+implementation details, visit:
+
+➡️ [Developer Handbook](./Developer-Handbook.md)
+
+This document includes:
+
+- Detailed wizard engine & state persistence explanation
+- Folder structure and code responsibilities
+- Signature template architecture
+- Theme + i18n system
+- Deployment notes
+- Future extensibility roadmap
 
 ---
 
@@ -135,19 +170,18 @@ email-signature-generator/
 │   │   ├── signature-builder.service.js
 │   │   ├── signature-html-standard.template.js
 │   │   └── signature-outlook-web-v3.template.js
-│   └── icons/                         # Raster fallback icons (if required)
-│       ├── call.png
-│       ├── facebook.png
-│       ├── factory.png
-│       ├── instagram.png
-│       ├── language.png
-│       ├── linkedin.png
-│       ├── M.png
-│       └── youtube.png
-│
-├── css/
-│   ├── index.css                      # Compiled & bundled CSS output
-│   └── *.map                          # Source maps (dev only)
+│   ├── icons/                         # Raster fallback icons (if required)
+│   │   ├── call.png
+│   │   ├── facebook.png
+│   │   ├── factory.png
+│   │   ├── instagram.png
+│   │   ├── language.png
+│   │   ├── linkedin.png
+│   │   ├── M.png
+│   │   └── youtube.png
+│   └── css/
+│       ├── index.css                      # Compiled & bundled CSS output
+│       └── *.map                          # Source maps (dev only)
 │
 ├── js/
 │   ├── config/

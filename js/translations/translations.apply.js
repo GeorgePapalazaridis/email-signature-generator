@@ -2,6 +2,13 @@ import { translations } from "./translations.data.js";
 import { setText, setPlaceholder } from "../utils/dom-utils.js";
 import { saveState } from "../services/state-storage.service.js";
 
+/**
+ * UI Text Localization System
+ * - Applies language dictionary to DOM text & placeholders
+ * - Persists language to localStorage
+ * - Broadcasts language-changed event to dynamic components (Step 4)
+ */
+
 // ===============================
 // 🔧 Language Switcher
 // ===============================
